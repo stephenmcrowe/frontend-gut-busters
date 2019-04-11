@@ -1,0 +1,17 @@
+{
+  "name": "starterpack-m-hess",
+  "version": "1.0.0",
+  "description": "cs52 sa3",
+  "main": "src/index.js",
+  "repository": "git@github.com:dartmouth-cs52-19S/starterpack-m-hess.git",
+  "author": "m-hess <madeline.e.hess.19@dartmouth.edu>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "devDependencies": {
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "webpack-dev-server": "^3.3.1"
+  }
+}
