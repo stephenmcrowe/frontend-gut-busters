@@ -1,15 +1,7 @@
-// change require to es6 import style
-import $ from 'jquery';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './style.scss';
 
-let num = 0;
+const App = () => <div className="test">All the REACT are belong to us!</div>;
 
-// Increment and display time spent on page
-// Source: https://www.w3schools.com/js/tryit.asp?filename=tryjs_setinterval2
-function timer() {
-  num += 1;
-  // document.getElementById('#main').innerHTML = (`<p>Youve been on this page for ${num} seconds.</p>`);
-  $('#main').html(`<p>Youve been on this page for ${num} seconds.</p>`);
-}
-// Calculate and display time
-setInterval(timer, 1000);
+ReactDOM.render(<App />, document.getElementById('main'));
