@@ -15,45 +15,6 @@ p {
   text-shadow: 1px 2px #000;
 }
 
-.logo {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  background-image: url('../img/clock_image.png');
-  width: 350px;
-  height: 350px;
-  min-height: 350px;
-  max-height: 350px;
-  min-width: 350px;
-  max-width: 350px;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-
-.clock-hand {
-  position: absolute;
-  top: 2;
-  right: 0;
-  bottom: 2;
-  left: 0;
-  animation: rotate-clock-hand 60s infinite linear;
-}
-
-.clocky {
-  background: #000;
-  height: 150px;
-  left: 50%;
-  position: absolute;
-  transform-origin: 200px 400px;
-  width: 7px;
-}
-
-@keyframes rotate-clock-hand {
-  0% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(540deg);
-  }
+.active {
+  color: pink;
 }
