@@ -1,4 +1,4 @@
-# Project Name
+# Gut-Busters
 
 ![Team Photo](src/img/team-logo.jpg)
 
