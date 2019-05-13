@@ -3,7 +3,8 @@
 ![Team Photo](src/img/team-logo.jpg)
 
 TODO: short project description, some sample screenshots or mockups
-Quiplash-like game with more user input -- and therefore more fun!
+
+Quiplash-like game with more user input —— and therefore more fun!
 
 ## Architecture
 
