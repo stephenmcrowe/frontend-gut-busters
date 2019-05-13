@@ -8,7 +8,6 @@ Quiplash-like game with more user input —— and therefore more fun!
 
 ## Architecture
 
-TODO:  descriptions of code organization and tools and libraries used
 * [ ] React to build the UI for the app 
 * [ ] Redux to manage to the app state 
 
