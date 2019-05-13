@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 // keys for actiontypes
 export const ActionTypes = {
   INCREMENT: 'INCREMENT',
