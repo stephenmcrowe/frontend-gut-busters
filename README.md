@@ -19,6 +19,10 @@ TODO: how to deploy the project
 
 ## Authors
 
-TODO: list of authors
+Charlotte Chui,
+Stephen Crowe,
+Danielle Fang,
+Madison Hazard,
+Madeline Hess
 
 ## Acknowledgments
