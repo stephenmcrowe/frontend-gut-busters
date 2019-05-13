@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-// import DisplayReducer from './display-reducer';
+import DisplayReducer from './display-reducer';
 // import VoteReducer from './vote-reducer';
 // import SubmitReducer from './submit-reducer';
 
@@ -17,6 +17,7 @@ import CountReducer from './count-reducer';
 
 const rootReducer = combineReducers({
   count: CountReducer,
+  display: DisplayReducer,
 });
 
 export default rootReducer;
