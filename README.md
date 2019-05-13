@@ -3,18 +3,21 @@
 ![Team Photo](src/img/team-logo.jpg)
 
 TODO: short project description, some sample screenshots or mockups
+Quiplash-like game with more user input -- and therefore more fun!
 
 ## Architecture
 
 TODO:  descriptions of code organization and tools and libraries used
+* [] React 
+* [] Redux
 
 ## Setup
 
-TODO: how to get the project dev environment up and running, npm install etc
+*[] yarn to install and yarn start to run!
 
 ## Deployment
 
-TODO: how to deploy the project
+*[] Deploy with surge
 
 ## Authors
 
