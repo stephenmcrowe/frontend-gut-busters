@@ -23,8 +23,8 @@ Quiplash-like game with more user input —— and therefore more fun!
 
 Charlotte Chui,
 Stephen Crowe,
-Danielle Fang,
 Madison Hazard,
-Madeline Hess
+Madeline Hess,
+Danielle Fang
 
 ## Acknowledgments
