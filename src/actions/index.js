@@ -9,6 +9,9 @@ export const ActionTypes = {
   CREATE_QUESTION: 'CREATE_QUESTION',
 };
 
+// const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
+const ROOT_URL = 'http://localhost:9090/api';
+
 export function increment() {
   return {
     type: ActionTypes.INCREMENT,
