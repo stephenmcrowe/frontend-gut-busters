@@ -1,9 +1,9 @@
 {
-  "name": "starterpack-m-hess",
+  "name": "gut-busters",
   "version": "1.0.0",
-  "description": "cs52 sa3",
+  "description": "cs52 final project",
   "main": "src/index.js",
-  "repository": "git@github.com:dartmouth-cs52-19S/starterpack-m-hess.git",
+  "repository": "git@github.com:dartmouth-cs52-19S/project-gut-busters.git",
   "author": "m-hess <madeline.e.hess.19@dartmouth.edu>",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
     "test": "eslint src/**.js",
     "build": "yarn clean; NODE_ENV=production webpack --colors",
     "clean": "rimraf dist",
-    "deploy": "yarn build; surge -p dist -d m-hess-cs52-starterpack.surge.sh; yarn clean"
+    "deploy": "yarn build; surge -p dist -d gut-busters.surge.sh; yarn clean"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",

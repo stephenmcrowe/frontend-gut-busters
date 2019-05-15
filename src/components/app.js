@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
 import Display from './display';
-// import Controls from '../containers/controls';
+import Health from './health';
+import FallBack from './fallback';
 
 const App = (props) => {
   return (
@@ -11,6 +12,8 @@ const App = (props) => {
       <div>
         <Switch>
           <Route exact path="/" component={Display} />
+          <Route exact path="/health" component={Health} />
+          <Route component={FallBack} />
         </Switch>
       </div>
     </Router>
