@@ -9,8 +9,8 @@ class Health extends React.Component {
     super(props);
 
     this.state = {
-      message: 'API',
-      version: 0,
+      key: 'GUT BUSTER API',
+      version: 'UNKNOWN',
     };
   }
 
@@ -19,14 +19,14 @@ class Health extends React.Component {
   }
 
   healthCheck() {
-    axios.get(`${ROOT_URL}/`)
+    axios.post(`${ROOT_URL}/`, { key: this.state.key })
       .then((results) => {
-        this.setState({ message: results.data.message, version: results.data.version });
+        this.setState({ version: results.data.value });
       });
   }
 
   renderHealth() {
-    return <p> {this.state.message}: v{this.state.version} </p>;
+    return <p> {this.state.key}: {this.state.version} </p>;
   }
 
   render() {
