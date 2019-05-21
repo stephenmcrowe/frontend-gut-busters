@@ -5,6 +5,12 @@ import {
 import Health from './health';
 import FallBack from './fallback';
 import mobileLanding from '../containers/landingpage_mobile/landingpage_mobile';
+import mobileWaiting from '../containers/waiting_mobile/waiting_mobile';
+import mobileScore from '../containers/score_mobile/score_mobile';
+import mobileAnswer from '../containers/score_mobile/score_mobile';
+import mobileVote from '../containers/score_mobile/score_mobile';
+import mobileScore from '../containers/score_mobile/score_mobile';
+
 
 /*
 Route                       -> Screen                       Receives:         Emits:
@@ -25,6 +31,10 @@ const App = (props) => {
         <Switch>
           <Route exact path="/" component={Health} />
           <Route exact path="/mobile" component={mobileLanding} />
+          <Route exact path="/mobile/answer/waiting" component={mobileWaiting} />
+          <Route path="/mobile/answer/:id" component={mobileLanding} />
+          <Route path="/mobile/vote/:id" component={mobileLanding} />
+          <Route exact path="/mobile/score" component={mobileScore} />
           <Route component={FallBack} />
         </Switch>
       </div>
