@@ -6,8 +6,8 @@ import Health from './health';
 import FallBack from './fallback';
 import mobileLanding from '../containers/landingpage_mobile/landingpage_mobile';
 import mobileWaiting from '../containers/waiting_mobile/waiting_mobile';
-import mobileAnswer from '../containers/score_mobile/answer_mobile';
-import mobileVote from '../containers/score_mobile/vote_mobile';
+import mobileAnswer from '../containers/answer_mobile/answer_mobile';
+import mobileVote from '../containers/vote_mobile/vote_mobile';
 import mobileScore from '../containers/score_mobile/score_mobile';
 
 
