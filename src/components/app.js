@@ -10,7 +10,6 @@ import mobileAnswer from '../containers/answer_mobile/answer_mobile';
 import mobileVote from '../containers/vote_mobile/vote_mobile';
 import mobileScore from '../containers/score_mobile/score_mobile';
 
-
 /*
 Route                       -> Screen                       Receives:         Emits:
 /                           -> health check                 anything          -----
@@ -21,7 +20,6 @@ Route                       -> Screen                       Receives:         Em
 /mobile/score               -> ranking (mobile)             score             none
 
 */
-
 
 const App = (props) => {
   return (
