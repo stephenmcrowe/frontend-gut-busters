@@ -8,6 +8,7 @@ export const ActionTypes = {
   FETCH_QUESTIONS: 'FETCH_QUESTIONS',
   CREATE_QUESTION: 'CREATE_QUESTION',
   JOIN_GAME: 'JOIN_GAME',
+  VOTE: 'VOTE',
 };
 
 // const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
@@ -65,6 +66,13 @@ export function createQuestion(question, history) {
 export function joinGame() {
   return {
     type: ActionTypes.JOIN_GAME,
+    payload: null,
+  };
+}
+
+export function vote() {
+  return {
+    type: ActionTypes.VOTE,
     payload: null,
   };
 }
