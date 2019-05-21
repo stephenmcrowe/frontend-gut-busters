@@ -1,0 +1,81 @@
+body, html {
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(180deg, #B6E5FF 0%, rgba(255, 255, 255, 0) 100%), #42BBFF;
+    width: 375px;
+    height: 812px;
+    left: 0px;
+    top: 0px;
+    color: white;
+}
+
+#mobileLanding-Wrapper {
+    position: absolute;
+    width: 333px;
+    height: 98px;
+    left: 22px;
+    top: 54px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 48px;
+    line-height: 56px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+#titlenLogo {
+    align-items: center;
+}
+
+#landingLogo {
+
+}
+
+.baseLogo {
+    position: absolute;
+    width: 246px;
+    height: 209px;
+    left: 55px;
+    top: 195px;
+    background: url(../img/gut-logo.svg);
+}
+
+#landingInputs {
+
+}
+.roomcode-input{
+    position: absolute;
+    width: 324px;
+    height: 0px;
+    left: 25px;
+    font-size: 24px;
+    top: 531px;
+    border: 4px solid #FFF500;
+
+}
+
+.playername-input {
+    position: absolute;
+    width: 324px;
+    height: 31px;
+    font-size: 24px;
+    left: 25px;
+    top: 574px;
+    border: 4px solid #FFA800;
+}
+
+#join-game {
+    position: absolute;
+    width: 324px;
+    height: 71px;
+    left: 25px;
+    top: 719px;
+    font-size: 24px;
+    line-height: 28px;
+    color: #2A3947;
+
+}
+
+#join-game-button {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFA800 100%), #FFF500;
+}

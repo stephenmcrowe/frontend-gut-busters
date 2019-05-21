@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { joinGame } from '../actions';
+import { joinGame } from '../../actions';
+import './landingpage_mobile.scss';
 
 class mobileLanding extends Component {
   constructor(props) {
