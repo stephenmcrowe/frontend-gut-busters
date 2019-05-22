@@ -48,6 +48,8 @@ const App = (props) => {
           <Route exact path="/" component={Health} />
           <Route exact path="/mobile" component={mobileLanding} />
           <Route exact path="/mobile/waiting" component={mobileWaiting} />
+          <Route path="/mobile/answer" component={mobileAnswer} />
+          {/* Above path is temporary, until we have ids */}
           <Route path="/mobile/answer/:id" component={mobileAnswer} />
           <Route path="/mobile/vote/:id" component={mobileVote} />
           <Route exact path="/mobile/score" component={mobileScore} />

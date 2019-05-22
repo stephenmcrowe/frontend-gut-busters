@@ -9,8 +9,9 @@ export const ActionTypes = {
   CREATE_QUESTION: 'CREATE_QUESTION',
   START_GAME: 'START_GAME',
   JOIN_GAME: 'JOIN_GAME',
-  VOTE: 'VOTE',
   START_ROUND: 'START_ROUND',
+  SUBMIT_VOTE: 'SUBMIT_VOTE',
+  SUBMIT_ANSWER: 'SUBMIT_ANSWER',
 };
 
 // const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
@@ -94,6 +95,12 @@ export function startRound() {
 
 export function vote() {
   return {
-    type: ActionTypes.VOTE,
+    type: ActionTypes.SUBMIT_VOTE,
+  };
+}
+
+export function submitAnswer(history) {
+  return {
+    type: ActionTypes.SUBMIT_ANSWER,
   };
 }
