@@ -93,14 +93,14 @@ export function startRound() {
   };
 }
 
-export function vote() {
-  return {
-    type: ActionTypes.SUBMIT_VOTE,
-  };
-}
-
 export function submitAnswer(history) {
   return {
     type: ActionTypes.SUBMIT_ANSWER,
+  };
+}
+
+export function submitVote(history) {
+  return {
+    type: ActionTypes.SUBMIT_VOTE,
   };
 }

@@ -1,59 +1,69 @@
+/* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { vote } from '../../actions';
+import { submitVote } from '../../actions';
 import './vote_mobile.scss';
+
+// Required Props:
+// player question
 
 class mobileVote extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      roomCode: '',
-      playerName: '',
+      tempAnswer: '',
     };
-
-    this.joinGameClick = this.joinGameClick.bind(this);
-    this.roomCodeChange = this.roomCodeChange.bind(this);
-    this.playerNameChange = this.playerNameChange.bind(this);
+    // bindings
   }
 
-  joinGameClick(event) {
+  // functions
+  selectAnswer(event) {
+    this.setState({ tempAnswer: event.target.value });
+  }
+
+  submitAnswer(event) {
     event.preventDefault();
-    this.props.joinGame(this.props.history);
-    // will be taken from server via actions
-  }
-
-  roomCodeChange(event) {
-    this.setState({ roomCode: event.target.value });
-  }
-
-  playerNameChange(event) {
-    this.setState({ playerName: event.target.value });
+    this.props.submitAnswer(this.props.history);
   }
 
   render() {
     return (
-      <div id="mobileLanding-Wrapper">
-        <div id="titleNlogo">
-          <div id="landingTitle">
-            <h1>Gut Busters</h1>
+      <div className="vote-page">
+        <div className="header">
+          <div className="timer">12</div>
+        </div>
+        <div className="vote-content">
+
+          <div className="question-wrapper">
+            <h1>What do you call an apple with no eyes?</h1>
+            {/* <h1>{this.props.player.question}</h1> */}
           </div>
-          <div id="landingLogo">
-            <div className="baseLogo" />
+
+          <div className="options-wrapper">
+            <button value="1" onClick={this.selectAnswer} className="select-vote first"><p>A hairy pear</p></button>
+            {/* in the future, value should be :answerid */}
+            {/* <input className="type-answer" type="text" placeholder="Your answer here..." onChange={this.answerTextChange} value={this.state.answerText} /> */}
+            <button value="2" onClick={this.selectAnswer} className="select-vote second"><p>Phil Hanlon&apos;s left shoelace</p></button>
+          </div>
+          <div className="submit-button">
+            <button onClick={this.submitAnswer} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Done!</p></NavLink></button>
           </div>
         </div>
-        <div id="landingInputs">
-          <input className="roomcode-input" type="text" placeholder="room code..." onChange={this.roomCodeChange} value={this.state.roomCode} />
-          <input className="playername-input" type="text" placeholder="playername..." onChange={this.playerNameChange} value={this.state.playerName} />
-        </div>
-        <div id="join-game">
-          <button onClick={this.joinGameClick} id="join-game-button"><NavLink to="/">Join!</NavLink></button>
-        </div>
+
       </div>
     );
   }
 }
 
-export default withRouter(connect(null, { vote })(mobileVote));
+// connects particular parts of redux state to this components props
+const mapStateToProps = state => (
+  {
+    question: state.question,
+  }
+);
+
+
+export default withRouter(connect(mapStateToProps, { submitVote })(mobileVote));

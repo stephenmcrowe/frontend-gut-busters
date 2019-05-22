@@ -16,6 +16,8 @@ class mobileAnswer extends Component {
       answerText: '',
     };
     // bindings
+    this.answerTextChange = this.answerTextChange.bind(this);
+    this.submitAnswer = this.answerTextChange.bind(this);
   }
 
   // functions

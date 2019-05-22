@@ -73,13 +73,12 @@
     border-right: none;
     outline: none;
 
-    border-bottom: 4px solid #FFA800;
+    border-bottom: 4px solid #FF7A00;
+  }
 
-}
-
-input::placeholder {
-    color: white;
-}
+  input::placeholder {
+      color: white;
+  }
 }
 
 .submit-button button {
@@ -87,6 +86,11 @@ input::placeholder {
   -moz-appearance: none;
   -ms-appearance: none;
   -o-appearance: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
 
   width: 300px;
   height: 75px;
