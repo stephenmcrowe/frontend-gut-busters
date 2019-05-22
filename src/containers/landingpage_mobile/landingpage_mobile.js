@@ -49,7 +49,7 @@ class mobileLanding extends Component {
           <input className="playername-input" type="text" placeholder="playername..." onChange={this.playerNameChange} value={this.state.playerName} />
         </div>
         <div className="join-game">
-          <button onClick={this.joinGameClick} className="join-game-button"><NavLink to="/mobile/answer/waiting" className="join-game"><p>Join!</p></NavLink></button>
+          <button onClick={this.joinGameClick} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Join!</p></NavLink></button>
         </div>
       </div>
     );
