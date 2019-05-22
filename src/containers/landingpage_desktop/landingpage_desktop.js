@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { startGame } from '../../actions';
+import './landingpage_desktop.scss';
 
 class LandingPage extends Component {
   constructor(props) {

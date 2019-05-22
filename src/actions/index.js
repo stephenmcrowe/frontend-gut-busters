@@ -76,6 +76,13 @@ export function startGame() {
   };
 }
 
+export function restartGame() {
+  return {
+    type: ActionTypes.RESTART_GAME,
+    payload: null,
+  };
+}
+
 /*
 * Mobile Actions
 */
