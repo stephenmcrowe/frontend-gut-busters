@@ -32,8 +32,13 @@ class waitingroom_desktop extends Component {
     this.renderButton = this.renderButton.bind(this);
   }
 
+
+  componentDidMount() {
+    this.props.getPlayers();
+  }
+
   onStartRound() {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.startRound(this.state);
   }
 
@@ -57,33 +62,31 @@ class waitingroom_desktop extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="start_round_button">
-        <button onClick={this.onStartRound} id="start_round_button"><NavLink to="/question_desktop">Start Round</NavLink></button>
+        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/question_desktop">Start Round</NavLink></button>
       </div>
 
     );
   }
 
-  componentDidMount() {
-    this.props.getPlayers();
-  }
-
   render() {
-    this.props.players.map((player) => {
-      return (
-      // did assuming whole background image/title/logo is just one image other than the button
-      // need to comeback and make sure that the components name match with the model
-        <div className="waiting">
-          {this.renderPage()}
-          <div className="player_section" key={player._id}>
-            <img alt="player_img" />
-            <h2 className="name">{player.name}</h2>
+    return (
+      this.props.players.map((player) => {
+        return (
+        // did assuming whole background image/title/logo is just one image other than the button
+        // need to comeback and make sure that the components name match with the model
+          <div className="waiting">
+            {this.renderPage()}
+            <div className="player_section" key={player._id}>
+              <img alt="player_img" />
+              <h2 className="name">{player.name}</h2>
+            </div>
+            {this.renderButton()}
           </div>
-          {this.renderButton()}
-        </div>
 
-      );
-    });
+        );
+      })
+    );
   }
 }
 
-export default withRouter(connect(Null, { startRound })(waitingroom_desktop));
+export default withRouter(connect(mapStateToProps, { startRound })(waitingroom_desktop));

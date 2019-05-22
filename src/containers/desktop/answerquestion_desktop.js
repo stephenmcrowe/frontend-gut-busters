@@ -14,7 +14,7 @@ const questionAnswer = (props) => {
   return (
     <div className="question_page">
       <h1>Round</h1>
-      {this.props.round}
+      {props.round}
       <h2>Please Answer Question on Your Screen</h2>
     </div>
 
