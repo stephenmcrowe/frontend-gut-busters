@@ -1,0 +1,40 @@
+body, html {
+    font-family: "Roboto", sans-serif;
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #C2E9FF;    width: 375px;
+    height: 812px;
+    left: 0px;
+    top: 0px;
+    color: white;
+}
+
+
+#mobileWaiting-Wrapper {
+    display: flex;
+}
+
+#waiting-Joke {
+    align-items: center;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 36px;
+    line-height: 42px;
+    color: #2A3947;
+}
+
+.baseLoading {
+    position: absolute;
+    width: 189px;
+    height: 189px;
+    left: 93px;
+    top: 279px;
+}
+
+#waiting-Info {
+    color: #000000;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+
+}

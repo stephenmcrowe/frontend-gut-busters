@@ -7,8 +7,10 @@ export const ActionTypes = {
   FETCH_QUESTION: 'FETCH_QUESTION',
   FETCH_QUESTIONS: 'FETCH_QUESTIONS',
   CREATE_QUESTION: 'CREATE_QUESTION',
+  START_GAME: 'START_GAME',
   JOIN_GAME: 'JOIN_GAME',
   VOTE: 'VOTE',
+  START_ROUND: 'START_ROUND',
 };
 
 // const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
@@ -63,6 +65,19 @@ export function createQuestion(question, history) {
   };
 }
 
+/*
+* Desktop Actions
+*/
+export function startGame() {
+  return {
+    type: ActionTypes.START_GAME,
+    payload: null,
+  };
+}
+
+/*
+* Mobile Actions
+*/
 export function joinGame() {
   return {
     type: ActionTypes.JOIN_GAME,
@@ -70,9 +85,15 @@ export function joinGame() {
   };
 }
 
+export function startRound() {
+  return {
+    type: ActionTypes.START_ROUND,
+    payload: null,
+  };
+}
+
 export function vote() {
   return {
     type: ActionTypes.VOTE,
-    payload: null,
   };
 }
