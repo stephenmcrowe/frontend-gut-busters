@@ -41,7 +41,7 @@ body, html {
 }
 
 #landingInputs {
-
+    text-align: center;
 }
 .roomcode-input{
     position: absolute;
@@ -50,7 +50,7 @@ body, html {
     left: 25px;
     font-size: 24px;
     top: 531px;
-    border: 4px solid #FFF500;
+    border-bottom: 4px solid #FFF500;
 
 }
 
@@ -61,7 +61,7 @@ body, html {
     font-size: 24px;
     left: 25px;
     top: 574px;
-    border: 4px solid #FFA800;
+    border-bottom: 4px solid #FFA800;
 }
 
 #join-game {
