@@ -1,6 +1,6 @@
 body, html {
     font-family: "Roboto", sans-serif;
-    background: linear-gradient(180deg, #B6E5FF 0%, rgba(255, 255, 255, 0) 100%), #42BBFF;
+    background: linear-gradient(180deg, #B6E5FF 0%, rgba(255, 255, 255, 0) 100%), #42BBFF;    
     width: 375px;
     height: 812px;
     left: 0px;
@@ -37,7 +37,7 @@ body, html {
     height: 209px;
     left: 55px;
     top: 195px;
-    background: url(../img/gut-logo.svg);
+    background: url(../../img/gut-logo.svg);
 }
 
 #landingInputs {
@@ -46,7 +46,7 @@ body, html {
 .roomcode-input{
     position: absolute;
     width: 324px;
-    height: 0px;
+    height: 31px;
     left: 25px;
     font-size: 24px;
     top: 531px;
@@ -77,5 +77,6 @@ body, html {
 }
 
 #join-game-button {
+    position: absolute;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFA800 100%), #FFF500;
 }
