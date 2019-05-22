@@ -16,11 +16,11 @@ import mobileScore from '../containers/score_mobile/score_mobile';
 // import mobileVote from '../containers/score_mobile/score_mobile';
 // import mobileScore from '../containers/score_mobile/score_mobile';
 
-import desktopLanding from '../containers/desktop/landingpage_deskop';
-import desktopWaiting from '../containers/desktop/waitingroom_desktop';
-import desktopScore from '../containers/desktop/score_desktop';
-import desktopAnswer from '../containers/desktop/answerquestion_desktop';
-import desktopVote from '../containers/desktop/voting_desktop';
+import desktopLanding from '../containers/landingpage_desktop/landingpage_desktop';
+import desktopWaiting from '../containers/waiting_desktop/waiting_desktop';
+import desktopScore from '../containers/score_desktop/score_desktop';
+import desktopAnswer from '../containers/answer_desktop/answerquestion_desktop';
+import desktopVote from '../containers/vote_desktop/vote_desktop';
 
 
 /*
