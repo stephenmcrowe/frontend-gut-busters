@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { startGame } from '../../actions';
+import { startRound } from '../../actions';
 import { NavLink, withRouter } from 'react-router-dom';
 
 /* 
@@ -40,57 +40,49 @@ class waitingroom_desktop extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
         <div id="waiting">
-          <div id="roome code"> 
+          <div id="room code"> 
           <h1>Room Code: </h1>
-           this.state
+           {this.props.room_id}
           </div>
-          <div id="start_game">
-            <button onClick={this.onStartGame} id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button>
+          <div id="Waiting_cap"> 
+          <h1>Waiting for players.... </h1>
           </div>
         </div>
       );
     }
 
-    renderPlayers() {
+    
+    renderButton() {
         // did assuming whole background image/title/logo is just one image other than the button
         return (
-            <div id="landing_desktop">
-              <div id="background"> 
-                  <div className="logo_title_img" />
-              </div>
-              <div id="start_game">
-                <button onClick={this.onStartGame} id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button>
-              </div>
-            </div>
-          );
+                <div id="start_round_button">
+                <button onClick={this.onStartRound} id="start_round_button"><NavLink to="/question_desktop">Start Round</NavLink></button>
+                </div>
+            
+            );
         }
-
-        
-        renderButton() {
-            // did assuming whole background image/title/logo is just one image other than the button
-            return (
-                  <div id="start_round_button">
-                    <button onClick={this.onStartRound} id="start_round_button"><NavLink to="/question_desktop">Start Round</NavLink></button>
-                  </div>
-              
-              );
+        componentDidMount() {
+            this.props.getPlayers();
             }
-        
-componentDidMount() {
-    this.props.getPlayers();
-    }
-    
+
   render() {
+    this.props.players.map((player) => {
     return (
-      <nav>
+  // did assuming whole background image/title/logo is just one image other than the button
+    //need to comeback and make sure that the components name match with the model
         <div className="waiting">
           {this.renderPage()}
-          {this.renderPlayers()}
+          <div className="player_section" key={player._id}>         
+          <img alt="player_img" />
+          <h2 className="name">{player.name}</h2>
+      </div>
           {this.renderButton()}  
         </div>
-      </nav>
+  
     );
     }
+
+    )}
 }
 
 export default withRouter(connect(Null, {startRound})(waitingroom_desktop));
