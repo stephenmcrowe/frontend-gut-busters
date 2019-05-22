@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { joinGame } from '../../actions';
 import './landingpage_mobile.scss';
+import logo from '../../img/gut-logo.svg';
 
 class mobileLanding extends Component {
   constructor(props) {
@@ -35,21 +36,20 @@ class mobileLanding extends Component {
 
   render() {
     return (
-      <div id="mobileLanding-Wrapper">
-        <div id="titleNlogo">
-          <div id="landingTitle">
-            <h1>Gut Busters</h1>
-          </div>
-          <div id="landingLogo">
-            <div className="baseLogo" />
-          </div>
+      <div className="landing-page">
+        <div className="landing-title">
+          <h1>Gut Busters</h1>
         </div>
-        <div id="landingInputs">
+        <div className="landing-logo">
+          {/* <div className="base-logo" /> */}
+          <img src={logo} alt="Gut Busters" />
+        </div>
+        <div className="landing-inputs">
           <input className="roomcode-input" type="text" placeholder="room code..." onChange={this.roomCodeChange} value={this.state.roomCode} />
           <input className="playername-input" type="text" placeholder="playername..." onChange={this.playerNameChange} value={this.state.playerName} />
         </div>
-        <div id="join-game">
-          <button onClick={this.joinGameClick} id="join-game-button"><NavLink to="/mobile/answer/waiting">Join!</NavLink></button>
+        <div className="join-game">
+          <button onClick={this.joinGameClick} className="join-game-button"><NavLink to="/mobile/answer/waiting" className="join-game"><p>Join!</p></NavLink></button>
         </div>
       </div>
     );
