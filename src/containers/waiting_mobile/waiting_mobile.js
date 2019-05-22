@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/button-has-type */
 import React, { Component } from 'react';
@@ -40,7 +41,7 @@ class mobileWaiting extends Component {
         // this.state.random = this.state.random + rand;
         this.setState({ random: this.state.random + rand });
         // this.selectedJoke: this.state.jokes.find(random).jokeText;
-        this.setState({ selectedJoke: this.state.jokes.find(random).jokeText });
+        this.setState({ selectedJoke: this.state.jokes.find(this.state.random).jokeText });
         // this.setState({ selectedJoke: })
       });
     // get random integer from 0 to length of array

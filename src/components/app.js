@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   BrowserRouter as Router, Route, Switch,
@@ -7,15 +8,14 @@ import FallBack from './fallback';
 import mobileLanding from '../containers/landingpage_mobile/landingpage_mobile';
 import mobileWaiting from '../containers/waiting_mobile/waiting_mobile';
 import mobileScore from '../containers/score_mobile/score_mobile';
-import mobileAnswer from '../containers/score_mobile/score_mobile';
-import mobileVote from '../containers/score_mobile/score_mobile';
-import mobileScore from '../containers/score_mobile/score_mobile';
+import mobileAnswer from '../containers/answer_mobile/answer_mobile';
+import mobileVote from '../containers/vote_mobile/vote_mobile';
 
-import desktopLanding from '../containers/desktop/landingpage_desktop';
+import desktopLanding from '../containers/desktop/landingpage_deskop';
 import desktopWaiting from '../containers/desktop/waitingroom_desktop';
-import desktopScore from '../containers/desktop/voting_desktop';
+import desktopScore from '../containers/desktop/score_desktop';
 import desktopAnswer from '../containers/desktop/answerquestion_desktop';
-import desktopVote from '../containers/desktop/score_desktop';
+import desktopVote from '../containers/desktop/voting_desktop';
 
 
 /*
