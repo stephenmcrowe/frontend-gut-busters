@@ -15,7 +15,7 @@ class LandingPage extends Component {
   
     onStartGame() {
         event.preventDefault();
-        this.props.startGame(this.state.title);
+        this.props.startGame(this.state);
       }
 
     renderLanding() {

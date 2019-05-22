@@ -11,6 +11,12 @@ import mobileAnswer from '../containers/score_mobile/score_mobile';
 import mobileVote from '../containers/score_mobile/score_mobile';
 import mobileScore from '../containers/score_mobile/score_mobile';
 
+import desktopLanding from '../containers/desktop/landingpage_desktop';
+import desktopWaiting from '../containers/desktop/waitingroom_desktop';
+import desktopScore from '../containers/desktop/voting_desktop';
+import desktopAnswer from '../containers/desktop/answerquestion_desktop';
+import desktopVote from '../containers/desktop/score_desktop';
+
 
 /*
 Route                       -> Screen                       Receives:         Emits:
@@ -21,6 +27,12 @@ Route                       -> Screen                       Receives:         Em
 /mobile/vote/:qstid         -> vote (mobile)                question          vote
 /mobile/score               -> ranking (mobile)             score             none
 
+/desktop                   -> landing (desktop)             ----              start game
+/desktop/waiting             -> waiting (desktop)           players, roomid   start round
+/desktop/answer/:qstid       -> answer (desktop)            answersin/done           -----
+/desktop/vote/:qstid         -> vote (desktop)              answers           votes
+/desktop/score               -> ranking (desktop)           players           ----
+/desktop/final               -> ranking (desktop)           playerscores      start game
 */
 
 
@@ -35,6 +47,12 @@ const App = (props) => {
           <Route path="/mobile/answer/:id" component={mobileLanding} />
           <Route path="/mobile/vote/:id" component={mobileLanding} />
           <Route exact path="/mobile/score" component={mobileScore} />
+
+          <Route exact path="/desktop" component={desktopLanding} />
+          <Route exact path="/desktop/answer/waiting" component={desktopWaiting} />
+          <Route path="/desktop/answer/:id" component={desktopAnswer} />
+          <Route path="/desktop/vote/:id" component={desktopVote} />
+          <Route exact path="/desktop/score" component={desktopScore} />
           <Route component={FallBack} />
         </Switch>
       </div>
