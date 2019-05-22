@@ -7,6 +7,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import random-int from 'random-int';
 import './waiting_mobile.scss';
+import ghost from '../../img/ghost-score.png'; // img source https://www.freeiconspng.com/img/36315
+
 
 // waiting page displays
 // an api generated joke
@@ -72,20 +74,22 @@ class mobileWaiting extends Component {
     // if (!this.state.gameStart) {
 
     return (
-      <div id="mobileWaiting-Wrapper">
-        <div id="waiting-Joke">
-          <h1>{this.selectedJoke}</h1>
+      <div id="mobile-waiting-page">
+        <div id="waiting-joke">
+          {/* <h1>{this.selectedJoke}</h1> */}
           {/* figure out how to loop through the jokes here that are
             specifically ghost related */}
+          <h1>If you&apos;ve got it... Haunt it!</h1>
         </div>
-        <div id="waiting-Loading">
-          <div className="baseLoading" />
+        <div id="waiting-loading">
+          <img className="loading-icon" src={ghost} alt="Loading Icon" />
+          {/* <div className="base-loading" /> */}
           {/* loading image that moves do it with CSS */}
         </div>
-        <div id="waiting-Info">
-          <div>
-                Waiting information: here is what you need to know!
-          </div>
+        <div id="waiting-info">
+          <h2>
+            Waiting information: here is what you need to know!
+          </h2>
         </div>
       </div>
     );

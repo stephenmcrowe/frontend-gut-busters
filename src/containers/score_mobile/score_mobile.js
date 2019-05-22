@@ -14,9 +14,11 @@ import ghost from '../../img/ghost-score.png'; // img source https://www.freeico
 const mobileScore = (props) => {
   return (
     <div className="score-page">
-      <img src={ghost} alt="Ghost Icon" />
-      <div>
+      <img className="score-icon" src={ghost} alt="Ghost Icon" />
+      <div className="score-text">
         <div className="final-score">
+          <h1>YOU WON!</h1>
+          {/* replace with if depending on ranking */}
           <h2>Final Score</h2>
           <h3>104</h3>
           {/* props.player.score */}
