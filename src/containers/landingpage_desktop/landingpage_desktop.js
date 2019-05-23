@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { startGame } from '../../actions';
 import './landingpage_desktop.scss';
 
-class LandingPage extends Component {
+class desktopLanding extends Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +27,7 @@ class LandingPage extends Component {
           <div className="logo_title_img" />
         </div>
         <div id="start_game">
-          <button onClick={this.onStartGame} type="submit" id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button>
+          <button type="submit" onClick={this.onStartGame} id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button>
         </div>
       </div>
     );
@@ -47,4 +47,4 @@ class LandingPage extends Component {
 
 
 // withRouter for location, reference from https://stackoverflow.com/questions/39174814/using-react-router-withrouter
-export default withRouter(connect(null, { startGame })(LandingPage));
+export default withRouter(connect(null, { startGame })(desktopLanding));
