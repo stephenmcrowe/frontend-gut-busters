@@ -11,7 +11,7 @@ Navlink to start round aka questions
 */
 
 
-// will get posts eventually
+/* will get posts eventually
 function mapStateToProps(reduxState) {
   // console.log(reduxState);
   return {
@@ -19,6 +19,7 @@ function mapStateToProps(reduxState) {
     players: reduxState.game.players,
   };
 }
+*/
 
 class waitingroom_desktop extends Component {
   constructor(props) {
@@ -28,14 +29,15 @@ class waitingroom_desktop extends Component {
 
     this.onStartRound = this.onStartRound.bind(this);
     this.renderPage = this.renderPage.bind(this);
-    this.renderPlayers = this.renderPlayers.bind(this);
+    // this.renderPlayers = this.renderPlayers.bind(this);
     this.renderButton = this.renderButton.bind(this);
   }
 
 
-  componentDidMount() {
+  /* componentDidMount() {
     this.props.getPlayers();
   }
+  */
 
   onStartRound() {
     // event.preventDefault();
@@ -48,7 +50,7 @@ class waitingroom_desktop extends Component {
       <div id="waiting">
         <div id="room code">
           <h1>Room Code: </h1>
-          {this.props.room_id}
+          { this.props.room_id}
         </div>
         <div id="Waiting_cap">
           <h1>Waiting for players.... </h1>
@@ -62,31 +64,35 @@ class waitingroom_desktop extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="start_round_button">
-        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/question_desktop">Start Round</NavLink></button>
+        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/desktop/answer">Start Round</NavLink></button>
       </div>
 
     );
   }
 
-  render() {
-    return (
-      this.props.players.map((player) => {
-        return (
-        // did assuming whole background image/title/logo is just one image other than the button
-        // need to comeback and make sure that the components name match with the model
-          <div className="waiting">
-            {this.renderPage()}
-            <div className="player_section" key={player._id}>
-              <img alt="player_img" />
-              <h2 className="name">{player.name}</h2>
-            </div>
-            {this.renderButton()}
-          </div>
+  /*
+  // did assuming whole background image/title/logo is just one image other than the button
+    // need to comeback and make sure that the components name match with the model
 
-        );
-      })
+    div className="player_section" key={player._id}>
+          <img alt="player_img" />
+          <h2 className="name">{player.name}</h2>
+        </div>
+        */
+
+  render() {
+    // return (
+    // this.props.players.map((player) => {
+    return (
+      <div className="waiting">
+        {this.renderPage()}
+        {this.renderButton()}
+      </div>
+
     );
+    // })
+    // );
   }
 }
 
-export default withRouter(connect(mapStateToProps, { startRound })(waitingroom_desktop));
+export default withRouter(connect(null, { startRound })(waitingroom_desktop));
