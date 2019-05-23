@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 //  import { endRounds } from '../../actions';
-// import './roundscore_desktop.scss';
+import './roundscore_desktop.scss';
 
 // Data needed (receive):
 // props.player array with each player having player.score from round
