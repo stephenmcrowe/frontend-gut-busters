@@ -64,7 +64,7 @@ class waitingroom_desktop extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="start_round_button">
-        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/desktop/amswer">Start Round</NavLink></button>
+        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/desktop/answer">Start Round</NavLink></button>
       </div>
 
     );
