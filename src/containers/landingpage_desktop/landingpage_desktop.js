@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { startGame } from '../../actions';
 import './landingpage_desktop.scss';
+import logo from '../../img/gut-logo-landing.png';
+// import startButton from '../../img/start-game-button.png';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -23,11 +25,12 @@ class LandingPage extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="landing_desktop">
-        <div id="background">
-          <div className="logo_title_img" />
-        </div>
         <div id="start_game">
+          <h1>Gut Busters</h1>
           <button onClick={this.onStartGame} type="submit" id="start_game_button"><NavLink to="/desktop/waiting">Start Game</NavLink></button>
+        </div>
+        <div id="background">
+          <img className="logo-img" src={logo} alt="Gut Busters" />
         </div>
       </div>
     );
