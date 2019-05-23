@@ -1,21 +1,66 @@
 #landing_desktop {
-
+  background-image: url(../../img/trianglify.png);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 #background {
+  flex: 10;
+  display: flex;
+  justify-content: flex-end;
 
-}
-
-.logo_title_img {
-
+  .logo-img {
+    height: 95vh;
+    width: auto;
+    max-height: 95vh;
+    align-self: flex-end;
+  }
 }
 
 #start_game {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
 
+  h1 {
+    margin: 100px 0px 100px 50px;
+    font-family: Creepster;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 120px;
+    text-align: center;
+    line-height: 120px;
+    color: #00f220;
+  }
 }
 
 #start_game_button {
+  display: flex;
+  background-image: url(../../img/start-game-button.png);
+  background-position: center;
+  height: 74px;
+  width: 299px;
+  margin: 100px 50px 100px 100px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
+
+  a {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    font-size: 36px;
+    line-height: 75px;
+    color: #60B7FF;
+  }
 }
 
 .landingPage {
