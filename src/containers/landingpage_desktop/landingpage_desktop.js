@@ -27,7 +27,7 @@ class LandingPage extends Component {
           <div className="logo_title_img" />
         </div>
         <div id="start_game">
-          <button onClick={this.onStartGame} type="submit" id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button>
+          <button onClick={this.onStartGame} type="submit" id="start_game_button"><NavLink to="/desktop/waiting">Start Game</NavLink></button>
         </div>
       </div>
     );

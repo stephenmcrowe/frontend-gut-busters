@@ -21,7 +21,7 @@ import desktopWaiting from '../containers/waiting_desktop/waiting_desktop';
 import desktopScore from '../containers/score_desktop/score_desktop';
 import desktopAnswer from '../containers/answer_desktop/answerquestion_desktop';
 import desktopVote from '../containers/vote_desktop/vote_desktop';
-
+import desktopVoteResult from '../containers/vote_results/vote_results';
 
 /*
 Route                       -> Screen                       Receives:         Emits:
@@ -57,9 +57,14 @@ const App = (props) => {
           <Route exact path="/mobile/score" component={mobileScore} />
 
           <Route exact path="/desktop" component={desktopLanding} />
-          <Route exact path="/desktop/answer/waiting" component={desktopWaiting} />
+          <Route exact path="/desktop/waiting" component={desktopWaiting} />
+          <Route path="/desktop/answer" component={desktopAnswer} />
+          {/* Above path is temporary, until we have ids */}
           <Route path="/desktop/answer/:id" component={desktopAnswer} />
-          <Route path="/desktop/vote/:id" component={desktopVote} />
+          <Route path="/desktop/voting" component={desktopVote} />
+          <Route path="/desktop/voteresult" component={desktopVoteResult} />
+          {/* Above path is temporary, until we have ids */}
+          <Route path="/desktop/voteresult/:id" component={desktopVoteResult} />
           <Route exact path="/desktop/score" component={desktopScore} />
           <Route component={FallBack} />
         </Switch>
