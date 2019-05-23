@@ -3,13 +3,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import { joinGame } from '../../actions';
 import './landingpage_mobile.scss';
 import logo from '../../img/gut-logo.svg';
 
-// connect to socket
-const socketserver = 'http://localhost:9090';
+// // connect to socket
+// const socketserver = 'http://localhost:9090';
 
 class mobileLanding extends Component {
   constructor(props) {
@@ -20,28 +20,28 @@ class mobileLanding extends Component {
       playerName: '',
     };
 
-    console.log(socketserver);
-    this.socket = io(socketserver);
-    this.socket.on('connect', () => { console.log('socket.io connected'); });
-    this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
-    this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
-    this.socket.on('error', (error) => { console.log(error); });
+    // console.log(socketserver);
+    // this.socket = io(socketserver);
+    // this.socket.on('connect', () => { console.log('socket.io connected'); });
+    // this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
+    // this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
+    // this.socket.on('error', (error) => { console.log(error); });
 
     this.joinGameClick = this.joinGameClick.bind(this);
     this.roomCodeChange = this.roomCodeChange.bind(this);
     this.playerNameChange = this.playerNameChange.bind(this);
   }
 
-  componentDidMount = () => {
-    this.socket.on('create_game', (game) => {
-      console.log(game);
-    });
-  }
+  // componentDidMount = () => {
+  //   this.socket.on('create_game', (game) => {
+  //     console.log(game);
+  //   });
+  // }
 
   joinGameClick(event) {
     event.preventDefault();
     this.props.joinGame(this.props.history);
-    this.socket.emit('create_game', {});
+    // this.socket.emit('create_game', {});
     // will be taken from server via actions
   }
 
