@@ -19,6 +19,7 @@ import mobileScore from '../containers/score_mobile/score_mobile';
 import desktopLanding from '../containers/landingpage_desktop/landingpage_desktop';
 import desktopWaiting from '../containers/waiting_desktop/waiting_desktop';
 import desktopScore from '../containers/score_desktop/score_desktop';
+import desktopRoundScore from '../containers/roundscore_desktop/roundscore_desktop';
 import desktopAnswer from '../containers/answer_desktop/answerquestion_desktop';
 import desktopVote from '../containers/vote_desktop/vote_desktop';
 import desktopVoteResult from '../containers/vote_results/vote_results';
@@ -65,6 +66,7 @@ const App = (props) => {
           <Route path="/desktop/voteresult" component={desktopVoteResult} />
           {/* Above path is temporary, until we have ids */}
           <Route path="/desktop/voteresult/:id" component={desktopVoteResult} />
+          <Route exact path="/desktop/roundscore" component={desktopRoundScore} />
           <Route exact path="/desktop/score" component={desktopScore} />
           <Route component={FallBack} />
         </Switch>
