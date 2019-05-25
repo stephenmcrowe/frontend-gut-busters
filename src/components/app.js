@@ -8,11 +8,11 @@ import SocketContext from '../socket-context';
 import Health from './health';
 import FallBack from './fallback';
 
-import mobileLanding from '../containers/landingpage_mobile/landingpage_mobile';
-import mobileWaiting from '../containers/waiting_mobile/waiting_mobile';
-import mobileAnswer from '../containers/answer_mobile/answer_mobile';
-import mobileVote from '../containers/vote_mobile/vote_mobile';
-import mobileScore from '../containers/score_mobile/score_mobile';
+import MobileLandingWithSocket from '../containers/landingpage_mobile/landingpage_mobile';
+import MobileWaitingWithSocket from '../containers/waiting_mobile/waiting_mobile';
+import MobileAnswerWithSocket from '../containers/answer_mobile/answer_mobile';
+import MobileVoteWithSocket from '../containers/vote_mobile/vote_mobile';
+import MobileScoreWithSocket from '../containers/score_mobile/score_mobile';
 
 // import { mobileScore, mobileAnswer, mobileVote } from '../containers/score_mobile/score_mobile';
 // import mobileAnswer from '../containers/score_mobile/score_mobile';
@@ -20,12 +20,12 @@ import mobileScore from '../containers/score_mobile/score_mobile';
 // import mobileScore from '../containers/score_mobile/score_mobile';
 
 import DesktopLandingWithSocket from '../containers/landingpage_desktop/landingpage_desktop';
-import desktopWaiting from '../containers/waiting_desktop/waiting_desktop';
-import desktopScore from '../containers/score_desktop/score_desktop';
-import desktopRoundScore from '../containers/roundscore_desktop/roundscore_desktop';
-import desktopAnswer from '../containers/answer_desktop/answerquestion_desktop';
-import desktopVote from '../containers/vote_desktop/vote_desktop';
-import desktopVoteResult from '../containers/vote_results/vote_results';
+import DesktopWaitingWithSocket from '../containers/waiting_desktop/waiting_desktop';
+import DesktopScoreWithSocket from '../containers/score_desktop/score_desktop';
+import DesktopRoundScoreWithSocket from '../containers/roundscore_desktop/roundscore_desktop';
+import DesktopAnswerWithSocket from '../containers/answer_desktop/answerquestion_desktop';
+import DesktopVoteWithSocket from '../containers/vote_desktop/vote_desktop';
+import DesktopVoteResultWithSocket from '../containers/vote_results/vote_results';
 
 /*
 Route                       -> Screen                       Receives:         Emits:
@@ -74,27 +74,27 @@ class App extends Component {
         <div>
           <Switch>
             <Route exact path="/" component={Health} />
-            <Route exact path="/mobile" component={mobileLanding} />
-            <Route exact path="/mobile/waiting" component={mobileWaiting} />
-            <Route path="/mobile/answer" component={mobileAnswer} />
+            <Route exact path="/mobile" component={MobileLandingWithSocket} />
+            <Route exact path="/mobile/waiting" component={MobileWaitingWithSocket} />
+            <Route path="/mobile/answer" component={MobileAnswerWithSocket} />
             {/* Above path is temporary, until we have ids */}
-            <Route path="/mobile/answer/:id" component={mobileAnswer} />
-            <Route path="/mobile/vote" component={mobileVote} />
+            <Route path="/mobile/answer/:id" component={MobileAnswerWithSocket} />
+            <Route path="/mobile/vote" component={MobileVoteWithSocket} />
             {/* Above path is temporary, until we have ids */}
-            <Route path="/mobile/vote/:id" component={mobileVote} />
-            <Route exact path="/mobile/score" component={mobileScore} />
+            <Route path="/mobile/vote/:id" component={MobileVoteWithSocket} />
+            <Route exact path="/mobile/score" component={MobileScoreWithSocket} />
 
             <Route exact path="/desktop" component={DesktopLandingWithSocket} />
-            <Route exact path="/desktop/waiting" component={desktopWaiting} />
-            <Route path="/desktop/answer" component={desktopAnswer} />
+            <Route exact path="/desktop/waiting" component={DesktopWaitingWithSocket} />
+            <Route path="/desktop/answer" component={DesktopAnswerWithSocket} />
             {/* Above path is temporary, until we have ids */}
-            <Route path="/desktop/answer/:id" component={desktopAnswer} />
-            <Route path="/desktop/voting" component={desktopVote} />
-            <Route path="/desktop/voteresult" component={desktopVoteResult} />
+            <Route path="/desktop/answer/:id" component={DesktopAnswerWithSocket} />
+            <Route path="/desktop/voting" component={DesktopVoteWithSocket} />
+            <Route path="/desktop/voteresult" component={DesktopVoteResultWithSocket} />
             {/* Above path is temporary, until we have ids */}
-            <Route path="/desktop/voteresult/:id" component={desktopVoteResult} />
-            <Route exact path="/desktop/roundscore" component={desktopRoundScore} />
-            <Route exact path="/desktop/score" component={desktopScore} />
+            <Route path="/desktop/voteresult/:id" component={DesktopVoteResultWithSocket} />
+            <Route exact path="/desktop/roundscore" component={DesktopRoundScoreWithSocket} />
+            <Route exact path="/desktop/score" component={DesktopScoreWithSocket} />
             <Route component={FallBack} />
           </Switch>
         </div>
