@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 import SocketContext from '../socket-context';
 import Health from './health';
 import FallBack from './fallback';
@@ -19,7 +19,7 @@ import mobileScore from '../containers/score_mobile/score_mobile';
 // import mobileVote from '../containers/score_mobile/score_mobile';
 // import mobileScore from '../containers/score_mobile/score_mobile';
 
-import desktopLanding from '../containers/landingpage_desktop/landingpage_desktop';
+import DesktopLandingWithSocket from '../containers/landingpage_desktop/landingpage_desktop';
 import desktopWaiting from '../containers/waiting_desktop/waiting_desktop';
 import desktopScore from '../containers/score_desktop/score_desktop';
 import desktopRoundScore from '../containers/roundscore_desktop/roundscore_desktop';
@@ -60,14 +60,12 @@ class App extends Component {
     // this.socket.on('error', (error) => { console.log(error); });
   }
 
-  // set up socket on componentDidMount()
+  // add socket listeners here
   componentDidMount = () => {
     // console.log(this.props.socket);
-    this.props.socket.on('connect', () => { console.log('socket.io connected'); });
-    // this.props.socket.emit('new-message-added', response.data.newMessage);
-    // this.socket.on('create_game', (game) => {
-    //   console.log(game);
-    // });
+    this.props.socket.on('create_game', (game) => {
+      console.log(game);
+    });
   }
 
   render() {
@@ -86,7 +84,7 @@ class App extends Component {
             <Route path="/mobile/vote/:id" component={mobileVote} />
             <Route exact path="/mobile/score" component={mobileScore} />
 
-            <Route exact path="/desktop" component={desktopLanding} />
+            <Route exact path="/desktop" component={DesktopLandingWithSocket} />
             <Route exact path="/desktop/waiting" component={desktopWaiting} />
             <Route path="/desktop/answer" component={desktopAnswer} />
             {/* Above path is temporary, until we have ids */}

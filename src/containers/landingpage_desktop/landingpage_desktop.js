@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { startGame } from '../../actions';
+// import io from 'socket.io-client';
+import SocketContext from '../../socket-context';
+// import { startGame } from '../../actions';
 import './landingpage_desktop.scss';
 import logo from '../../img/gut-logo-landing.png';
 // import startButton from '../../img/start-game-button.png';
 
-class desktopLanding extends Component {
+class DesktopLanding extends Component {
   constructor(props) {
     super(props);
 
@@ -20,8 +22,9 @@ class desktopLanding extends Component {
   }
 
   onStartGame() {
+    console.log(this);
     // event.preventDefault();
-    this.props.startGame(this.state);
+    // this.props.startGame(this.state);
     this.props.socket.emit('create_game', {});
   }
 
@@ -54,6 +57,12 @@ class desktopLanding extends Component {
   }
 }
 
+const DesktopLandingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopLanding {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
+// { startGame }
 // withRouter for location, reference from https://stackoverflow.com/questions/39174814/using-react-router-withrouter
-export default withRouter(connect(null, { startGame })(desktopLanding));
+export default withRouter(connect(null, null)(DesktopLandingWithSocket));
