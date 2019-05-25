@@ -64,5 +64,5 @@ export function submitVote(questionid, answerid) {
 /* Game Functions (Receiving) */
 // socket.on in components
 export function updateGame(game) {
-
+  this.props.socket.emit('create_game', {});
 }
