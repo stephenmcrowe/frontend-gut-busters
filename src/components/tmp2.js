@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
-import io from 'socket.io-client';
-import SocketContext from '../socket-context';
+// import io from 'socket.io-client';
+// import SocketContext from
 import Health from './health';
 import FallBack from './fallback';
 
@@ -54,7 +54,7 @@ class App extends Component {
     // set up socket
     // console.log(socketserver);
     // this.socket = io(socketserver);
-    // this.props.socket.on('connect', () => { console.log('socket.io connected'); });
+    // this.socket.on('connect', () => { console.log('socket.io connected'); });
     // this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
     // this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
     // this.socket.on('error', (error) => { console.log(error); });
@@ -62,12 +62,9 @@ class App extends Component {
 
   // set up socket on componentDidMount()
   componentDidMount = () => {
-    // console.log(this.props.socket);
-    this.props.socket.on('connect', () => { console.log('socket.io connected'); });
-    // this.props.socket.emit('new-message-added', response.data.newMessage);
-    // this.socket.on('create_game', (game) => {
-    //   console.log(game);
-    // });
+    this.socket.on('create_game', (game) => {
+      console.log(game);
+    });
   }
 
   render() {
@@ -105,10 +102,4 @@ class App extends Component {
   }
 }
 
-const AppWithSocket = props => (
-  <SocketContext.Consumer>
-    {socket => <App {...props} socket={socket} />}
-  </SocketContext.Consumer>
-);
-
-export default AppWithSocket;
+export default App;

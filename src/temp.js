@@ -5,15 +5,15 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import * as io from 'socket.io-client';
 import reducers from './reducers';
-import AppWithSocket from './components/app';
-import SocketContext from './socket-context';
+// import SocketContext from './socket-context';
+import App from './components/app';
 
 // connect to socket
 const socketserver = 'http://localhost:9090';
 // console.log(socketserver);
 const socket = io(socketserver);
 
-// socket.on('connect', () => { console.log('socket.io connected'); });
+socket.on('connect', () => { console.log('socket.io connected'); });
 socket.on('disconnect', () => { console.log('socket.io disconnected'); });
 socket.on('reconnect', () => { console.log('socket.io reconnected'); });
 socket.on('error', (error) => { console.log(error); });
@@ -25,12 +25,14 @@ const store = createStore(reducers, {}, compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
 ));
 
+// Socket Context Source: https://itnext.io/how-to-use-a-single-instance-of-socket-io-in-your-react-app-6a4465dcb398
+
 // we now wrap App in a Provider
 ReactDOM.render(
+  // <SocketContext.Provider value={socket}>
   <Provider store={store}>
-    <SocketContext.Provider value={socket}>
-      <AppWithSocket />
-    </SocketContext.Provider>
+    <App />
   </Provider>,
+  {/* </SocketContext.Provider>, */},
   document.getElementById('main'),
 );

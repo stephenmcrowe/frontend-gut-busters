@@ -10,6 +10,7 @@ store player info as local state for now
 Navlink to start round aka questions
 */
 
+// start_game
 
 /* will get posts eventually
 function mapStateToProps(reduxState) {

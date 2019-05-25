@@ -1,46 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import io from 'socket.io-client';
 import { startGame } from '../../actions';
 import './landingpage_desktop.scss';
 import logo from '../../img/gut-logo-landing.png';
 // import startButton from '../../img/start-game-button.png';
-
-// connect to socket
-const socketserver = 'http://localhost:9090';
 
 class desktopLanding extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-
-    // set up socket
-    console.log(socketserver);
-    this.socket = io(socketserver);
-    this.socket.on('connect', () => { console.log('socket.io connected'); });
-    this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
-    this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
-    this.socket.on('error', (error) => { console.log(error); });
-
-
     this.onStartGame = this.onStartGame.bind(this);
     this.renderLanding = this.renderLanding.bind(this);
   }
 
-  // set up socket on componentDidMount()
-  componentDidMount = () => {
-    this.socket.on('create_game', (game) => {
-      console.log(game);
-    });
+  componentDidMount() {
+    console.log(this.props);
   }
 
   onStartGame() {
     // event.preventDefault();
     this.props.startGame(this.state);
-    this.socket.emit('create_game', {});
+    this.props.socket.emit('create_game', {});
   }
+
 
   renderLanding() {
     // did assuming whole background image/title/logo is just one image other than the button
