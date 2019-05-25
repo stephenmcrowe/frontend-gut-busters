@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { restartGame } from '../../actions';
 import './score_desktop.scss';
+import SocketContext from '../../socket-context';
 
 // Data needed (receive):
 // props.player array with each player having player.score
 
 // still need to be made fully applicable for variable number of players
 
-class desktopScore extends Component {
+class DesktopScore extends Component {
   constructor(props) {
     super(props);
 
@@ -66,4 +67,10 @@ const mapStateToProps = state => (
   }
 );
 
-export default withRouter(connect(mapStateToProps, { restartGame })(desktopScore));
+const DesktopScoreWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopScore {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+export default withRouter(connect(mapStateToProps, { restartGame })(DesktopScoreWithSocket));

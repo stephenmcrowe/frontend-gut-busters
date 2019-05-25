@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import SocketContext from '../../socket-context';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -31,5 +31,11 @@ class questionAnswer extends Component {
   }
 }
 
+const QuestionAnswerWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <questionAnswer {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
-export default withRouter(connect(null, null)(questionAnswer));
+
+export default withRouter(connect(null, null)(QuestionAnswerWithSocket));

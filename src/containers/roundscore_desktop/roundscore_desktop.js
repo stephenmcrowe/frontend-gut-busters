@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import SocketContext from '../../socket-context';
 //  import { endRounds } from '../../actions';
 // import './roundscore_desktop.scss';
 
@@ -8,7 +9,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 // props.player array with each player having player.score from round
 // some kind of joke at the top
 
-class desktopRoundScore extends Component {
+class DesktopRoundScore extends Component {
   constructor(props) {
     super(props);
 
@@ -87,5 +88,11 @@ const mapStateToProps = state => (
   }
 );
 
+const DesktopRoundScoreWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopRoundScore {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
 // { endRounds }
-export default withRouter(connect(mapStateToProps, null)(desktopRoundScore));
+export default withRouter(connect(mapStateToProps, null)(DesktopRoundScoreWithSocket));

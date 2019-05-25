@@ -7,11 +7,12 @@ import io from 'socket.io-client';
 import { joinGame } from '../../actions';
 import './landingpage_mobile.scss';
 import logo from '../../img/gut-logo.svg';
+import SocketContext from '../../socket-context';
 
 // connect to socket
 const socketserver = 'http://localhost:9090';
 
-class mobileLanding extends Component {
+class MobileLanding extends Component {
   constructor(props) {
     super(props);
 
@@ -75,4 +76,10 @@ class mobileLanding extends Component {
   }
 }
 
-export default withRouter(connect(null, { joinGame })(mobileLanding));
+const MobileLandingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <MobileLanding {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+export default withRouter(connect(null, { joinGame })(MobileLanding));

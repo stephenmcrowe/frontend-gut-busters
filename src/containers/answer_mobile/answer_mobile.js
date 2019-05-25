@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { submitAnswer } from '../../actions';
 import './answer_mobile.scss';
+import SocketContext from '../../socket-context';
 
 // Required Props:
 // player question
@@ -64,4 +65,11 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { submitAnswer })(mobileAnswer));
+const MobileAnswerWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <mobileAnswer {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+
+export default withRouter(connect(mapStateToProps, { submitAnswer })(MobileAnswerWithSocket));

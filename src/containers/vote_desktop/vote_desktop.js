@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import SocketContext from '../../socket-context';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
 }
 */
 
-class voting extends Component {
+class DesktopVoting extends Component {
   constructor(props) {
     super(props);
 
@@ -32,5 +32,11 @@ class voting extends Component {
   }
 }
 
+const DesktopVotingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopVoting {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
-export default withRouter(connect(null, null)(voting));
+
+export default withRouter(connect(null, null)(DesktopVotingWithSocket));

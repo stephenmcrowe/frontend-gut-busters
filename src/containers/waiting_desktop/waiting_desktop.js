@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { startRound } from '../../actions';
+import SocketContext from '../../socket-context';
 
 /*
 listens for players coming in
@@ -22,7 +23,7 @@ function mapStateToProps(reduxState) {
 }
 */
 
-class waitingroom_desktop extends Component {
+class DesktopWaiting extends Component {
   constructor(props) {
     super(props);
 
@@ -96,4 +97,11 @@ class waitingroom_desktop extends Component {
   }
 }
 
-export default withRouter(connect(null, { startRound })(waitingroom_desktop));
+const DesktopWaitingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopWaiting {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+
+export default withRouter(connect(null, { startRound })(DesktopWaitingWithSocket));
