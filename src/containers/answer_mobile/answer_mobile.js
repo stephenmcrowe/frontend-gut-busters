@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { submitAnswer } from '../../actions';
+import { submitAnswer, fetchGame } from '../../actions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 
@@ -20,6 +20,13 @@ class mobileAnswer extends Component {
     this.answerTextChange = this.answerTextChange.bind(this);
     this.submitAnswer = this.answerTextChange.bind(this);
   }
+
+  componentDidMount = () => {
+    fetchGame(this.props.socket);
+    console.log('game has been fetched in answer mobile');
+    console.log(fetchGame(this.props.socket));
+  }
+
 
   // functions
   answerTextChange(event) {
@@ -72,4 +79,4 @@ const MobileAnswerWithSocket = props => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { submitAnswer })(MobileAnswerWithSocket));
+export default withRouter(connect(mapStateToProps, { submitAnswer, fetchGame })(MobileAnswerWithSocket));

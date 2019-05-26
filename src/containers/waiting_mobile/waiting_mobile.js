@@ -2,13 +2,14 @@
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/button-has-type */
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 // import random-int from 'random-int';
 import './waiting_mobile.scss';
 import ghost from '../../img/ghost-score.png'; // img source https://www.freeiconspng.com/img/36315
 import SocketContext from '../../socket-context';
+import { fetchGame } from '../../actions';
 
 // waiting page displays
 // an api generated joke
@@ -65,7 +66,9 @@ class MobileWaiting extends Component {
         console.log('rip waiting joke');
         console.log(this.state);
       });
-
+    fetchGame(this.props.socket);
+    console.log('game has been fetched');
+    console.log(fetchGame(this.props.socket));
     // get random integer from 0 to length of array
     // gettings becomes an action
   }
@@ -102,4 +105,6 @@ const MobileWaitingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default MobileWaitingWithSocket;
+// export default MobileWaitingWithSocket;
+
+export default withRouter(connect(null, { fetchGame })(MobileWaitingWithSocket));
