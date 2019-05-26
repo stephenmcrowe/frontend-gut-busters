@@ -76,12 +76,15 @@ export function createQuestion(question, history) {
 */
 
 export function fetchGame(socket) {
-  return socket.on('game', (game) => {
-    return {
-      type: ActionTypes.FETCH_GAME,
-      payload: game,
-    };
-  });
+  return (dispatch) => {
+    socket.on('game', (game) => {
+      console.log('game was emitted');
+      dispatch({
+        type: ActionTypes.FETCH_GAME,
+        payload: game,
+      });
+    });
+  };
 }
 
 // const routes = {
@@ -93,37 +96,31 @@ export function fetchGame(socket) {
 
 // This isn't implemented (on server but is easy) and maybe we don't need it?!? - Stephen
 export function answerStage(socket) {
-  return (dispatch) => {
-    socket.on('answer', (game) => {
-      return {
-        type: ActionTypes.ANSWER_STAGE,
-        payload: game,
-      };
-    });
-  };
+  return socket.on('answer', (game) => {
+    return {
+      type: ActionTypes.ANSWER_STAGE,
+      payload: game,
+    };
+  });
 }
 
 export function voteStage(socket) {
-  return (dispatch) => {
-    socket.on('vote', (game) => {
-      return {
-        type: ActionTypes.VOTE_STAGE,
-        payload: game,
-      };
-    });
-  };
+  return socket.on('vote', (game) => {
+    return {
+      type: ActionTypes.VOTE_STAGE,
+      payload: game,
+    };
+  });
 }
 
 // This isn't implemented (on server) - Stephen
 export function scoreStage(socket) {
-  return (dispatch) => {
-    socket.on('score', (game) => {
-      return {
-        type: ActionTypes.SCORE_STAGE,
-        payload: game,
-      };
-    });
-  };
+  return socket.on('score', (game) => {
+    return {
+      type: ActionTypes.SCORE_STAGE,
+      payload: game,
+    };
+  });
 }
 
 // Not sure if these (below) are actually necessary, but yeah. One central place for websocket stuff - Stephen

@@ -20,6 +20,7 @@ class DesktopLanding extends Component {
 
   componentDidMount() {
     this.props.fetchGame(this.props.socket);
+    console.log('game is fetched');
   }
 
   onStartGame() {
