@@ -3,8 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import io from 'socket.io-client';
-import { joinGame } from '../../actions';
+import { joinGame, fetchGame } from '../../actions';
 import './landingpage_mobile.scss';
 import logo from '../../img/gut-logo.svg';
 import SocketContext from '../../socket-context';
@@ -20,30 +19,15 @@ class MobileLanding extends Component {
       roomCode: '',
       playerName: '',
     };
-
-    console.log(socketserver);
-    this.socket = io(socketserver);
-    this.socket.on('connect', () => { console.log('socket.io connected'); });
-    this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
-    this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
-    this.socket.on('error', (error) => { console.log(error); });
-
-    this.joinGameClick = this.joinGameClick.bind(this);
-    this.roomCodeChange = this.roomCodeChange.bind(this);
-    this.playerNameChange = this.playerNameChange.bind(this);
   }
 
-  // componentDidMount = () => {
-  //   this.socket.on('create_game', (game) => {
-  //     console.log(game);
-  //   });
-  // }
+  componentDidMount = () => {
+    fetchGame(this.props.socket);
+  }
 
   joinGameClick(event) {
     event.preventDefault();
-    this.props.joinGame(this.props.history);
-    this.socket.emit('create_player', {});
-    // will be taken from server via actions
+    joinGame(this.props.socket, this.props.history);
   }
 
   roomCodeChange(event) {
@@ -82,4 +66,4 @@ const MobileLandingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default withRouter(connect(null, { joinGame })(MobileLanding));
+export default withRouter(connect(null, { fetchGame })(MobileLandingWithSocket));

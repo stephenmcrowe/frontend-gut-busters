@@ -6,6 +6,7 @@ import SocketContext from '../../socket-context';
 // import { startGame } from '../../actions';
 import './landingpage_desktop.scss';
 import logo from '../../img/gut-logo-landing.png';
+import { fetchGame, createGame } from '../../actions';
 // import startButton from '../../img/start-game-button.png';
 
 class DesktopLanding extends Component {
@@ -18,14 +19,11 @@ class DesktopLanding extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
+    this.props.fetchGame(this.props.socket);
   }
 
   onStartGame() {
-    console.log(this);
-    // event.preventDefault();
-    // this.props.startGame(this.state);
-    this.props.socket.emit('create_game', {});
+    createGame(this.props.socket);
   }
 
 
@@ -65,4 +63,4 @@ const DesktopLandingWithSocket = props => (
 
 // { startGame }
 // withRouter for location, reference from https://stackoverflow.com/questions/39174814/using-react-router-withrouter
-export default withRouter(connect(null, null)(DesktopLandingWithSocket));
+export default withRouter(connect(null, { fetchGame })(DesktopLandingWithSocket));

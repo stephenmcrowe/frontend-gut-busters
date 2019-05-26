@@ -24,7 +24,7 @@ import DesktopWaitingWithSocket from '../containers/waiting_desktop/waiting_desk
 import DesktopScoreWithSocket from '../containers/score_desktop/score_desktop';
 import DesktopRoundScoreWithSocket from '../containers/roundscore_desktop/roundscore_desktop';
 import DesktopAnswerWithSocket from '../containers/answer_desktop/answerquestion_desktop';
-import DesktopVoteWithSocket from '../containers/vote_desktop/vote_desktop';
+import DesktopVotingWithSocket from '../containers/vote_desktop/vote_desktop';
 import DesktopVoteResultWithSocket from '../containers/vote_results/vote_results';
 
 /*
@@ -61,12 +61,12 @@ class App extends Component {
   }
 
   // add socket listeners here
-  componentDidMount = () => {
-    // console.log(this.props.socket);
-    this.props.socket.on('create_game', (game) => {
-      console.log(game);
-    });
-  }
+  // componentDidMount = () => {
+  //   // console.log(this.props.socket);
+  //   this.props.socket.on('create_game', (game) => {
+  //     console.log(game);
+  //   });
+  // }
 
   render() {
     return (
@@ -89,7 +89,7 @@ class App extends Component {
             <Route path="/desktop/answer" component={DesktopAnswerWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/answer/:id" component={DesktopAnswerWithSocket} />
-            <Route path="/desktop/voting" component={DesktopVoteWithSocket} />
+            <Route path="/desktop/voting" component={DesktopVotingWithSocket} />
             <Route path="/desktop/voteresult" component={DesktopVoteResultWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/voteresult/:id" component={DesktopVoteResultWithSocket} />
