@@ -1,1 +1,120 @@
 // to be added
+.vote_results{
+    background: linear-gradient(180deg, #86D3FF 0%, #FFFFFF 100%);
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    #voteResults{
+
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 64px;
+        line-height: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        #question{
+            h1{
+                color: #FFFFFF;
+            }
+        }
+
+        .rainbow{
+            width:500px; 
+            height:10px; 
+            background-image:url('../../img/rainbow.png');
+            background-size: cover;
+            margin:0; 
+            padding:0; 
+        }
+    }
+
+    .player_answers{
+        background: #FF7A00;
+        border: 10px solid #FFFFFF;
+        margin-top: 30px;
+        width:300px; 
+        height:600px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        .answer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .answer_player_img{
+            display: flex;
+            align-self: center;
+            width:75px; 
+            height:75px; 
+            background-image:url('../../img/p1.png');
+            background-size: cover;
+            margin:10px; 
+            padding:0; 
+        }
+
+        h1{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 40px;
+            line-height: 56px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            color: #2A3947;
+        }
+
+        .answers_voters{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: flex-end;
+            width: 100%;
+            height: 75px;
+
+            .voter_player_img1{
+                width:50px; 
+                height:50px; 
+                background-image:url('../../img/p1.png');
+                background-size: cover;
+                margin:5px; 
+                padding:0; 
+            }
+
+            .voter_player_img2{
+                width:50px; 
+                height:50px; 
+                background-image:url('../../img/p1.png');
+                background-size: cover;
+                margin:5px; 
+                padding:0; 
+            }
+        }
+    }
+
+    #next_button{
+        align-self: flex-end;
+       #button{
+            width:50px; 
+            height:50px; 
+            background-image:url('../../img/next.png');
+            background-size: cover;
+            margin:0; 
+            padding:0;  
+            border-radius: 35px;
+        }
+    }
+}

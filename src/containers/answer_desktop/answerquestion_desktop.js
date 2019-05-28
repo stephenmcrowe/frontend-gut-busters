@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import './answer_desktop.scss';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions';
 
@@ -40,14 +41,17 @@ class QuestionAnswer extends Component {
   }
 
   // props.round will be instantiated once connected to backend
+  // {this.props.round}
   render() {
     return (
-      <div className="question_page">
+      <div id="question_page">
         <h1>Round</h1>
-        {this.props.round}
-        <h2>Please Answer Question on Your Screen</h2>
-        <button type="button" onClick={this.onButtonClick}>Test props</button>
-        {this.renderQuestions()}
+        <h2>Please Answer Question on Screen</h2>
+        <div id="dots">
+          <div id="dot_1">.</div>
+          <div id="dot_2">.</div>
+          <div id="dot_3">.</div>
+        </div>
       </div>
 
     );

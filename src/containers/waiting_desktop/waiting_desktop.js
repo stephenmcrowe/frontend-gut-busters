@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import './waiting_desktop.scss';
 import { startGame, fetchGame } from '../../actions';
 // import { fetchGame, startGame } from '../../actions';
 // import { startGame } from '../../actions';
@@ -76,7 +77,6 @@ class DesktopWaiting extends Component {
         <div id="room code">
           <h1>Room Code: {this.gameCode()}</h1>
           <button type="button" onClick={this.onButtonClick}>Test props</button>
-
         </div>
         <div id="Waiting_cap">
           <h1>Waiting for players.... </h1>
@@ -86,12 +86,11 @@ class DesktopWaiting extends Component {
     );
   }
 
-
   renderButton() {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="start_round_button">
-        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/desktop/answer">Start Round</NavLink></button>
+        <button onClick={this.onStartRound} type="submit" id="start_round"><NavLink to="/desktop/answer">Start Round</NavLink></button>
       </div>
 
     );
@@ -111,7 +110,7 @@ class DesktopWaiting extends Component {
     // return (
     // this.props.players.map((player) => {
     return (
-      <div className="waiting">
+      <div id="waiting-room-page">
         {this.renderPage()}
         {this.renderButton()}
       </div>
