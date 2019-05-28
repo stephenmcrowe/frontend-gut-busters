@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { startRound } from '../../actions';
+import { startGame, fetchGame } from '../../actions';
+// import { fetchGame, startGame } from '../../actions';
+// import { startGame } from '../../actions';
 import SocketContext from '../../socket-context';
 
 /*
@@ -28,7 +30,6 @@ class DesktopWaiting extends Component {
     super(props);
 
     this.state = {};
-
     this.onStartRound = this.onStartRound.bind(this);
     this.renderPage = this.renderPage.bind(this);
     // this.renderPlayers = this.renderPlayers.bind(this);
@@ -36,14 +37,18 @@ class DesktopWaiting extends Component {
   }
 
 
-  /* componentDidMount() {
-    this.props.getPlayers();
+  componentDidMount() {
+    // this.props.getPlayers();
+    // do we need to re-fetch the game here?
+    this.props.fetchGame(this.props.socket);
   }
-  */
+
 
   onStartRound() {
     // event.preventDefault();
-    this.props.startRound(this.state);
+    startGame(this.props.socket);
+    // console.log(this.onStartRound);
+    console.log('round started');
   }
 
   renderPage() {
@@ -104,4 +109,4 @@ const DesktopWaitingWithSocket = props => (
 );
 
 
-export default withRouter(connect(null, { startRound })(DesktopWaitingWithSocket));
+export default withRouter(connect(null, { fetchGame, startGame })(DesktopWaitingWithSocket));

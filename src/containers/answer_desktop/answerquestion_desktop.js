@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SocketContext from '../../socket-context';
+import { fetchGame } from '../../actions';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -11,11 +12,16 @@ import SocketContext from '../../socket-context';
 }
 */
 
-class questionAnswer extends Component {
+class QuestionAnswer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+  }
+
+  componentDidMount() {
+    this.props.fetchGame(this.props.socket);
+    console.log('game fetched in answer question');
   }
 
   // props.round will be instantiated once connected to backend
@@ -33,9 +39,9 @@ class questionAnswer extends Component {
 
 const QuestionAnswerWithSocket = props => (
   <SocketContext.Consumer>
-    {socket => <questionAnswer {...props} socket={socket} />}
+    {socket => <QuestionAnswer {...props} socket={socket} />}
   </SocketContext.Consumer>
 );
 
 
-export default withRouter(connect(null, null)(QuestionAnswerWithSocket));
+export default withRouter(connect(null, { fetchGame })(QuestionAnswerWithSocket));
