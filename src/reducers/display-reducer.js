@@ -1,3 +1,5 @@
+// Legacy code
+
 import { ActionTypes } from '../actions';
 
 // code taken from postReducer --> scaffolding for display

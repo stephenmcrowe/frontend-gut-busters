@@ -1,12 +1,17 @@
-/* eslint-disable react/button-has-type */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/no-unused-vars */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { joinGame } from '../../actions';
+import { joinGame, fetchGame } from '../../actions';
 import './landingpage_mobile.scss';
 import logo from '../../img/gut-logo.svg';
+import SocketContext from '../../socket-context';
 
-class mobileLanding extends Component {
+// connect to socket
+const socketserver = 'http://localhost:9090';
+
+class MobileLanding extends Component {
   constructor(props) {
     super(props);
 
@@ -15,15 +20,19 @@ class mobileLanding extends Component {
       playerName: '',
     };
 
-    this.joinGameClick = this.joinGameClick.bind(this);
+    // bindings
     this.roomCodeChange = this.roomCodeChange.bind(this);
     this.playerNameChange = this.playerNameChange.bind(this);
+    this.joinGameClick = this.joinGameClick.bind(this);
   }
 
   joinGameClick(event) {
-    event.preventDefault();
-    this.props.joinGame(this.props.history);
-    // will be taken from server via actions
+    // event.preventDefault();
+    console.log(this.props.socket);
+    console.log(this.state.roomCode);
+    console.log(this.state.playerName);
+    console.log(this.props.joinGame);
+    this.props.joinGame(this.props.socket, this.state.roomCode, this.state.playerName);
   }
 
   roomCodeChange(event) {
@@ -49,11 +58,17 @@ class mobileLanding extends Component {
           <input className="playername-input" type="text" placeholder="playername..." onChange={this.playerNameChange} value={this.state.playerName} />
         </div>
         <div className="join-game">
-          <button onClick={this.joinGameClick} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Join!</p></NavLink></button>
+          <button type="submit" onClick={this.joinGameClick} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Join!</p></NavLink></button>
         </div>
       </div>
     );
   }
 }
 
-export default withRouter(connect(null, { joinGame })(mobileLanding));
+const MobileLandingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <MobileLanding {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+export default withRouter(connect(null, { joinGame })(MobileLandingWithSocket));

@@ -2,13 +2,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { submitAnswer } from '../../actions';
+import { submitAnswer, fetchGame } from '../../actions';
 import './answer_mobile.scss';
+import SocketContext from '../../socket-context';
 
 // Required Props:
 // player question
 
-class mobileAnswer extends Component {
+class MobileAnswer extends Component {
   constructor(props) {
     super(props);
 
@@ -19,6 +20,13 @@ class mobileAnswer extends Component {
     this.answerTextChange = this.answerTextChange.bind(this);
     this.submitAnswer = this.answerTextChange.bind(this);
   }
+
+  componentDidMount = () => {
+    fetchGame(this.props.socket);
+    console.log('game has been fetched in answer mobile');
+    console.log(fetchGame(this.props.socket));
+  }
+
 
   // functions
   answerTextChange(event) {
@@ -64,4 +72,11 @@ const mapStateToProps = state => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { submitAnswer })(mobileAnswer));
+const MobileAnswerWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <MobileAnswer {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
+
+export default withRouter(connect(mapStateToProps, { submitAnswer, fetchGame })(MobileAnswerWithSocket));

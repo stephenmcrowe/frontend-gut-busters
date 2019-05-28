@@ -1,3 +1,5 @@
+// Legacy
+
 import { ActionTypes } from '../actions';
 
 const initialState = {

@@ -3,13 +3,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { submitVote } from '../../actions';
+import SocketContext from '../../socket-context';
+import { submitVote, fetchGame } from '../../actions';
 import './vote_mobile.scss';
 
 // Required Props:
 // player question
 
-class mobileVote extends Component {
+class MobileVote extends Component {
   constructor(props) {
     super(props);
 
@@ -17,6 +18,12 @@ class mobileVote extends Component {
       tempAnswer: '',
     };
     // bindings
+  }
+
+  componentDidMount = () => {
+    fetchGame(this.props.socket);
+    console.log('game has been fetched in vote mobile');
+    console.log(fetchGame(this.props.socket));
   }
 
   // functions
@@ -65,5 +72,11 @@ const mapStateToProps = state => (
   }
 );
 
+const MobileVoteWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <MobileVote {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
-export default withRouter(connect(mapStateToProps, { submitVote })(mobileVote));
+
+export default withRouter(connect(mapStateToProps, { submitVote, fetchGame })(MobileVoteWithSocket));

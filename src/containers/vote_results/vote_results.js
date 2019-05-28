@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import SocketContext from '../../socket-context';
 // import { nextQuestion } from '../../actions';
 /*
 listens for players coming in
@@ -23,7 +24,7 @@ function mapStateToProps(reduxState) {
 }
 */
 
-class voteResults extends Component {
+class VoteResults extends Component {
   constructor(props) {
     super(props);
 
@@ -101,5 +102,12 @@ class voteResults extends Component {
     // );
   }
 }
+
+const VoteResultsWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <VoteResults {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
 // export default withRouter(connect(null, { nextQuestion })(voteResults));
-export default withRouter(connect(null, null)(voteResults));
+export default withRouter(connect(null, null)(VoteResultsWithSocket));
