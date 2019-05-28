@@ -61,12 +61,12 @@ class App extends Component {
   }
 
   // add socket listeners here
-  componentDidMount = () => {
-    // console.log(this.props.socket);
-    this.props.socket.on('create_game', (game) => {
-      console.log(game);
-    });
-  }
+  // componentDidMount = () => {
+  //   // console.log(this.props.socket);
+  //   this.props.socket.on('create_game', (game) => {
+  //     console.log(game);
+  //   });
+  // }
 
   render() {
     return (
