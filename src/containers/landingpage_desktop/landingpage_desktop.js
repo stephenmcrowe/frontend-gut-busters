@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { startGame } from '../../actions';
+// import io from 'socket.io-client';
+import SocketContext from '../../socket-context';
+// import { startGame } from '../../actions';
 import './landingpage_desktop.scss';
 import logo from '../../img/gut-logo-landing.png';
+import { fetchGame, createGame } from '../../actions';
 // import startButton from '../../img/start-game-button.png';
 
-class LandingPage extends Component {
+class DesktopLanding extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
-
     this.onStartGame = this.onStartGame.bind(this);
     this.renderLanding = this.renderLanding.bind(this);
   }
 
   onStartGame() {
-    // event.preventDefault();
-    this.props.startGame(this.state);
+    createGame(this.props.socket);
   }
 
   renderLanding() {
@@ -26,8 +27,9 @@ class LandingPage extends Component {
     return (
       <div id="landing_desktop">
         <div id="start_game">
+          {/* <button type="submit" onClick={this.onStartGame} id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button> */}
           <h1>Gut Busters</h1>
-          <button onClick={this.onStartGame} type="submit" id="start_game_button"><NavLink to="/desktop/waiting">Start Game</NavLink></button>
+          <button onClick={this.onStartGame} type="button" id="start_game_button"><NavLink to="/desktop/waiting">Start Game</NavLink></button>
         </div>
         <div id="background">
           <img className="logo-img" src={logo} alt="Gut Busters" />
@@ -48,6 +50,12 @@ class LandingPage extends Component {
   }
 }
 
+const DesktopLandingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopLanding {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
+// { startGame }
 // withRouter for location, reference from https://stackoverflow.com/questions/39174814/using-react-router-withrouter
-export default withRouter(connect(null, { startGame })(LandingPage));
+export default withRouter(connect(null, { fetchGame })(DesktopLandingWithSocket));

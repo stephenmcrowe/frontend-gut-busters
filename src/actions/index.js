@@ -1,22 +1,30 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 // keys for actiontypes
 export const ActionTypes = {
+  /* Lab stuff
   INCREMENT: 'INCREMENT',
   DECREMENT: 'DECREMENT',
   FETCH_QUESTION: 'FETCH_QUESTION',
   FETCH_QUESTIONS: 'FETCH_QUESTIONS',
-  CREATE_QUESTION: 'CREATE_QUESTION',
+  CREATE_QUESTION: 'CREATE_QUESTION', */
+  FETCH_GAME: 'FETCH_GAME',
+  ANSWER_STAGE: 'ANSWER_STAGE',
+  VOTE_STAGE: 'VOTE_STAGE',
+  SCORE_STAGE: 'SCORE_STAGE',
+  /* Don't think we need reducers for these... - Stephen
   START_GAME: 'START_GAME',
   JOIN_GAME: 'JOIN_GAME',
   START_ROUND: 'START_ROUND',
   SUBMIT_VOTE: 'SUBMIT_VOTE',
   SUBMIT_ANSWER: 'SUBMIT_ANSWER',
+  */
 };
 
 // const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
-const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 
+/* Lab stuff
 export function increment() {
   return {
     type: ActionTypes.INCREMENT,
@@ -65,17 +73,71 @@ export function createQuestion(question, history) {
       });
   };
 }
+*/
+
+export function fetchGame(socket) {
+  return (dispatch) => {
+    socket.on('game', (game) => {
+      console.log(game);
+      // console.log('game was emitted');
+      dispatch({
+        type: ActionTypes.FETCH_GAME,
+        payload: game,
+      });
+    });
+  };
+}
+
+// const routes = {
+//   vote: '/desktop/voting',
+// };
+
+// Unsure how best to transition to new stage rn, both on server and on frontend - Stephen.
+// For now, these are the events we are listening to
+
+// This isn't implemented (on server but is easy) and maybe we don't need it?!? - Stephen
+export function answerStage(socket) {
+  return socket.on('answer', (game) => {
+    return {
+      type: ActionTypes.ANSWER_STAGE,
+      payload: game,
+    };
+  });
+}
+
+export function voteStage(socket) {
+  return socket.on('vote', (game) => {
+    return {
+      type: ActionTypes.VOTE_STAGE,
+      payload: game,
+    };
+  });
+}
+
+// This isn't implemented (on server) - Stephen
+export function scoreStage(socket) {
+  return socket.on('score', (game) => {
+    return {
+      type: ActionTypes.SCORE_STAGE,
+      payload: game,
+    };
+  });
+}
+
+// Not sure if these (below) are actually necessary, but yeah. One central place for websocket stuff - Stephen
 
 /*
 * Desktop Actions
 */
-export function startGame() {
-  return {
-    type: ActionTypes.START_GAME,
-    payload: null,
-  };
+export function createGame(socket) {
+  socket.emit('create_game', {});
 }
 
+export function startGame(socket, gameId) {
+  socket.emit('start_game', { gameId });
+}
+
+// What is this? Doesn't exist rn - Stephen
 export function restartGame() {
   return {
     type: ActionTypes.RESTART_GAME,
@@ -86,28 +148,23 @@ export function restartGame() {
 /*
 * Mobile Actions
 */
-export function joinGame() {
-  return {
-    type: ActionTypes.JOIN_GAME,
-    payload: null,
-  };
+export function joinGame(socket, code, name) {
+  socket.emit('join_game', { code, name });
 }
 
+/* lol wut? This not a thing
 export function startRound() {
-  return {
-    type: ActionTypes.START_ROUND,
-    payload: null,
-  };
+}
+*/
+
+export function submitAnswer(socket, gameId, questionId, answerId, answer) {
+  socket.emit('submit_answer', {
+    gameId, questionId, answerId, answer,
+  });
 }
 
-export function submitAnswer(history) {
-  return {
-    type: ActionTypes.SUBMIT_ANSWER,
-  };
-}
-
-export function submitVote(history) {
-  return {
-    type: ActionTypes.SUBMIT_VOTE,
-  };
+export function submitVote(socket, gameId, questionId, answerId, playerId) {
+  socket.emit('submit_vote', {
+    gameId, questionId, answerId, playerId,
+  });
 }

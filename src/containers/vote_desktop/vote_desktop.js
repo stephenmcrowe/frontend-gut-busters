@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './vote_desktop.scss';
+import SocketContext from '../../socket-context';
+import { fetchGame } from '../../actions';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -11,11 +13,16 @@ import './vote_desktop.scss';
 }
 */
 
-class voting extends Component {
+class DesktopVoting extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+  }
+
+  componentDidMount() {
+    this.props.fetchGame(this.props.socket);
+    console.log('game fetched in desktop voting');
   }
 
   // props.round will be instantiated once connected to backend
@@ -37,5 +44,11 @@ class voting extends Component {
   }
 }
 
+const DesktopVotingWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <DesktopVoting {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
-export default withRouter(connect(null, null)(voting));
+
+export default withRouter(connect(null, { fetchGame })(DesktopVotingWithSocket));

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './answer_desktop.scss';
+import SocketContext from '../../socket-context';
+import { fetchGame } from '../../actions';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -11,11 +13,19 @@ import './answer_desktop.scss';
 }
 */
 
-class questionAnswer extends Component {
+class QuestionAnswer extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+  }
+
+  componentDidMount() {
+    this.props.fetchGame(this.props.socket);
+  }
+
+  onButtonClick = () => {
+    console.log(this.props.game);
   }
 
   // props.round will be instantiated once connected to backend
@@ -36,5 +46,17 @@ class questionAnswer extends Component {
   }
 }
 
+const QuestionAnswerWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <QuestionAnswer {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
 
-export default withRouter(connect(null, null)(questionAnswer));
+function mapStateToProps(reduxState) {
+  return {
+    game: reduxState.socket.game,
+  };
+}
+
+
+export default withRouter(connect(mapStateToProps, { fetchGame })(QuestionAnswerWithSocket));
