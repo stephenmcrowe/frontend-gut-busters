@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { startRound } from '../../actions';
+import './waiting_desktop.scss';
 
 /*
 listens for players coming in
@@ -47,13 +48,13 @@ class waitingroom_desktop extends Component {
   renderPage() {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
-      <div id="waiting">
+      <div id="waiting_room">
         <div id="room code">
           <h1>Room Code: </h1>
           { this.props.room_id}
         </div>
         <div id="Waiting_cap">
-          <h1>Waiting for players.... </h1>
+          <h3>Waiting for players.... </h3>
         </div>
       </div>
     );
@@ -64,7 +65,7 @@ class waitingroom_desktop extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="start_round_button">
-        <button onClick={this.onStartRound} type="submit" id="start_round_button"><NavLink to="/desktop/answer">Start Round</NavLink></button>
+        <button onClick={this.onStartRound} type="submit" id="start_round"><NavLink to="/desktop/answer">Start Round</NavLink></button>
       </div>
 
     );
@@ -84,7 +85,7 @@ class waitingroom_desktop extends Component {
     // return (
     // this.props.players.map((player) => {
     return (
-      <div className="waiting">
+      <div id="waiting-room-page">
         {this.renderPage()}
         {this.renderButton()}
       </div>
