@@ -9,7 +9,7 @@ import SocketContext from '../../socket-context';
 // Required Props:
 // player question
 
-class mobileAnswer extends Component {
+class MobileAnswer extends Component {
   constructor(props) {
     super(props);
 
@@ -74,7 +74,7 @@ const mapStateToProps = state => (
 
 const MobileAnswerWithSocket = props => (
   <SocketContext.Consumer>
-    {socket => <mobileAnswer {...props} socket={socket} />}
+    {socket => <MobileAnswer {...props} socket={socket} />}
   </SocketContext.Consumer>
 );
 
