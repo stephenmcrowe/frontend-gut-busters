@@ -6,47 +6,53 @@
     flex-direction: column;
 }
 
-#room_code
-{h1{
-    margin-left: 5%;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 50px;
-    line-height: 75px;
-    padding-bottom: 10px;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-    text-decoration: underline;
-    text-underline-position: under;
-    text-decoration-color:  #FFA800;
+#waiting{
+    #room_code
+    {
+        h1{
+        margin-left: 5%;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 50px;
+        line-height: 75px;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        color: #FFFFFF;
+        text-decoration: underline;
+        text-underline-position: under;
+        text-decoration-color:  #FFA800;
+    }
+    }
+
+    #Waiting_cap{
+    h3{
+        margin-left: 5%;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 30px;
+        line-height: 75px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+
+        color: #FFF500;
+    }
 }
-}
-
-
-h3{
-    margin-left: 5%;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 30px;
-    line-height: 75px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-
-    color: #FFF500;
 }
 
 #start_round_button{
     align-self: center;
     background: linear-gradient(180deg, #FFF500 0%, #FFA800 79.69%, #FF7A00 100%), #60B7FF;
     /* White */
-    border: 5px solid #FFFFFF;
+    border: 3px solid #FFFFFF;
     box-sizing: border-box;
+    width: 90%;
+    height: 70px;
     margin-left: 5%;
-}
+    margin-right: 5%;
 
 #start_round{
     background-color: Transparent;
@@ -56,20 +62,25 @@ h3{
     outline:none;
     font-family: Roboto;
     font-style: normal;
-
     font-weight: normal;
     font-size: 30px;
-    line-height: 75px;
+    line-height: 60px;
+    width: 100%;
     display: flex;
-    align-items: center;
-    flex-direction: center;
-    text-align: center;
+    justify-content: center;
+    align-content: center;
 
+    a{
     color: #2A3947;
-
+    text-shadow: 1px 1px #FFFFFF;
+    text-decoration: none;
+    width: 100%;
+    
+    }
     /* Darkest Dark */
     /* White */
 
+}
 }
 
 #player{
