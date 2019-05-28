@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import './vote_results.scss';
 // import { nextQuestion } from '../../actions';
+
 /*
 listens for players coming in
 store player info as local state for now
@@ -52,9 +54,12 @@ class voteResults extends Component {
     return (
       <div id="voteResults">
         <div id="question">
-          { this.props.question}
+          <h1>
+            { this.props.question}
+          What do you call a one eyed pear?
+          </h1>
         </div>
-        <img alt="rainBow Bar" />
+        <div className="img" />
       </div>
     );
   }
@@ -66,7 +71,11 @@ class voteResults extends Component {
     // would be to "/desktop/voteResult/:id once we get the questions ids per round and the votes
     // button will be image in css
       <div id="next_button">
-        <button onClick={this.onNext} type="submit" id="next_button"><NavLink to="/desktop/voteResult" /></button>
+        <div id="next_button_pic">
+          <div id="triangle" />
+          <div id="circle" />
+        </div>
+        <button onClick={this.onNext} type="submit" id="button"><NavLink to="/desktop/voteResult" /></button>
       </div>
 
     );
