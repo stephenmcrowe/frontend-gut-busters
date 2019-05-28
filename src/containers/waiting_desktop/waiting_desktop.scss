@@ -6,7 +6,8 @@
     flex-direction: column;
 }
 
-h1{
+#room_code
+{h1{
     margin-left: 5%;
     font-family: Roboto;
     font-style: normal;
@@ -20,7 +21,7 @@ h1{
     text-decoration: underline;
     text-underline-position: under;
     text-decoration-color:  #FFA800;
-   
+}
 }
 
 
@@ -68,5 +69,25 @@ h3{
 
     /* Darkest Dark */
     /* White */
+
+}
+
+#player{
+    
+    img{
+        // background: url(Screen Shot 2019-05-15 at 10.56.png);
+    border-radius: 144.5px;
+    }
+
+    .name{font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 37px;
+    display: flex;
+    align-items: center;
+
+    color: #000000;}
+
 
 }

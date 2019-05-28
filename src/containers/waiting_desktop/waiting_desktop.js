@@ -49,7 +49,7 @@ class waitingroom_desktop extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="waiting_room">
-        <div id="room code">
+        <div id="room_code">
           <h1>Room Code: </h1>
           { this.props.room_id}
         </div>
