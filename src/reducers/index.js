@@ -1,24 +1,11 @@
 import { combineReducers } from 'redux';
-import DisplayReducer from './display-reducer';
-// import VoteReducer from './vote-reducer';
-// import SubmitReducer from './submit-reducer';
-import SocketReducer from './socket-reducter';
-
-// const rootReducer = combineReducers({
-//   display: DisplayReducer,
-//   votes: VoteReducer,
-//   submit: SubmitReducer,
-// });
-
-// export default rootReducer;
-
-// the starting point for your redux store
-// this defines what your store state will look like
-import CountReducer from './count-reducer';
+// import DisplayReducer from './display-reducer';
+// import CountReducer from './count-reducer';
+import SocketReducer from './socket-reducer';
 
 const rootReducer = combineReducers({
-  count: CountReducer,
-  display: DisplayReducer,
+  // count: CountReducer,
+  // display: DisplayReducer,
   socket: SocketReducer,
 });
 

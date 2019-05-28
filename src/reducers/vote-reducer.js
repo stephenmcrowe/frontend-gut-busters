@@ -1,3 +1,5 @@
+// Legacy
+
 import { ActionTypes } from '../actions';
 // method taken from CountReducer --> scaffolding for counting votes
 const VoteReducer = (state = 0, action) => {

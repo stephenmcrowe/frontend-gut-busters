@@ -19,6 +19,8 @@ class MobileLanding extends Component {
       roomCode: '',
       playerName: '',
     };
+    this.roomCodeChange = this.roomCodeChange.bind(this);
+    this.playerNameChange = this.playerNameChange.bind(this);
   }
 
   componentDidMount = () => {
