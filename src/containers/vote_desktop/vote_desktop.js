@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
+import './vote_desktop.scss';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -26,6 +26,11 @@ class voting extends Component {
           {this.props.round}
         </h1>
         <h2>Voting in Progress...</h2>
+        <div id="dots">
+          <div id="dot_1">.</div>
+          <div id="dot_2">.</div>
+          <div id="dot_3">.</div>
+        </div>
       </div>
 
     );
