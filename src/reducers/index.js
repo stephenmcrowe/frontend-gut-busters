@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import DisplayReducer from './display-reducer';
 // import VoteReducer from './vote-reducer';
 // import SubmitReducer from './submit-reducer';
+import SocketReducer from './socket-reducter';
 
 // const rootReducer = combineReducers({
 //   display: DisplayReducer,
@@ -18,6 +19,7 @@ import CountReducer from './count-reducer';
 const rootReducer = combineReducers({
   count: CountReducer,
   display: DisplayReducer,
+  socket: SocketReducer,
 });
 
 export default rootReducer;

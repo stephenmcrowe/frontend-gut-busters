@@ -1,11 +1,12 @@
 import { SocketActionTypes } from '../actions/submitActions';
+import { ActionTypes } from '../actions';
 
 const initialState = {
   game: {},
   test: 0,
 };
 
-const socketReducer = (state = initialState, action) => {
+const SocketReducer = (state = initialState, action) => {
   switch (action.typs) {
     // Client emits to server - not sure we need state update
     case SocketActionTypes.CREATE_GAME:
@@ -21,10 +22,12 @@ const socketReducer = (state = initialState, action) => {
     // Server emits to client - not sure we have any functions besides updating entire game object
     case SocketActionTypes.UPDATE_GAME:
       return Object.assign({}, state, { game: action.payload });
+    case ActionTypes.FETCH_GAME:
+      return Object.assign({}, state, { geme: action.payload });
     // Default
     default:
       return state;
   }
 };
 
-export default socketReducer;
+export default SocketReducer;

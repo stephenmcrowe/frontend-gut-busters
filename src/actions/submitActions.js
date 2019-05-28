@@ -33,7 +33,7 @@ export function decrement() {
 
 /* Joining Functions */
 export function createGame() {
-
+  this.props.socket.emit('create_game', {});
 }
 
 export function startGame() {
@@ -63,6 +63,14 @@ export function submitVote(questionid, answerid) {
 
 /* Game Functions (Receiving) */
 // socket.on in components
-export function updateGame(game) {
-  this.props.socket.emit('create_game', {});
+export function updateGame(socket) {
+  return (dispatch) => {
+    socket.on('game', (game) => {
+      console.log('game was emitted');
+      dispatch({
+        type: SocketActionTypes.FETCH_GAME,
+        payload: game,
+      });
+    });
+  };
 }
