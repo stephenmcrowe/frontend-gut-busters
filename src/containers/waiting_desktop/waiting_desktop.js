@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import './waiting_desktop.scss';
-import { startRound, startGame, fetchGame } from '../../actions';
+import { startGame, fetchGame } from '../../actions';
 // import { fetchGame, startGame } from '../../actions';
 // import { startGame } from '../../actions';
 import SocketContext from '../../socket-context';
