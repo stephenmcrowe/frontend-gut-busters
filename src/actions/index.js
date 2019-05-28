@@ -78,7 +78,7 @@ export function createQuestion(question, history) {
 export function fetchGame(socket) {
   return (dispatch) => {
     socket.on('game', (game) => {
-      console.log('game was emitted');
+      console.log(game);
       dispatch({
         type: ActionTypes.FETCH_GAME,
         payload: game,

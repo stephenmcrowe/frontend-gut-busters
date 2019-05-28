@@ -18,15 +18,9 @@ class DesktopLanding extends Component {
     this.renderLanding = this.renderLanding.bind(this);
   }
 
-  componentDidMount() {
-    this.props.fetchGame(this.props.socket);
-    console.log('game is fetched');
-  }
-
   onStartGame() {
     createGame(this.props.socket);
   }
-
 
   renderLanding() {
     // did assuming whole background image/title/logo is just one image other than the button
@@ -35,7 +29,7 @@ class DesktopLanding extends Component {
         <div id="start_game">
           {/* <button type="submit" onClick={this.onStartGame} id="start_game_button"><NavLink to="/waitingDesktop">Start Game</NavLink></button> */}
           <h1>Gut Busters</h1>
-          <button onClick={this.onStartGame} type="submit" id="start_game_button"><NavLink to="/desktop/waiting">Start Game</NavLink></button>
+          <button onClick={this.onStartGame} type="button" id="start_game_button"><NavLink to="/desktop/waiting">Start Game</NavLink></button>
         </div>
         <div id="background">
           <img className="logo-img" src={logo} alt="Gut Busters" />

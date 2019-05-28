@@ -38,8 +38,6 @@ class DesktopWaiting extends Component {
 
 
   componentDidMount() {
-    // this.props.getPlayers();
-    // do we need to re-fetch the game here?
     this.props.fetchGame(this.props.socket);
   }
 
@@ -47,8 +45,14 @@ class DesktopWaiting extends Component {
   onStartRound() {
     // event.preventDefault();
     startGame(this.props.socket);
-    // console.log(this.onStartRound);
-    console.log('round started');
+  }
+
+  onButtonClick = () => {
+    console.log(this.props);
+  }
+
+  gameCode() {
+    return this.props.game ? this.props.game.code : '';
   }
 
   renderPage() {
@@ -56,8 +60,9 @@ class DesktopWaiting extends Component {
     return (
       <div id="waiting">
         <div id="room code">
-          <h1>Room Code: </h1>
-          { this.props.room_id}
+          <h1>Room Code: {this.gameCode()}</h1>
+          <button type="button" onClick={this.onButtonClick}>Test props</button>
+
         </div>
         <div id="Waiting_cap">
           <h1>Waiting for players.... </h1>
@@ -108,5 +113,10 @@ const DesktopWaitingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
+function mapStateToProps(reduxState) {
+  return {
+    game: reduxState.socket.game,
+  };
+}
 
-export default withRouter(connect(null, { fetchGame, startGame })(DesktopWaitingWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame, startGame })(DesktopWaitingWithSocket));
