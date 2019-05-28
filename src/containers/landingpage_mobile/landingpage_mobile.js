@@ -66,8 +66,4 @@ const MobileLandingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-<<<<<<< HEAD
-export default withRouter(connect(null, { joinGame })(MobileLandingWithSocket));
-=======
-export default withRouter(connect(null, { fetchGame })(MobileLandingWithSocket));
->>>>>>> 41c4d5b297a9710fd575a8b4c9aafe5f0355d4e3
+export default withRouter(connect(null, { joinGame, fetchGame })(MobileLandingWithSocket));
