@@ -28,6 +28,18 @@ class QuestionAnswer extends Component {
     console.log(this.props.game);
   }
 
+  renderQuestions = () => {
+    if (this.props.game) {
+      const questions = this.props.game.questions.map((question) => {
+        return (
+          <div key={question}>{question.bank.question}</div>
+        );
+      });
+      return questions;
+    }
+    return '';
+  }
+
   // props.round will be instantiated once connected to backend
   // {this.props.round}
   render() {
