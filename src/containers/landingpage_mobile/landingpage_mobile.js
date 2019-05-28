@@ -19,17 +19,20 @@ class MobileLanding extends Component {
       roomCode: '',
       playerName: '',
     };
+
+    // bindings
     this.roomCodeChange = this.roomCodeChange.bind(this);
     this.playerNameChange = this.playerNameChange.bind(this);
-  }
-
-  componentDidMount = () => {
-    fetchGame(this.props.socket);
+    this.joinGameClick = this.joinGameClick.bind(this);
   }
 
   joinGameClick(event) {
-    event.preventDefault();
-    joinGame(this.props.socket, this.props.history);
+    // event.preventDefault();
+    console.log(this.props.socket);
+    console.log(this.state.roomCode);
+    console.log(this.state.playerName);
+    console.log(this.props.joinGame);
+    this.props.joinGame(this.props.socket, this.state.roomCode, this.state.playerName);
   }
 
   roomCodeChange(event) {
@@ -68,4 +71,4 @@ const MobileLandingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default withRouter(connect(null, { joinGame, fetchGame })(MobileLandingWithSocket));
+export default withRouter(connect(null, { joinGame })(MobileLandingWithSocket));

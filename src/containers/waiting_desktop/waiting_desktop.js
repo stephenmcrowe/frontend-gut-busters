@@ -44,11 +44,25 @@ class DesktopWaiting extends Component {
 
   onStartRound() {
     // event.preventDefault();
-    startGame(this.props.socket);
+    if (this.props.game) {
+      this.props.startGame(this.props.socket, this.props.game.id);
+    }
   }
 
   onButtonClick = () => {
-    console.log(this.props);
+    console.log(this.props.game);
+  }
+
+  renderPlayers = () => {
+    if (this.props.game) {
+      const players = this.props.game.players.map((player) => {
+        return (
+          <div key={player}>{player}</div>
+        );
+      });
+      return players;
+    }
+    return '';
   }
 
   gameCode() {
@@ -66,6 +80,7 @@ class DesktopWaiting extends Component {
         </div>
         <div id="Waiting_cap">
           <h1>Waiting for players.... </h1>
+          {this.renderPlayers()}
         </div>
       </div>
     );

@@ -21,7 +21,10 @@ class QuestionAnswer extends Component {
 
   componentDidMount() {
     this.props.fetchGame(this.props.socket);
-    console.log('game fetched in answer question');
+  }
+
+  onButtonClick = () => {
+    console.log(this.props.game);
   }
 
   // props.round will be instantiated once connected to backend
@@ -31,6 +34,7 @@ class QuestionAnswer extends Component {
         <h1>Round</h1>
         {this.props.round}
         <h2>Please Answer Question on Your Screen</h2>
+        <button type="button" onClick={this.onButtonClick}>Test props</button>
       </div>
 
     );
@@ -43,5 +47,11 @@ const QuestionAnswerWithSocket = props => (
   </SocketContext.Consumer>
 );
 
+function mapStateToProps(reduxState) {
+  return {
+    game: reduxState.socket.game,
+  };
+}
 
-export default withRouter(connect(null, { fetchGame })(QuestionAnswerWithSocket));
+
+export default withRouter(connect(mapStateToProps, { fetchGame })(QuestionAnswerWithSocket));
