@@ -27,6 +27,18 @@ class QuestionAnswer extends Component {
     console.log(this.props.game);
   }
 
+  renderQuestions = () => {
+    if (this.props.game) {
+      const questions = this.props.game.questions.map((question) => {
+        return (
+          <div key={question}>{question.bank.question}</div>
+        );
+      });
+      return questions;
+    }
+    return '';
+  }
+
   // props.round will be instantiated once connected to backend
   render() {
     return (
@@ -35,6 +47,7 @@ class QuestionAnswer extends Component {
         {this.props.round}
         <h2>Please Answer Question on Your Screen</h2>
         <button type="button" onClick={this.onButtonClick}>Test props</button>
+        {this.renderQuestions()}
       </div>
 
     );

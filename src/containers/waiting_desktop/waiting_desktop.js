@@ -57,7 +57,7 @@ class DesktopWaiting extends Component {
     if (this.props.game) {
       const players = this.props.game.players.map((player) => {
         return (
-          <div key={player}>{player}</div>
+          <div key={player}>{player.name}</div>
         );
       });
       return players;
