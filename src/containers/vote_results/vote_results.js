@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
+import './vote_results.scss';
 import SocketContext from '../../socket-context';
 // import { nextQuestion } from '../../actions';
+
 /*
 listens for players coming in
 store player info as local state for now
@@ -53,9 +55,12 @@ class VoteResults extends Component {
     return (
       <div id="voteResults">
         <div id="question">
-          { this.props.question}
+          <h1>
+            { this.props.question}
+          What do you call a one eyed pear?
+          </h1>
         </div>
-        <img alt="rainBow Bar" />
+        <div className="rainbow" />
       </div>
     );
   }
@@ -65,9 +70,9 @@ class VoteResults extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
     // would be to "/desktop/voteResult/:id once we get the questions ids per round and the votes
-    // button will be image in css
+    // button will be image in css         <div className="next_button_pic" />
       <div id="next_button">
-        <button onClick={this.onNext} type="submit" id="next_button"><NavLink to="/desktop/voteResult" /></button>
+        <button onClick={this.onNext} type="submit" id="button"><NavLink to="/desktop/answer" /></button>
       </div>
 
     );
@@ -94,6 +99,16 @@ class VoteResults extends Component {
     return (
       <div className="vote_results">
         {this.renderHeader()}
+        <div className="player_answers">
+          <div className="answer">
+            <div className="answer_player_img" />
+            <h1>Answer Text Here</h1>
+            <div className="answers_voters">
+              <div className="voter_player_img1" />
+              <div className="voter_player_img2" />
+            </div>
+          </div>
+        </div>
         {this.renderNextButton()}
       </div>
 
