@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 //  import { endRounds } from '../../actions';
-// import './roundscore_desktop.scss';
+import './roundscore_desktop.scss';
 
 // Data needed (receive):
 // props.player array with each player having player.score from round
@@ -46,7 +46,7 @@ class desktopRoundScore extends Component {
       <div className="round-score-page">
         <div className="round-title">
           <div className="round-num">
-            <h1> Round round_number_here</h1>
+            <h1> Round 1</h1>
           </div>
           <div className="joke">
             <h2>joke to be inserted here</h2>
@@ -54,22 +54,32 @@ class desktopRoundScore extends Component {
         </div>
         <div className="player-scores">
           <div className="player-round-score">
-            <h1>player 1</h1>
             <img alt="player_img1" />
-
+            <div className="player-bar">
+              <h3>player 1</h3>
+              <h3>2000</h3>
+            </div>
           </div>
           <div className="player-round-score">
-            <h1>player 2</h1>
             <img alt="player_img2" />
-
+            <div className="player-bar">
+              <h3>player 2</h3>
+              <h3>1500</h3>
+            </div>
           </div>
           <div className="player-round-score">
-            <h1>player 3</h1>
             <img alt="player_img3" />
+            <div className="player-bar">
+              <h3>player 3</h3>
+              <h3>1000</h3>
+            </div>
           </div>
           <div className="player-round-score">
-            <h1>player 4</h1>
             <img alt="player_img4" />
+            <div className="player-bar">
+              <h3>player 4</h3>
+              <h3>9000</h3>
+            </div>
           </div>
         </div>
         <div className="next-button">
