@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { createGame, fetchGame } from '../../actions';
+import { fetchGame } from '../../actions/index';
+import { createGame } from '../../actions/submitActions';
 import './score_desktop.scss';
 import SocketContext from '../../socket-context';
-
-// Data needed (receive):
-// props.player array with each player having player.score
-
-// still need to be made fully applicable for variable number of players
 
 class DesktopScore extends Component {
   constructor(props) {
@@ -20,7 +16,6 @@ class DesktopScore extends Component {
 
   componentDidMount() {
     this.props.fetchGame(this.props.socket);
-    console.log('game fetched in final score');
   }
 
   onRestartGame() {
@@ -65,9 +60,22 @@ class DesktopScore extends Component {
   //     </div>
   //   );
   // }
+  renderScores = () => {
+    if (this.props.game) {
+      const scores = this.props.game.questions(1).answers(1).score.map((score) => {
+        return (
+          <div key={this.props.game.questions(1)}>{this.props.game.questions(1).answers(1).score}</div>
+        );
+      });
+      return scores;
+    }
+    return '';
+  }
+
   render() {
     return (
       <div className="desktop-score-page">
+        {this.renderScores()};
         {/* <div className="game-winner">
         //    <h1>{this.props.player.find(1)} won because ghouls
         //                 just want to have fun!
@@ -121,12 +129,11 @@ class DesktopScore extends Component {
   }
 }
 
-const mapStateToProps = state => (
-  {
-    player: state.player,
-    game: state.game,
-  }
-);
+function mapStateToProps(reduxState) {
+  return {
+    game: reduxState.socket.game,
+  };
+}
 
 const DesktopScoreWithSocket = props => (
   <SocketContext.Consumer>
@@ -134,4 +141,4 @@ const DesktopScoreWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default withRouter(connect(mapStateToProps, { fetchGame, createGame })(DesktopScoreWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame })(DesktopScoreWithSocket));

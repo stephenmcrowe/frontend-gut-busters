@@ -11,9 +11,9 @@ import SocketContext from './socket-context';
 
 // connect to socket
 const socketserver = 'http://localhost:9090';
-// console.log(socketserver);
 const socket = io(socketserver);
 
+// connecting to the socket
 socket.on('connect', () => { console.log('socket.io connected'); });
 socket.on('disconnect', () => { console.log('socket.io disconnected'); });
 socket.on('reconnect', () => { console.log('socket.io reconnected'); });

@@ -3,28 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import './waiting_desktop.scss';
-import { startGame, fetchGame } from '../../actions';
-// import { fetchGame, startGame } from '../../actions';
-// import { startGame } from '../../actions';
+import { fetchGame } from '../../actions/index';
+import { startGame } from '../../actions/submitActions';
 import SocketContext from '../../socket-context';
-
-/*
-listens for players coming in
-store player info as local state for now
-Navlink to start round aka questions
-*/
-
-// start_game
-
-/* will get posts eventually
-function mapStateToProps(reduxState) {
-  // console.log(reduxState);
-  return {
-    room_id: reduxState.game.id,
-    players: reduxState.game.players,
-  };
-}
-*/
 
 class DesktopWaiting extends Component {
   constructor(props) {
@@ -33,7 +14,6 @@ class DesktopWaiting extends Component {
     this.state = {};
     this.onStartRound = this.onStartRound.bind(this);
     this.renderPage = this.renderPage.bind(this);
-    // this.renderPlayers = this.renderPlayers.bind(this);
     this.renderButton = this.renderButton.bind(this);
   }
 
@@ -44,9 +24,8 @@ class DesktopWaiting extends Component {
 
 
   onStartRound() {
-    // event.preventDefault();
     if (this.props.game) {
-      this.props.startGame(this.props.socket, this.props.game.id);
+      startGame(this.props.socket, this.props.game.id);
     }
   }
 
@@ -133,4 +112,4 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchGame, startGame })(DesktopWaitingWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame })(DesktopWaitingWithSocket));
