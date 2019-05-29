@@ -34,7 +34,6 @@ Route                       -> Screen                       Receives:         Em
 /mobile/answer/:qstid       -> answer (mobile)              question          answer
 /mobile/vote/:qstid         -> vote (mobile)                question          vote
 /mobile/score               -> ranking (mobile)             score             none
-
 /desktop                   -> landing (desktop)             ----              start game
 /desktop/waiting             -> waiting (desktop)           players, roomid   start round
 /desktop/answer/:qstid       -> answer (desktop)            answersin/done           -----
