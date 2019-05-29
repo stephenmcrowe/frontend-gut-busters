@@ -41,7 +41,7 @@ class MobileVote extends Component {
 
   voteTiming() {
   // Emit time updates to client
-    let timeLeft = 15;
+    let timeLeft = 14;
     const voteTimerCountdown = setInterval(() => {
       this.setState({
         timestamp: timeLeft,
@@ -49,6 +49,9 @@ class MobileVote extends Component {
       // eslint-disable-next-line no-plusplus
       timeLeft--;
       if (timeLeft === 0) {
+        this.setState({
+          timestamp: 0,
+        });
         clearInterval(voteTimerCountdown);
       }
     }, 1000);
