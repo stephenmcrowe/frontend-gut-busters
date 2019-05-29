@@ -17,11 +17,16 @@ class MobileVote extends Component {
 
     this.state = {
       tempAnswer: '',
+      timestamp: '15',
     };
+
+    // Bindings
+    this.voteTiming = this.voteTiming.bind(this);
   }
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
+    this.voteTiming();
   }
 
   // functions
@@ -34,11 +39,28 @@ class MobileVote extends Component {
     this.props.submitAnswer(this.props.history);
   }
 
+  voteTiming() {
+  // Emit time updates to client
+    let timeLeft = 15;
+    const voteTimerCountdown = setInterval(() => {
+      this.setState({
+        timestamp: timeLeft,
+      });
+      // eslint-disable-next-line no-plusplus
+      timeLeft--;
+      if (timeLeft === 0) {
+        clearInterval(voteTimerCountdown);
+      }
+    }, 1000);
+  }
+
   render() {
     return (
       <div className="vote-page">
         <div className="header">
-          <div className="timer">12</div>
+          <div className="timer">
+            {this.state.timestamp}
+          </div>
         </div>
         <div className="vote-content">
 
