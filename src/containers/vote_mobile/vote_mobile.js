@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions/index';
-import { submitVote, receiveVote } from '../../actions/submitActions';
+import { submitVote, receiveVote, moveOn } from '../../actions/submitActions';
 import './vote_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 
@@ -24,6 +24,11 @@ class MobileVote extends Component {
       idx: myIdx,
       display: true,
     };
+
+    // Listeners
+    this.props.socket.on('vote', (id) => {
+      moveOn(this.props.socket, this.props.history, 'mobile/vote/', id);
+    });
 
     // Bindings
     this.voteTiming = this.voteTiming.bind(this);
