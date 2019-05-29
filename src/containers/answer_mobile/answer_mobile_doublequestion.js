@@ -79,7 +79,7 @@ class MobileAnswer extends Component {
           if (answer.player === localStorage.getItem('myId')) {
             myQuestions.push(question);
           }
-          if (answer.votes.length == 0) {
+          if (answer.votes.length === 0) {
             first.push(true);
           } else {
             first.push(false);
