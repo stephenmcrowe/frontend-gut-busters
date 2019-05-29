@@ -55,7 +55,7 @@ class QuestionAnswer extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
       <div id="start_round_button">
-        <button onClick={this.onStartVoting} type="submit" id="start_round"><NavLink to="/desktop/answer">Start Round</NavLink></button>
+        <button onClick={this.onStartVoting} type="submit" id="stat_voting">Start Voting!</button>
       </div>
 
     );
