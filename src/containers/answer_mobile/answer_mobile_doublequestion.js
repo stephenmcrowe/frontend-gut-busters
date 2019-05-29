@@ -25,7 +25,7 @@ class MobileAnswer extends Component {
     this.state = {
       answerText1: '',
       answerText2: '',
-      timestamp: '60',
+      timestamp: '5',
       questionId1: '', // this.props.question[0].id, // this.props.question[quesIndex1].id,
       questionId2: '', // this.props.question[1].id, // this.props.question[quesIndex2].id,
       answerId1: '', // this.props.question[0].answers[0].id, // this.props.question[quesIndex1].answers[answerIndex1].id,
@@ -43,7 +43,13 @@ class MobileAnswer extends Component {
       console.log('Time out!');
       // console.log(this.props.question[0].answers[0].id, this.props.question[1].answers[0].id);
       // console.log(this.props.game);
-      // console.log(this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+      console.log(this.props.game);
+      console.log(`questionId1: ${this.state.questionId1}`);
+      console.log(`answerId1: ${this.state.answerId1}`);
+      console.log(`answerText1: ${this.state.answerText1}`);
+      console.log(`questionId2: ${this.state.questionId2}`);
+      console.log(`answerId2: ${this.state.answerId2}`);
+      console.log(`answerText2: ${this.state.answerText2}`);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
@@ -72,26 +78,23 @@ class MobileAnswer extends Component {
 
     // Super jankey but we need to rerender with event
     this.props.socket.on('game', (game) => {
-      console.log(localStorage.getItem('myId'));
       const myQuestions = [];
       const myAnswers = [];
       game.questions.forEach((question) => {
         question.answers.forEach((answer) => {
           if (answer.player === localStorage.getItem('myId')) {
-            myQuestions.push(question.bank);
+            myQuestions.push(question);
             myAnswers.push(answer);
           }
         });
       });
-      console.log(myQuestions);
-      // localStorage.setItem('myQuestions', myQuestions);
-      // localStorage.setItem('first', first);
+      console.log(`myQuestions${myQuestions}`);
 
       // Then set state locally using myQuestions
       this.setState({ questionId1: myQuestions[0].id });
       this.setState({ questionId2: myQuestions[1].id });
       this.setState({ answerId1: myAnswers[0].id });
-      this.setState({ answerId1: myAnswers[1].id });
+      this.setState({ answerId2: myAnswers[1].id });
       this.setState({ q1: myQuestions[0] });
       this.setState({ q2: myQuestions[1] });
     });
@@ -131,14 +134,14 @@ class MobileAnswer extends Component {
 
   renderQuestion1() {
     if (this.props.game && this.state.q1) {
-      return this.state.q1.question;
+      return this.state.q1.bank.question;
     }
     return '';
   }
 
   renderQuestion2() {
     if (this.props.game && this.state.q2) {
-      return this.state.q2.question;
+      return this.state.q2.bank.question;
     }
     return '';
   }
