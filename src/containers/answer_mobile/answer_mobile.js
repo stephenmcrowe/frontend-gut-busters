@@ -1,10 +1,17 @@
 /* eslint-disable react/button-has-type */
+/*
+* Sources:
+* - Setting up timers: https://medium.com/dailyjs/combining-react-with-socket-io-for-real-time-goodness-d26168429a34
+*/
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { submitAnswer, fetchGame } from '../../actions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
+import { subscribeToTimer } from '../../timers';
+
 
 // Required Props:
 // player question
@@ -15,7 +22,26 @@ class MobileAnswer extends Component {
 
     this.state = {
       answerText: '',
+      timestamp: '30',
     };
+
+    // Received Events
+    this.props.socket.on('time_remaining', (time) => {
+      console.log(`timer reads: ${time}`);
+    });
+    this.props.socket.on('time_out', () => {
+      console.log('Time out!');
+    });
+
+    this.props.socket.on('timer', () => {
+      console.log('received timer!');
+    });
+
+    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
+      timestamp: timeRemaining,
+    }));
+
+
     // bindings
     this.answerTextChange = this.answerTextChange.bind(this);
     this.submitAnswer = this.answerTextChange.bind(this);
@@ -38,11 +64,26 @@ class MobileAnswer extends Component {
     this.props.submitAnswer(this.props.history);
   }
 
+  // Emitted Events
+  subscribeMe(cb) {
+    // this.props.socket.emit('subscribe_to_timer');
+    subscribeToTimer(this.props.socket, cb);
+  }
+
+  // Miscellaneous testing
+  // eslint-disable-next-line class-methods-use-this
+  display(err, timestamp) {
+    console.log(`current time reads ${timestamp}`);
+  }
+
+
   render() {
     return (
       <div className="answer-page">
         <div className="header">
-          <div className="timer">12</div>
+          <div className="timer">
+            {this.state.timestamp}
+          </div>
         </div>
         <div className="answer-content">
 
