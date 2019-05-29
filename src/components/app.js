@@ -6,6 +6,7 @@ import {
 import SocketContext from '../socket-context';
 import Health from './health';
 import FallBack from './fallback';
+import { moveOn } from '../actions/submitActions';
 
 import MobileLandingWithSocket from '../containers/landingpage_mobile/landingpage_mobile';
 import MobileWaitingWithSocket from '../containers/waiting_mobile/waiting_mobile';
@@ -49,6 +50,14 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.props.socket.on('start_voting', (questionId) => {
+      this.props.moveOn(this.props.socket, this.props.history, `mobile/vote/${questionId}`);
+    });
+
+    this.props.socket.on('vote', (questionId) => {
+      this.props.moveOn(this.props.socket, this.props.history, `mobile/vote/${questionId}`);
+    });
   }
 
   render() {
