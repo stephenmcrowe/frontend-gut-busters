@@ -24,7 +24,7 @@ class MobileAnswer extends Component {
     this.state = {
       answerText1: '',
       answerText2: '',
-      timestamp: '10',
+      timestamp: '60',
       questionId1: '',
       questionId2: '',
       answerId1: '',
