@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './answer_desktop.scss';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions';
+import { fetchGame } from '../../actions/index';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);

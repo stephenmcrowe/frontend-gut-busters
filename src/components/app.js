@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
-// import io from 'socket.io-client';
 import SocketContext from '../socket-context';
 import Health from './health';
 import FallBack from './fallback';
@@ -50,23 +49,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-
-    // set up socket
-    // console.log(socketserver);
-    // this.socket = io(socketserver);
-    // this.props.socket.on('connect', () => { console.log('socket.io connected'); });
-    // this.socket.on('disconnect', () => { console.log('socket.io disconnected'); });
-    // this.socket.on('reconnect', () => { console.log('socket.io reconnected'); });
-    // this.socket.on('error', (error) => { console.log(error); });
   }
-
-  // add socket listeners here
-  // componentDidMount = () => {
-  //   // console.log(this.props.socket);
-  //   this.props.socket.on('create_game', (game) => {
-  //     console.log(game);
-  //   });
-  // }
 
   render() {
     return (

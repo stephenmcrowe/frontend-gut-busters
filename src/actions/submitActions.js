@@ -1,76 +1,51 @@
-// import axios from 'axios';
-// import io from 'socket.io-client';
-
-// keys for actiontypes
-export const SocketActionTypes = {
-  INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT',
-  CREATE_GAME: 'CREATE_GAME',
-  START_GAME: 'START_GAME',
-  CREATE_PLAYER: 'CREATE_PLAYER',
-  SUBMIT_ANSWER: 'SUBMIT_ANSWER',
-  SUBMIT_VOTE: 'SUBMIT_VOTE',
-  UPDATE_GAME: 'UPDATE_GAME',
-};
-
-// const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api'; USE ME
-
-/* Demo Functions */
-export function increment() {
-  return {
-    type: SocketActionTypes.INCREMENT,
-    payload: null,
-  };
+// Put player id in local storage
+export function receiveJoinGame(socket) {
+  socket.on('join_game', (play) => {
+    localStorage.setItem('myId', play.id);
+  });
 }
 
-export function decrement() {
-  return {
-    type: SocketActionTypes.DECREMENT,
-    payload: null,
-  };
+/*
+* Desktop Actions
+*/
+export function createGame(socket) {
+  socket.emit('create_game', {});
 }
 
-/* Joining Functions */
-export function createGame() {
-  this.props.socket.emit('create_game', {});
+export function startGame(socket, gameId) {
+  socket.emit('start_game', { gameId });
 }
 
-export function startGame() {
+export function pushStage(socket, history) {
+  socket.on('start_game', (game) => {
+    console.log(game.questions[0].bank.question);
+    history.push('/mobile/answer');
+  });
 
+  socket.on('answer', (game) => {
+    history.push('/mobile/answer');
+  });
+
+  socket.on('vote', (game) => {
+    history.push('/mobile/vote');
+  });
 }
 
-export function createPlayer() {
-
+/*
+* Mobile Actions
+*/
+export function submitAnswer(socket, gameId, questionId, answerId, answer) {
+  socket.emit('submit_answer', {
+    gameId, questionId, answerId, answer,
+  });
 }
 
-
-/* Game Functions (Sending) */
-// socket.emit inside actions
-export function submitAnswer(questionid, answerid, text) {
-  return {
-    type: SocketActionTypes.SUBMIT_ANSWER,
-    payload: null,
-  };
+export function submitVote(socket, gameId, questionId, answerId, playerId) {
+  socket.emit('submit_vote', {
+    gameId, questionId, answerId, playerId,
+  });
 }
 
-export function submitVote(questionid, answerid) {
-  return {
-    type: SocketActionTypes.SUBMIT_VOTE,
-    payload: null,
-  };
-}
-
-/* Game Functions (Receiving) */
-// socket.on in components
-export function updateGame(socket) {
-  return (dispatch) => {
-    socket.on('game', (game) => {
-      console.log('game was emitted');
-      dispatch({
-        type: SocketActionTypes.FETCH_GAME,
-        payload: game,
-      });
-    });
-  };
+export function joinGame(socket, code, name) {
+  socket.emit('join_game', { code, name });
 }
