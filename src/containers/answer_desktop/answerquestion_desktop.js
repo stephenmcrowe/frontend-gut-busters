@@ -45,7 +45,7 @@ class QuestionAnswer extends Component {
   render() {
     return (
       <div id="question_page">
-        <h1>Round</h1>
+        <h1>Ready</h1>
         <h2>Please Answer Question on Screen</h2>
         <div id="dots">
           <div id="dot_1">.</div>

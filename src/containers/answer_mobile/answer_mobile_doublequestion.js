@@ -21,28 +21,34 @@ class MobileAnswer extends Component {
   constructor(props) {
     super(props);
 
+
     this.state = {
       answerText1: '',
       answerText2: '',
-      timestamp: '60',
-      questionId1: '',
-      questionId2: '',
-      answerId1: '',
-      answerId2: '',
-
+      timestamp: '30',
+      questionId1: '', // this.props.question[0].id, // this.props.question[quesIndex1].id,
+      questionId2: '', // this.props.question[1].id, // this.props.question[quesIndex2].id,
+      answerId1: '', // this.props.question[0].answers[0].id, // this.props.question[quesIndex1].answers[answerIndex1].id,
+      answerId2: '', // this.props.question[1].answers[0].id, // this.props.question[quesIndex2].[answerIndex1].id,
+      q1: '',
+      q2: '',
     };
 
     // Received Events
     this.props.socket.on('time_remaining', (time) => {
-      console.log(`timer reads: ${time}`);
+      // console.log(`timer reads: ${time}`);
     });
+
     this.props.socket.on('time_out', () => {
       console.log('Time out!');
-      submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId2, '');
-      submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId2, '');
-
+      // console.log(this.props.question[0].answers[0].id, this.props.question[1].answers[0].id);
+      // console.log(this.props.game);
+      // console.log(this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
+
 
     this.props.socket.on('timer', () => {
       console.log('received timer!');
@@ -56,14 +62,40 @@ class MobileAnswer extends Component {
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
     this.answerTextChange2 = this.answerTextChange2.bind(this);
+    // this.setIds = this.setIds.bind(this);
     this.submitTypedAnswers = this.submitTypedAnswers.bind(this);
   }
 
+
   componentDidMount = () => {
     fetchGame(this.props.socket);
-    // update questionId and answerId state fields here
-  }
 
+    // Super jankey but we need to rerender with event
+    this.props.socket.on('game', (game) => {
+      console.log(localStorage.getItem('myId'));
+      const myQuestions = [];
+      const myAnswers = [];
+      game.questions.forEach((question) => {
+        question.answers.forEach((answer) => {
+          if (answer.player === localStorage.getItem('myId')) {
+            myQuestions.push(question.bank);
+            myAnswers.push(answer);
+          }
+        });
+      });
+      console.log(myQuestions);
+      // localStorage.setItem('myQuestions', myQuestions);
+      // localStorage.setItem('first', first);
+
+      // Then set state locally using myQuestions
+      this.setState({ questionId1: myQuestions[0].id });
+      this.setState({ questionId2: myQuestions[1].id });
+      this.setState({ answerId1: myAnswers[0].id });
+      this.setState({ answerId1: myAnswers[1].id });
+      this.setState({ q1: myQuestions[0] });
+      this.setState({ q2: myQuestions[1] });
+    });
+  };
 
   // functions
   answerTextChange1(event) {
@@ -78,8 +110,8 @@ class MobileAnswer extends Component {
 
   submitTypedAnswers(event) {
     event.preventDefault();
-    this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
-    this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
+    this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+    this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
 
     // this.props.socket.emit('start_voting'); // wrong place to do this
     moveOn(this.props.socket, this.props.history, 'mobile/waiting');
@@ -98,6 +130,20 @@ class MobileAnswer extends Component {
     console.log(`current time reads ${timestamp}`);
   }
 
+  renderQuestion1() {
+    if (this.props.game && this.state.q1) {
+      return this.state.q1.question;
+    }
+    return '';
+  }
+
+  renderQuestion2() {
+    if (this.props.game && this.state.q2) {
+      return this.state.q2.question;
+    }
+    return '';
+  }
+
 
   render() {
     return (
@@ -111,8 +157,8 @@ class MobileAnswer extends Component {
 
           <div className="qst-1">
             <div className="question-wrapper">
-              <h1>What do you call an apple with no eyes?</h1>
-              {/* <h1>{this.props.question[0]}</h1> */}
+              {/* <h1>What do you call an apple with no eyes?</h1> */}
+              <h1>{this.renderQuestion1()}</h1>
             </div>
 
             <div className="answer-wrapper">
@@ -122,8 +168,8 @@ class MobileAnswer extends Component {
 
           <div className="qst-2">
             <div className="question-wrapper">
-              <h1>Best history prof rap name:</h1>
-              {/* <h1>{this.props.question[0]}</h1> */}
+              {/* <h1>Best history prof rap name:</h1> */}
+              <h1>{this.renderQuestion2()}</h1>
             </div>
 
             <div className="answer-wrapper">
@@ -141,13 +187,13 @@ class MobileAnswer extends Component {
 }
 
 // connects particular parts of redux state to this components props
-const mapStateToProps = state => (
-  {
-    question: state.question,
-    game: state.game,
-  }
-);
+function mapStateToProps(reduxState) {
+  return {
+    question: reduxState.socket.game.questions,
+    game: reduxState.socket.game,
 
+  };
+}
 
 const MobileAnswerWithSocket = props => (
   <SocketContext.Consumer>
@@ -156,4 +202,4 @@ const MobileAnswerWithSocket = props => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { submitAnswer, fetchGame })(MobileAnswerWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame })(MobileAnswerWithSocket));

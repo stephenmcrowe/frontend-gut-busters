@@ -106,6 +106,7 @@
 }
 
 .submit-button button {
+  visibility: hidden;
   -webkit-appearance: none;
   -moz-appearance: none;
   -ms-appearance: none;
@@ -126,6 +127,7 @@
 }
 
 .submit-button a {
+  visibility: hidden;
   color: #2A3947;
   text-decoration: none;
 }

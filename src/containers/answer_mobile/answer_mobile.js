@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchGame } from '../../actions/index';
-import { submitAnswer, pushStage, moveOn } from '../../actions/submitActions';
+import { submitAnswer, moveOn } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 import { subscribeToTimer } from '../../timers';
@@ -24,17 +24,19 @@ class MobileAnswer extends Component {
     this.state = {
       answerText: '',
       timestamp: '10',
-      questionId: '',
-      answerId: '',
+      questionId: this.props.question.id,
+      answerId: this.props.game.questions.answers.id,
     };
 
+    console.log(this.state.questionId);
     // Received Events
     this.props.socket.on('time_remaining', (time) => {
-      console.log(`timer reads: ${time}`);
+      // console.log(`timer reads: ${time}`);
     });
     this.props.socket.on('time_out', () => {
       console.log('Time out!');
-      submitAnswer(this.props.socket, this.props.game._id, this.state.questionId, this.state.answerId, '');
+      console.log(this.state.questionId);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId, this.state.answerId, '');
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
 
@@ -95,7 +97,7 @@ class MobileAnswer extends Component {
 
           <div className="question-wrapper">
             <h1>What do you call an apple with no eyes?</h1>
-            {/* <h1>{this.props.question}</h1> */}
+            {/* <h1>{this.props.question.bank.question}</h1> */}
           </div>
 
           <div className="answer-wrapper">
