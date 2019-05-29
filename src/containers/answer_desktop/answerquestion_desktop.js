@@ -18,6 +18,10 @@ class QuestionAnswer extends Component {
     super(props);
 
     this.state = {};
+
+    // Bindings
+    this.onStartVoting = this.onStartVoting.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +30,13 @@ class QuestionAnswer extends Component {
 
   onButtonClick = () => {
     console.log(this.props.game);
+  }
+
+  onStartVoting() {
+    this.props.socket.emit('start_voting');
+    // if (this.props.game) {
+    //   startGame(this.props.socket, this.props.game.id);
+    // }
   }
 
   renderQuestions = () => {
@@ -38,6 +49,16 @@ class QuestionAnswer extends Component {
       return questions;
     }
     return '';
+  }
+
+  renderButton() {
+    // did assuming whole background image/title/logo is just one image other than the button
+    return (
+      <div id="start_round_button">
+        <button onClick={this.onStartVoting} type="submit" id="start_round"><NavLink to="/desktop/answer">Start Round</NavLink></button>
+      </div>
+
+    );
   }
 
   // props.round will be instantiated once connected to backend
