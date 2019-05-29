@@ -73,6 +73,21 @@ class MobileAnswer extends Component {
   componentDidMount = () => {
     fetchGame(this.props.socket);
 
+    // Super jankey but we need to rerender with event
+    this.props.socket.on('game', (game) => {
+      const myQuestions = [];
+      game.questions.forEach((question) => {
+        question.answers.forEach((answer) => {
+          console.log(answer);
+          if (answer.player === localStorage.getItem('myId')) {
+            myQuestions.push(question);
+          }
+        });
+      });
+      console.log(myQuestions);
+      // Then set state locally using myQuestions
+    });
+
     // update questionId and answerId state fields here
   }
 
