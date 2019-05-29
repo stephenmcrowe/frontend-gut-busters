@@ -5,25 +5,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-// import random-int from 'random-int';
 import './waiting_mobile.scss';
-import ghost from '../../img/ghost-score.png'; // img source https://www.freeiconspng.com/img/36315
+import ghost from '../../img/ghost-score.png';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions';
+import { fetchGame } from '../../actions/index';
+import { pushStage } from '../../actions/submitActions';
 
-// waiting page displays
-// an api generated joke
-// loading image that moves
-// listens for start game from server that pushes to the next page
 
-// function mapStateToProps(reduxState) {
-//   // console.log(reduxState);
-//   return {
-//     // room_id: reduxState.game.id,
-//     // players: reduxState.game.players,
-//     game_started: reduxState.game.start,
-//   };
-// }
 const randomInt = require('random-int');
 
 class MobileWaiting extends Component {
@@ -32,8 +20,6 @@ class MobileWaiting extends Component {
     this.state = {
       jokes: [],
       selectedJoke: '',
-      // random: 0,
-    //   gameStart: false, // game start listen change with server
     };
   }
 
@@ -63,19 +49,15 @@ class MobileWaiting extends Component {
 
         // this.setState({ selectedJoke: })
       }).catch((error) => {
-        console.log('rip waiting joke');
-        console.log(this.state);
+        // console.log('rip waiting joke');
       });
-    fetchGame(this.props.socket);
-    console.log('game has been fetched');
-    console.log(fetchGame(this.props.socket));
+    this.props.fetchGame(this.props.socket);
     // get random integer from 0 to length of array
     // gettings becomes an action
+    pushStage(this.props.socket, this.props.history);
   }
 
   render() {
-    // if (!this.state.gameStart) {
-
     return (
       <div id="mobile-waiting-page">
         <div id="waiting-joke">
@@ -91,6 +73,7 @@ class MobileWaiting extends Component {
         </div>
         <div id="waiting-info">
           <h2>
+            {/* TODO: argument based on which component is next */}
             Waiting information: here is what you need to know!
           </h2>
         </div>
@@ -105,6 +88,11 @@ const MobileWaitingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-// export default MobileWaitingWithSocket;
+function mapStateToProps(reduxState) {
+  return {
+    game: reduxState.socket.game,
+  };
+}
 
-export default withRouter(connect(null, { fetchGame })(MobileWaitingWithSocket));
+
+export default withRouter(connect(mapStateToProps, { fetchGame })(MobileWaitingWithSocket));

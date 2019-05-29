@@ -3,13 +3,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { joinGame, fetchGame } from '../../actions';
+import { joinGame, receiveJoinGame } from '../../actions/submitActions';
 import './landingpage_mobile.scss';
 import logo from '../../img/gut-logo.svg';
 import SocketContext from '../../socket-context';
-
-// connect to socket
-const socketserver = 'http://localhost:9090';
 
 class MobileLanding extends Component {
   constructor(props) {
@@ -26,13 +23,12 @@ class MobileLanding extends Component {
     this.joinGameClick = this.joinGameClick.bind(this);
   }
 
+  componentDidMount() {
+    receiveJoinGame(this.props.socket);
+  }
+
   joinGameClick(event) {
-    // event.preventDefault();
-    console.log(this.props.socket);
-    console.log(this.state.roomCode);
-    console.log(this.state.playerName);
-    console.log(this.props.joinGame);
-    this.props.joinGame(this.props.socket, this.state.roomCode, this.state.playerName);
+    joinGame(this.props.socket, this.state.roomCode, this.state.playerName);
   }
 
   roomCodeChange(event) {
@@ -71,4 +67,5 @@ const MobileLandingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default withRouter(connect(null, { joinGame })(MobileLandingWithSocket));
+
+export default withRouter(connect(null)(MobileLandingWithSocket));

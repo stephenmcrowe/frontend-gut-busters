@@ -5,14 +5,6 @@ import './vote_desktop.scss';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions';
 
-/* function mapStateToProps(reduxState) {
-  // console.log(reduxState);
-  return {
-    round: reduxState.game.round,
-  };
-}
-*/
-
 class DesktopVoting extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +14,6 @@ class DesktopVoting extends Component {
 
   componentDidMount() {
     this.props.fetchGame(this.props.socket);
-    console.log('game fetched in desktop voting');
   }
 
   // props.round will be instantiated once connected to backend

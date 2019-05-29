@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { submitAnswer, fetchGame } from '../../actions';
+import { fetchGame } from '../../actions/index';
+import { submitAnswer, pushStage } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 
@@ -23,8 +24,6 @@ class MobileAnswer extends Component {
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
-    console.log('game has been fetched in answer mobile');
-    console.log(fetchGame(this.props.socket));
   }
 
 
@@ -34,8 +33,9 @@ class MobileAnswer extends Component {
   }
 
   submitAnswer(event) {
-    event.preventDefault();
+    // event.preventDefault();
     this.props.submitAnswer(this.props.history);
+    pushStage(this.props.socket, this.props.history);
   }
 
   render() {
@@ -48,7 +48,7 @@ class MobileAnswer extends Component {
 
           <div className="question-wrapper">
             <h1>What do you call an apple with no eyes?</h1>
-            {/* <h1>{this.props.player.question}</h1> */}
+            {/* <h1>{this.props.question}</h1> */}
           </div>
 
           <div className="answer-wrapper">
