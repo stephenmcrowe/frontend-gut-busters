@@ -20,13 +20,18 @@ class MobileVote extends Component {
 
     this.state = {
       tempAnswer: '',
+      timestamp: '15',
       idx: myIdx,
       display: true,
     };
+
+    // Bindings
+    this.voteTiming = this.voteTiming.bind(this);
   }
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
+    this.voteTiming();
   }
 
   // functions
@@ -45,18 +50,34 @@ class MobileVote extends Component {
     submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.idx], this.props.game.questions[this.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
   }
 
+  voteTiming() {
+  // Emit time updates to client
+    let timeLeft = 14;
+    const voteTimerCountdown = setInterval(() => {
+      this.setState({
+        timestamp: timeLeft,
+      });
+      // eslint-disable-next-line no-plusplus
+      timeLeft--;
+      if (timeLeft === 0) {
+        this.setState({
+          timestamp: 0,
+        });
+        clearInterval(voteTimerCountdown);
+      }
+    }, 1000);
+  }
+
   render() {
     if (this.state.display) {
       return (
         <div className="vote-page">
           <div className="header">
             <div className="timer">
-              12
-              {/* this.state.timestamp */}
+              {this.state.timestamp}
             </div>
           </div>
           <div className="vote-content">
-
             <div className="question-wrapper">
               <h1>What do you call an apple with no eyes?</h1>
               {/* <h1>{this.props.game.questions[this.idx].bank.question}</h1> */}
