@@ -46,15 +46,8 @@ export function submitVote(socket, gameId, questionId, answerId, playerId) {
 }
 
 export function receiveVote(socket) {
-  return socket.on('vote', (idx1, idx2) => {
-    localStorage.setItem('myIdx', idx1, idx2);
-    return [idx1, idx2];
-  });
-}
-
-export function receiveQuestion(socket) {
-  return socket.on('question', (idx) => {
-    localStorage.setItem('quesIdx', idx);
+  return socket.on('vote', (idx) => {
+    localStorage.setItem('myIdx', idx);
     return idx;
   });
 }
