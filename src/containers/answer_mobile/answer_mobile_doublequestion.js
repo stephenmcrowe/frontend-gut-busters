@@ -81,7 +81,7 @@ class MobileAnswer extends Component {
     this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
     this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
 
-    this.props.socket.emit('start_voting'); // wrong place to do this
+    // this.props.socket.emit('start_voting'); // wrong place to do this
     moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     // pushStage(this.props.socket, this.props.history);
   }
