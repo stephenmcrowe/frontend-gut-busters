@@ -10,7 +10,7 @@ import AppWithSocket from './components/app';
 import SocketContext from './socket-context';
 
 // connect to socket
-const socketserver = 'http://localhost:9090';
+const socketserver = 'https://gut-busters.herokuapp.com/';
 const socket = io(socketserver);
 
 // connecting to the socket
