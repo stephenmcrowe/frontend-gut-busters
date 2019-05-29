@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchGame } from '../../actions/index';
-import { submitAnswer, pushStage } from '../../actions/submitActions';
+import { submitAnswer, moveOn } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 import { subscribeToTimer } from '../../timers';
@@ -23,15 +23,21 @@ class MobileAnswer extends Component {
 
     this.state = {
       answerText: '',
-      timestamp: '30',
+      timestamp: '10',
+      questionId: this.props.question.id,
+      answerId: this.props.game.questions.answers.id,
     };
 
+    console.log(this.state.questionId);
     // Received Events
     this.props.socket.on('time_remaining', (time) => {
-      console.log(`timer reads: ${time}`);
+      // console.log(`timer reads: ${time}`);
     });
     this.props.socket.on('time_out', () => {
       console.log('Time out!');
+      console.log(this.state.questionId);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId, this.state.answerId, '');
+      moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
 
     this.props.socket.on('timer', () => {
@@ -45,11 +51,12 @@ class MobileAnswer extends Component {
 
     // bindings
     this.answerTextChange = this.answerTextChange.bind(this);
-    this.submitAnswer = this.answerTextChange.bind(this);
+    this.submitTypedAnswer = this.submitTypedAnswer.bind(this);
   }
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
+    // update questionId and answerId state fields here
   }
 
 
@@ -58,10 +65,11 @@ class MobileAnswer extends Component {
     this.setState({ answerText: event.target.value });
   }
 
-  submitAnswer(event) {
+  submitTypedAnswer(event) {
     // event.preventDefault();
-    this.props.submitAnswer(this.props.history);
-    pushStage(this.props.socket, this.props.history);
+    this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId, this.state.answerId, this.state.answerText);
+    moveOn(this.props.socket, this.props.history, 'mobile/waiting');
+    // pushStage(this.props.socket, this.props.history);
   }
 
   // Emitted Events
@@ -89,7 +97,7 @@ class MobileAnswer extends Component {
 
           <div className="question-wrapper">
             <h1>What do you call an apple with no eyes?</h1>
-            {/* <h1>{this.props.question}</h1> */}
+            {/* <h1>{this.props.question.bank.question}</h1> */}
           </div>
 
           <div className="answer-wrapper">
@@ -109,6 +117,7 @@ class MobileAnswer extends Component {
 const mapStateToProps = state => (
   {
     question: state.question,
+    game: state.game,
   }
 );
 

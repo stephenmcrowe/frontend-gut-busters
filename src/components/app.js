@@ -9,7 +9,7 @@ import FallBack from './fallback';
 
 import MobileLandingWithSocket from '../containers/landingpage_mobile/landingpage_mobile';
 import MobileWaitingWithSocket from '../containers/waiting_mobile/waiting_mobile';
-import MobileAnswerWithSocket from '../containers/answer_mobile/answer_mobile';
+import MobileAnswerWithSocket from '../containers/answer_mobile/answer_mobile_doublequestion';
 import MobileVoteWithSocket from '../containers/vote_mobile/vote_mobile';
 import MobileScoreWithSocket from '../containers/score_mobile/score_mobile';
 
