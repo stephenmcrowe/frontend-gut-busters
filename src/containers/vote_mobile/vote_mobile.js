@@ -20,12 +20,9 @@ class MobileVote extends Component {
 
     this.state = {
       tempAnswer: '',
-<<<<<<< HEAD
       timestamp: '15',
-=======
       idx: myIdx,
       display: true,
->>>>>>> master
     };
 
     // Bindings
@@ -72,32 +69,19 @@ class MobileVote extends Component {
   }
 
   render() {
-<<<<<<< HEAD
-    return (
-      <div className="vote-page">
-        <div className="header">
-          <div className="timer">
-            {this.state.timestamp}
-          </div>
-        </div>
-        <div className="vote-content">
-=======
     if (this.state.display) {
       return (
         <div className="vote-page">
           <div className="header">
             <div className="timer">
-              12
-              {/* this.state.timestamp */}
+              {this.state.timestamp}
             </div>
           </div>
           <div className="vote-content">
-
             <div className="question-wrapper">
               <h1>What do you call an apple with no eyes?</h1>
               {/* <h1>{this.props.game.questions[this.idx].bank.question}</h1> */}
             </div>
->>>>>>> master
 
             <div className="options-wrapper">
               <button value="1" onClick={this.selectAnswer} className="select-vote first"><p>opt 1{/* this.props.game.questions[this.idx].answers[0] */}</p></button>
