@@ -30,7 +30,8 @@ class MobileAnswer extends Component {
       questionId2: '', // this.props.question[1].id, // this.props.question[quesIndex2].id,
       answerId1: '', // this.props.question[0].answers[0].id, // this.props.question[quesIndex1].answers[answerIndex1].id,
       answerId2: '', // this.props.question[1].answers[0].id, // this.props.question[quesIndex2].[answerIndex1].id,
-
+      q1: '',
+      q2: '',
     };
 
     // Received Events
@@ -61,7 +62,7 @@ class MobileAnswer extends Component {
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
     this.answerTextChange2 = this.answerTextChange2.bind(this);
-    this.setIds = this.setIds.bind(this);
+    // this.setIds = this.setIds.bind(this);
     this.submitTypedAnswers = this.submitTypedAnswers.bind(this);
   }
 
@@ -71,45 +72,30 @@ class MobileAnswer extends Component {
 
     // Super jankey but we need to rerender with event
     this.props.socket.on('game', (game) => {
+      console.log(localStorage.getItem('myId'));
       const myQuestions = [];
-      const first = [];
+      const myAnswers = [];
       game.questions.forEach((question) => {
         question.answers.forEach((answer) => {
-          console.log(answer);
           if (answer.player === localStorage.getItem('myId')) {
-            myQuestions.push(question);
-          }
-          if (answer.votes.length === 0) {
-            first.push(true);
-          } else {
-            first.push(false);
+            myQuestions.push(question.bank);
+            myAnswers.push(answer);
           }
         });
       });
       console.log(myQuestions);
-      localStorage.setItem('myQuestions', myQuestions);
-      localStorage.setItem('first', first);
+      // localStorage.setItem('myQuestions', myQuestions);
+      // localStorage.setItem('first', first);
 
       // Then set state locally using myQuestions
+      this.setState({ questionId1: myQuestions[0].id });
+      this.setState({ questionId2: myQuestions[1].id });
+      this.setState({ answerId1: myAnswers[0].id });
+      this.setState({ answerId1: myAnswers[1].id });
+      this.setState({ q1: myQuestions[0] });
+      this.setState({ q2: myQuestions[1] });
     });
-
-    // update questionId and answerId state fields here
-  }
-
-  setIds() {
-    this.setState({ questionId1: localStorage.getItem('myQuestions')[0].id });
-    this.setState({ questionId2: localStorage.getItem('myQuestions')[1].id });
-    if (localStorage.getItem('first')[0]) {
-      this.setState({ answerId1: localStorage.getItem('myQuestions')[0].answer[0].id });
-    } else {
-      this.setState({ answerId1: localStorage.getItem('myQuestions')[0].answer[1].id });
-    }
-    if (localStorage.getItem('first')[1]) {
-      this.setState({ answerId1: localStorage.getItem('myQuestions')[1].answer[0].id });
-    } else {
-      this.setState({ answerId1: localStorage.getItem('myQuestions')[1].answer[1].id });
-    }
-  }
+  };
 
   // functions
   answerTextChange1(event) {
@@ -143,13 +129,24 @@ class MobileAnswer extends Component {
     console.log(`current time reads ${timestamp}`);
   }
 
+  renderQuestion1() {
+    if (this.props.game && this.state.q1) {
+      return this.state.q1.question;
+    }
+    return '';
+  }
+
+  renderQuestion2() {
+    if (this.props.game && this.state.q2) {
+      return this.state.q2.question;
+    }
+    return '';
+  }
+
 
   render() {
     return (
       <div className="answer-page">
-        <div className="set-id">
-          {this.setIds()}
-        </div>
         <div className="header">
           <div className="timer">
             {this.state.timestamp}
@@ -160,7 +157,7 @@ class MobileAnswer extends Component {
           <div className="qst-1">
             <div className="question-wrapper">
               {/* <h1>What do you call an apple with no eyes?</h1> */}
-              <h1>{localStorage.getItem('myQuestions')[0]}</h1>
+              <h1>{this.renderQuestion1()}</h1>
             </div>
 
             <div className="answer-wrapper">
@@ -171,7 +168,7 @@ class MobileAnswer extends Component {
           <div className="qst-2">
             <div className="question-wrapper">
               {/* <h1>Best history prof rap name:</h1> */}
-              <h1>{localStorage.getItem('myQuestions')[1]}</h1>
+              <h1>{this.renderQuestion2()}</h1>
             </div>
 
             <div className="answer-wrapper">
