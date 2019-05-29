@@ -29,13 +29,6 @@ class MobileVote extends Component {
     fetchGame(this.props.socket);
   }
 
-  voteDisable() {
-    // make sure this exact path is set up later because right now it's not the player id who answered the question
-    if (this.props.game.questions[this.idx].answers.playerid === localStorage.getItem('myId')) {
-      this.setState({ display: false });
-    }
-  }
-
   // functions
   selectAnswer(event) {
     this.setState({ tempAnswer: event.target.value });
@@ -43,29 +36,37 @@ class MobileVote extends Component {
 
   submitVote(event) {
     event.preventDefault();
+
+    // make sure this exact path is set up later because right now it's not the player id who answered the question
+    if (this.props.game.questions[this.idx].answers.playerid === localStorage.getItem('myId')) {
+      this.setState({ display: false });
+    }
     // eslint-disable-next-line max-len
     submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.idx], this.props.game.questions[this.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
   }
 
   render() {
-    if (this.display) {
+    if (this.state.display) {
       return (
         <div className="vote-page">
           <div className="header">
-            <div className="timer">12</div>
+            <div className="timer">
+              12
+              {/* this.state.timestamp */}
+            </div>
           </div>
           <div className="vote-content">
 
             <div className="question-wrapper">
-              {/* <h1>What do you call an apple with no eyes?</h1> */}
+              <h1>What do you call an apple with no eyes?</h1>
               {/* <h1>{this.props.game.questions[this.idx].bank.question}</h1> */}
             </div>
 
             <div className="options-wrapper">
-              <button value="1" onClick={this.selectAnswer} className="select-vote first"><p>{this.props.game.questions[this.idx].answers[0]}</p></button>
+              <button value="1" onClick={this.selectAnswer} className="select-vote first"><p>opt 1{/* this.props.game.questions[this.idx].answers[0] */}</p></button>
               {/* in the future, value should be :answerid */}
               {/* <input className="type-answer" type="text" placeholder="Your answer here..." onChange={this.answerTextChange} value={this.state.answerText} /> */}
-              <button value="2" onClick={this.selectAnswer} className="select-vote second"><p>{this.props.game.questions[this.idx].answers[1]}</p></button>
+              <button value="2" onClick={this.selectAnswer} className="select-vote second"><p>opt 2{/* this.props.game.questions[this.idx].answers[1] */}</p></button>
             </div>
             <div className="submit-button">
               <button onClick={this.submitAnswer} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Done!</p></NavLink></button>

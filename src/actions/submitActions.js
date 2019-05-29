@@ -24,6 +24,7 @@ export function submitAnswer(socket, gameId, questionId, answerId, answer) {
   socket.emit('submit_answer', {
     gameId, questionId, answerId, answer,
   });
+  console.log('emaited answer', answer);
 }
 
 export function moveOn(socket, history, page) {
@@ -57,7 +58,6 @@ export function joinGame(socket, code, name) {
 
 export function pushStage(socket, history) {
   socket.on('start_game', (game) => {
-    console.log(game.questions[0].bank.question);
     history.push('/mobile/answer');
   });
 

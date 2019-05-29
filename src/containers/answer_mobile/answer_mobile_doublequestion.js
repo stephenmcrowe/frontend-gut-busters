@@ -38,8 +38,9 @@ class MobileAnswer extends Component {
     });
     this.props.socket.on('time_out', () => {
       console.log('Time out!');
-      submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId2, '');
-      submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId2, '');
+      console.log(this.props.game);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, '');
 
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
@@ -58,6 +59,7 @@ class MobileAnswer extends Component {
     this.answerTextChange2 = this.answerTextChange2.bind(this);
     this.submitTypedAnswers = this.submitTypedAnswers.bind(this);
   }
+
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
@@ -78,8 +80,8 @@ class MobileAnswer extends Component {
 
   submitTypedAnswers(event) {
     event.preventDefault();
-    this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
-    this.props.submitAnswer(this.props.socket, this.props.game._id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
+    this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+    this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
 
     moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     // pushStage(this.props.socket, this.props.history);
@@ -140,13 +142,13 @@ class MobileAnswer extends Component {
 }
 
 // connects particular parts of redux state to this components props
-const mapStateToProps = state => (
-  {
-    question: state.question,
-    game: state.game,
-  }
-);
+function mapStateToProps(reduxState) {
+  return {
+    question: reduxState.socket.game.questions,
+    game: reduxState.socket.game,
 
+  };
+}
 
 const MobileAnswerWithSocket = props => (
   <SocketContext.Consumer>
