@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchGame } from '../../actions/index';
-import { submitAnswer, moveOn } from '../../actions/submitActions';
+import { submitAnswer, moveOn } from '../../actions/submitActions'; // receiveQuestion,
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 import { subscribeToTimer } from '../../timers';
@@ -21,29 +21,38 @@ class MobileAnswer extends Component {
   constructor(props) {
     super(props);
 
+    // const quesIndex1 = receiveQuestion(this.props.socket)[0];
+    // const quesIndex2 = receiveQuestion(this.props.socket)[1];
+
+    // console.log('index 1 of question', quesIndex1);
+    // console.log('index 2 of question', quesIndex2);
+
     this.state = {
       answerText1: '',
       answerText2: '',
-      timestamp: '60',
-      questionId1: '',
-      questionId2: '',
-      answerId1: '',
-      answerId2: '',
+      timestamp: '10',
+      questionId1: '', // this.props.question[0].id, // this.props.question[quesIndex1].id,
+      questionId2: '', // this.props.question[1].id, // this.props.question[quesIndex2].id,
+      answerId1: '', // this.props.question[0].answers[0].id, // this.props.question[quesIndex1].answers[answerIndex1].id,
+      answerId2: '', // this.props.question[1].answers[0].id, // this.props.question[quesIndex2].[answerIndex1].id,
 
     };
 
     // Received Events
     this.props.socket.on('time_remaining', (time) => {
-      console.log(`timer reads: ${time}`);
+      // console.log(`timer reads: ${time}`);
     });
+
     this.props.socket.on('time_out', () => {
       console.log('Time out!');
+      console.log(this.props.question[0].answers[0].id, this.props.question[1].answers[0].id);
       console.log(this.props.game);
-      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1);
-      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, '');
-
+      console.log(this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
+
 
     this.props.socket.on('timer', () => {
       console.log('received timer!');
@@ -63,6 +72,7 @@ class MobileAnswer extends Component {
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
+
     // update questionId and answerId state fields here
   }
 
@@ -70,11 +80,15 @@ class MobileAnswer extends Component {
   // functions
   answerTextChange1(event) {
     event.preventDefault();
+    this.setState({ questionId1: this.props.question[0].id });
+    this.setState({ answerId1: this.props.question[0].answers[0].id });
     this.setState({ answerText1: event.target.value });
   }
 
   answerTextChange2(event) {
     event.preventDefault();
+    this.setState({ questionId2: this.props.question[1].id });
+    this.setState({ answerId2: this.props.question[1].answers[0].id });
     this.setState({ answerText2: event.target.value });
   }
 
@@ -157,4 +171,4 @@ const MobileAnswerWithSocket = props => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { submitAnswer, fetchGame })(MobileAnswerWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame })(MobileAnswerWithSocket));

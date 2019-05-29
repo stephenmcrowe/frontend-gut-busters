@@ -55,7 +55,7 @@ class DesktopWaiting extends Component {
       <div id="waiting">
         <div id="room_code">
           <h1>Room Code: {this.gameCode()}</h1>
-          <button type="button" onClick={this.onButtonClick}>Test props</button>
+          {/* <button type="button" onClick={this.onButtonClick}>Test props</button> */}
         </div>
         <div id="Waiting_cap">
           <h3>Waiting for players.... </h3>

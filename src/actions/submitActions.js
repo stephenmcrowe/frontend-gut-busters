@@ -24,7 +24,7 @@ export function submitAnswer(socket, gameId, questionId, answerId, answer) {
   socket.emit('submit_answer', {
     gameId, questionId, answerId, answer,
   });
-  console.log('emaited answer', answer);
+  // console.log('emaited answer', answer);
 }
 
 export function moveOn(socket, history, page) {
@@ -46,11 +46,19 @@ export function submitVote(socket, gameId, questionId, answerId, playerId) {
 }
 
 export function receiveVote(socket) {
-  return socket.on('vote', (idx) => {
-    localStorage.setItem('myIdx', idx);
+  return socket.on('vote', (idx1, idx2) => {
+    localStorage.setItem('myIdx', idx1, idx2);
+    return [idx1, idx2];
+  });
+}
+
+export function receiveQuestion(socket) {
+  return socket.on('question', (idx) => {
+    localStorage.setItem('quesIdx', idx);
     return idx;
   });
 }
+
 
 export function joinGame(socket, code, name) {
   socket.emit('join_game', { code, name });
