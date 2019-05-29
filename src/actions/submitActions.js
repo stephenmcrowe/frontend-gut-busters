@@ -40,6 +40,18 @@ export function submitAnswer(socket, gameId, questionId, answerId, answer) {
   });
 }
 
+export function moveOn(socket, history, page) {
+  console.log(socket);
+  console.log(history);
+  console.log(page);
+  console.log('moveOn activated');
+  history.push(`/${page}`);
+
+  // socket.emit('move_on', () => {
+  //   history.push(`/${page}`);
+  // });
+}
+
 export function submitVote(socket, gameId, questionId, answerId, playerId) {
   socket.emit('submit_vote', {
     gameId, questionId, answerId, playerId,
