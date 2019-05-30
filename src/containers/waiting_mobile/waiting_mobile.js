@@ -9,7 +9,7 @@ import './waiting_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions/index';
-import { pushStage } from '../../actions/submitActions';
+import { pushStage, moveOn } from '../../actions/submitActions';
 
 
 const randomInt = require('random-int');
@@ -21,7 +21,13 @@ class MobileWaiting extends Component {
       jokes: [],
       selectedJoke: '',
     };
+
+    // Listeners
+    this.props.socket.on('see_scores', () => {
+      moveOn(this.props.socket, this.props.history, 'mobile/score');
+    });
   }
+
 
   componentDidMount() {
     axios.get('https://icanhazdadjoke.com/search?term=ghost', {

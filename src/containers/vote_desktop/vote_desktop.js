@@ -20,8 +20,7 @@ class DesktopVoting extends Component {
   render() {
     return (
       <div className="voting_page">
-        <h1>Round
-          {this.props.round}
+        <h1>Vote!
         </h1>
         <h2>Voting in Progress...</h2>
         <div id="dots">
