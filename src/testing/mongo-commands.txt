@@ -1,0 +1,5 @@
+db.banks.insert(
+   {
+      'question': 'question1',
+   }
+)

@@ -71,7 +71,7 @@ class App extends Component {
             <Route path="/desktop/answer" component={DesktopAnswerWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/answer/:id" component={DesktopAnswerWithSocket} />
-            <Route path="/desktop/voting" component={DesktopVotingWithSocket} />
+            <Route path="/desktop/vote" component={DesktopVotingWithSocket} />
             <Route path="/desktop/voteresult" component={DesktopVoteResultWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/voteresult/:id" component={DesktopVoteResultWithSocket} />

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /*
 * Sources:
@@ -16,6 +17,16 @@ import { subscribeToTimer } from '../../timers';
 
 // Required Props:
 // player question
+
+// fake Question for testing:
+const questionsTest = {
+  _id: '5cee2f1d2f5763d88683ca4c',
+  code: '1234',
+  active: true,
+  questions: ['5cf02890b8888886f14f086d', '5cf028a5b8888886f14f086e', '5cf028abb8888886f14f086f'],
+  players: [],
+  createdAt: '2019-05-30T07:05:01.948Z',
+};
 
 class MobileAnswer extends Component {
   constructor(props) {

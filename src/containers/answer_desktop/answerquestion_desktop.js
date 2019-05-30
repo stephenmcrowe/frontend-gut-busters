@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import './answer_desktop.scss';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions/index';
-import { startVoting } from '../../actions/submitActions';
+import { startVoting, moveOn } from '../../actions/submitActions';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -24,6 +24,10 @@ class QuestionAnswer extends Component {
       console.log('dun got got!!!!');
     });
 
+    this.props.socket.on('see_scores', () => {
+      moveOn(this.props.socket, this.props.history, 'desktop/score');
+    });
+
     // Bindings
     this.onStartVoting = this.onStartVoting.bind(this);
     this.renderButton = this.renderButton.bind(this);
@@ -40,7 +44,7 @@ class QuestionAnswer extends Component {
   onStartVoting() {
     console.log('clicked start voting!');
     // console.log(this.props.socket);
-    startVoting(this.props.socket);
+    startVoting(this.props.socket, [1, 2, 3]); // this.props.game.questions
     // if (this.props.game) {
     //   startGame(this.props.socket, this.props.game.id);
     // }
@@ -62,7 +66,7 @@ class QuestionAnswer extends Component {
     // did assuming whole background image/title/logo is just one image other than the button
     return (
     // <div id="start_round_button">
-      <button onClick={this.onStartVoting} type="submit" id="start_round_button"><h3>Start Voting!</h3></button>
+      <button onClick={this.onStartVoting} type="submit" id="start_round_button"><NavLink to="/desktop/vote"><h3>Start Voting!</h3></NavLink></button>
     // </div>
 
     );
