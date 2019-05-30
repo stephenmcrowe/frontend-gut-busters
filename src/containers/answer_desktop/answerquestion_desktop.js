@@ -73,8 +73,8 @@ class QuestionAnswer extends Component {
   render() {
     return (
       <div id="question_page">
-        <h1>Ready</h1>
-        <h2>Please Answer Question on Screen</h2>
+        <h1>Ready?</h1>
+        <h2>Quick! Answer the questions on your phone. When time runs out, go ahead and click to start voting on the funniest responses.</h2>
         <div id="dots">
           <div id="dot_1">.</div>
           <div id="dot_2">.</div>
