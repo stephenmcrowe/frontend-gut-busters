@@ -39,6 +39,10 @@ export function moveOn(socket, history, page) {
   // });
 }
 
+export function startVoting(socket) {
+  socket.emit('start_voting');
+}
+
 export function submitVote(socket, gameId, questionId, answerId, playerId) {
   socket.emit('submit_vote', {
     gameId, questionId, answerId, playerId,
