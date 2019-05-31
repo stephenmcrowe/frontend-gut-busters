@@ -4,7 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import './answer_desktop.scss';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions/index';
-import { startVoting, moveOn } from '../../actions/submitActions';
+import { startVoting } from '../../actions/submitActions';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -25,7 +25,8 @@ class QuestionAnswer extends Component {
     });
 
     this.props.socket.on('see_scores', () => {
-      moveOn(this.props.socket, this.props.history, 'desktop/score');
+      console.log('see_scores received');
+      // moveOn(this.props.socket, this.props.history, 'desktop/score');
     });
 
     // Bindings
@@ -44,7 +45,8 @@ class QuestionAnswer extends Component {
   onStartVoting() {
     console.log('clicked start voting!');
     // console.log(this.props.socket);
-    startVoting(this.props.socket, [1, 2, 3]); // this.props.game.questions
+    console.log(this.props.game.questions);
+    startVoting(this.props.socket, this.props.game.questions); // this.props.game.questions
     // if (this.props.game) {
     //   startGame(this.props.socket, this.props.game.id);
     // }

@@ -3,14 +3,21 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './vote_desktop.scss';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions';
+import { fetchGame } from '../../actions/index';
+// import { moveOn } from '../../actions/submitActions';
 
 class DesktopVoting extends Component {
   constructor(props) {
     super(props);
 
     this.state = {};
+
+    this.props.socket.on('see_scores', () => {
+      console.log('see_scores received');
+    //   moveOn(this.props.socket, this.props.history, 'desktop/score');
+    });
   }
+
 
   componentDidMount() {
     this.props.fetchGame(this.props.socket);

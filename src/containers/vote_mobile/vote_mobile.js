@@ -27,7 +27,16 @@ class MobileVote extends Component {
 
     // Listeners
     this.props.socket.on('vote', (id) => {
+      console.log('received vote event');
       moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    });
+
+    // this.props.socket.on('vote', (id) => {
+    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    // });
+
+    this.props.socket.on('see_scores', () => {
+      moveOn(this.props.socket, this.props.history, 'mobile/score');
     });
 
     // Bindings
