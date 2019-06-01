@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import { fetchGame } from '../../actions/index';
-import { submitAnswer, moveOn } from '../../actions/submitActions';
+import { submitAnswer, startVoting, moveOn } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 import { subscribeToTimer } from '../../timers';
@@ -46,6 +46,14 @@ class MobileAnswer extends Component {
     };
 
     // Received Events
+    this.props.socket.on('timer', () => {
+      console.log('received timer!');
+    });
+
+    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
+      timestamp: timeRemaining,
+    }));
+
     this.props.socket.on('time_remaining', (time) => {
       // console.log(`timer reads: ${time}`);
     });
@@ -63,18 +71,16 @@ class MobileAnswer extends Component {
       console.log(`answerText2: ${this.state.answerText2}`);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
+
+      startVoting(this.props.socket, this.props.game.questions);
+
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
 
-
-    this.props.socket.on('timer', () => {
-      console.log('received timer!');
+    this.props.socket.on('vote', (id) => {
+      console.log('received vote event');
+      moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
     });
-
-    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
-      timestamp: timeRemaining,
-    }));
-
 
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
