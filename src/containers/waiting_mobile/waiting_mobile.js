@@ -26,11 +26,15 @@ class MobileWaiting extends Component {
     // this.props.socket.on('see_scores', () => {
     //   moveOn(this.props.socket, this.props.history, 'mobile/score');
     // });
-
     this.props.socket.on('vote', (id) => {
       console.log('received vote event');
       moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
     });
+
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    // });
   }
 
 
