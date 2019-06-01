@@ -8,7 +8,7 @@ import axios from 'axios';
 import './waiting_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions/index';
+import { fetchGame, currentVote } from '../../actions/index';
 import { pushStage, moveOn } from '../../actions/submitActions';
 
 
@@ -28,6 +28,8 @@ class MobileWaiting extends Component {
     // });
     this.props.socket.on('vote', (id) => {
       console.log('received vote event');
+      console.log(id);
+      currentVote(id);
       moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
     });
 
@@ -110,4 +112,4 @@ function mapStateToProps(reduxState) {
 }
 
 
-export default withRouter(connect(mapStateToProps, { fetchGame })(MobileWaitingWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame, currentVote })(MobileWaitingWithSocket));
