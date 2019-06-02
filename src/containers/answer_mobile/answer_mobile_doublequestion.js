@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { fetchGame, currentVote } from '../../actions/index';
+// import { fetchGame, currentVote } from '../../actions/index';
 import { submitAnswer, startVoting, moveOn } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
@@ -62,13 +62,13 @@ class MobileAnswer extends Component {
       console.log('Time out!');
       // console.log(this.props.question[0].answers[0].id, this.props.question[1].answers[0].id);
       // console.log(this.props.game);
-      console.log(this.props.game);
-      console.log(`questionId1: ${this.state.questionId1}`);
-      console.log(`answerId1: ${this.state.answerId1}`);
-      console.log(`answerText1: ${this.state.answerText1}`);
-      console.log(`questionId2: ${this.state.questionId2}`);
-      console.log(`answerId2: ${this.state.answerId2}`);
-      console.log(`answerText2: ${this.state.answerText2}`);
+      // console.log(this.props.game);
+      // console.log(`questionId1: ${this.state.questionId1}`);
+      // console.log(`answerId1: ${this.state.answerId1}`);
+      // console.log(`answerText1: ${this.state.answerText1}`);
+      // console.log(`questionId2: ${this.state.questionId2}`);
+      // console.log(`answerId2: ${this.state.answerId2}`);
+      // console.log(`answerText2: ${this.state.answerText2}`);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
 
@@ -77,12 +77,12 @@ class MobileAnswer extends Component {
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
 
-    this.props.socket.on('vote', (id) => {
-      console.log('received vote event');
-      console.log(id);
-      currentVote(id);
-      // moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    });
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   console.log(id);
+    //   currentVote(id);
+    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    // });
 
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
@@ -93,30 +93,54 @@ class MobileAnswer extends Component {
 
 
   componentDidMount = () => {
-    fetchGame(this.props.socket);
+    // fetchGame(this.props.socket);
+
+    // Don't do this, there's a reason game is stored in Redux - madison
 
     // Super jankey but we need to rerender with event
-    this.props.socket.on('game', (game) => {
-      const myQuestions = [];
-      const myAnswers = [];
-      game.questions.forEach((question) => {
-        question.answers.forEach((answer) => {
-          if (answer.player === localStorage.getItem('myId')) {
-            myQuestions.push(question);
-            myAnswers.push(answer);
-          }
-        });
-      });
-      console.log(`myQuestions${myQuestions}`);
+    // this.props.socket.on('game', (game) => {
+    //   const myQuestions = [];
+    //   const myAnswers = [];
+    //   game.questions.forEach((question) => {
+    //     question.answers.forEach((answer) => {
+    //       if (answer.player === localStorage.getItem('myId')) {
+    //         myQuestions.push(question);
+    //         myAnswers.push(answer);
+    //       }
+    //     });
+    //   });
+    //   console.log(`myQuestions${myQuestions}`);
+    //
+    //   // Then set state locally using myQuestions
+    //   this.setState({ questionId1: myQuestions[0].id });
+    //   this.setState({ questionId2: myQuestions[1].id });
+    //   this.setState({ answerId1: myAnswers[0].id });
+    //   this.setState({ answerId2: myAnswers[1].id });
+    //   this.setState({ q1: myQuestions[0] });
+    //   this.setState({ q2: myQuestions[1] });
+    // });
 
-      // Then set state locally using myQuestions
-      this.setState({ questionId1: myQuestions[0].id });
-      this.setState({ questionId2: myQuestions[1].id });
-      this.setState({ answerId1: myAnswers[0].id });
-      this.setState({ answerId2: myAnswers[1].id });
-      this.setState({ q1: myQuestions[0] });
-      this.setState({ q2: myQuestions[1] });
+    console.log(this.props.game);
+
+    const myQuestions = [];
+    const myAnswers = [];
+    this.props.game.questions.forEach((question) => {
+      question.answers.forEach((answer) => {
+        if (answer.player === localStorage.getItem('myId')) {
+          myQuestions.push(question);
+          myAnswers.push(answer);
+        }
+      });
     });
+    // console.log(`myQuestions${myQuestions}`);
+
+    // Then set state locally using myQuestions
+    this.setState({ questionId1: myQuestions[0].id });
+    this.setState({ questionId2: myQuestions[1].id });
+    this.setState({ answerId1: myAnswers[0].id });
+    this.setState({ answerId2: myAnswers[1].id });
+    this.setState({ q1: myQuestions[0] });
+    this.setState({ q2: myQuestions[1] });
   };
 
   // functions
@@ -224,4 +248,4 @@ const MobileAnswerWithSocket = props => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchGame, currentVote })(MobileAnswerWithSocket));
+export default withRouter(connect(mapStateToProps)(MobileAnswerWithSocket));

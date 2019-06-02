@@ -3,14 +3,32 @@ export const ActionTypes = {
   ANSWER_STAGE: 'ANSWER_STAGE',
   VOTE_STAGE: 'VOTE_STAGE',
   SCORE_STAGE: 'SCORE_STAGE',
-  CURR_VOTE: 'CURR_VOTE',
+  OTHER: 'OTHER',
 };
+
+export function setGame(game) {
+  return (dispatch) => {
+    dispatch({
+      type: ActionTypes.FETCH_GAME,
+      payload: game,
+    });
+  };
+}
+
+export function setVote(index) {
+  return (dispatch) => {
+    dispatch({
+      type: ActionTypes.FETCH_GAME,
+      payload: index,
+    });
+  };
+}
 
 export function fetchGame(socket) {
   return (dispatch) => {
     socket.on('game', (game) => {
       dispatch({
-        type: ActionTypes.FETCH_GAME,
+        type: ActionTypes.OTHER,
         payload: game,
       });
     });
@@ -22,36 +40,29 @@ export function fetchGame(socket) {
 // This isn't implemented (on server but is easy) and maybe we don't need it?!? - Stephen
 
 
-export function voteStage(socket) {
-  return socket.on('vote', (game) => {
-    return {
-      type: ActionTypes.VOTE_STAGE,
-      payload: game,
-    };
-  });
-}
+// export function voteStage(socket) {
+//   return socket.on('vote', (game) => {
+//     return {
+//       type: ActionTypes.VOTE_STAGE,
+//       payload: game,
+//     };
+//   });
+// }
 
 // This isn't implemented (on server) - Stephen
-export function scoreStage(socket) {
-  return socket.on('score', (game) => {
-    return {
-      type: ActionTypes.SCORE_STAGE,
-      payload: game,
-    };
-  });
-}
+// export function scoreStage(socket) {
+//   return socket.on('score', (game) => {
+//     return {
+//       type: ActionTypes.SCORE_STAGE,
+//       payload: game,
+//     };
+//   });
+// }
 
 // What is this? Doesn't exist rn - Stephen
-export function restartGame() {
-  return {
-    type: ActionTypes.RESTART_GAME,
-    payload: null,
-  };
-}
-
-export function currentVote(questionId) {
-  return {
-    type: ActionTypes.CURR_VOTE,
-    payload: questionId,
-  };
-}
+// export function restartGame() {
+//   return {
+//     type: ActionTypes.RESTART_GAME,
+//     payload: null,
+//   };
+// }

@@ -4,10 +4,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import SocketContext from '../../socket-context';
-import { fetchGame, currentVote } from '../../actions/index';
+// import { fetchGame, currentVote } from '../../actions/index';
 import { submitVote, receiveVote, moveOn } from '../../actions/submitActions';
 import './vote_mobile.scss';
 import ghost from '../../img/ghost-score.png';
+import { subscribeToTimer } from '../../timers';
 
 // Required Props:
 // player question
@@ -25,29 +26,28 @@ class MobileVote extends Component {
       display: true,
     };
 
-    // Listeners
-    this.props.socket.on('vote', (id) => {
-      console.log('received vote event');
-      console.log(id);
-      currentVote(id);
-      // moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    });
+    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
+      timestamp: timeRemaining,
+    }));
 
-    // this.props.socket.on('vote', (id) => {
-    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    // });
+    this.props.socket.on('vote', (vote) => {
+      console.log('vote constructor');
+      console.log(vote);
+    });
 
     this.props.socket.on('see_scores', () => {
+      console.log('see_scores!');
       moveOn(this.props.socket, this.props.history, 'mobile/score');
     });
-
-    // Bindings
-    this.voteTiming = this.voteTiming.bind(this);
   }
 
   componentDidMount = () => {
-    fetchGame(this.props.socket);
-    this.voteTiming();
+    // fetchGame(this.props.socket);
+    // console.log(this.props.game);
+    // this.props.socket.on('vote', (vote) => {
+    //   console.log('vote component did mount');
+    //   console.log(vote);
+    // });
   }
 
   // functions
@@ -63,25 +63,7 @@ class MobileVote extends Component {
       this.setState({ display: false });
     }
     // eslint-disable-next-line max-len
-    submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.idx], this.props.game.questions[this.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
-  }
-
-  voteTiming() {
-  // Emit time updates to client
-    let timeLeft = 14;
-    const voteTimerCountdown = setInterval(() => {
-      this.setState({
-        timestamp: timeLeft,
-      });
-      // eslint-disable-next-line no-plusplus
-      timeLeft--;
-      if (timeLeft === 0) {
-        this.setState({
-          timestamp: 0,
-        });
-        clearInterval(voteTimerCountdown);
-      }
-    }, 1000);
+    submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.state.idx], this.props.game.questions[this.state.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
   }
 
   render() {
@@ -142,6 +124,7 @@ class MobileVote extends Component {
 function mapStateToProps(reduxState) {
   return {
     game: reduxState.socket.game,
+    index: reduxState.index,
   };
 }
 
@@ -152,4 +135,4 @@ const MobileVoteWithSocket = props => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchGame, currentVote })(MobileVoteWithSocket));
+export default withRouter(connect(mapStateToProps)(MobileVoteWithSocket));

@@ -3,30 +3,29 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import SocketContext from '../socket-context';
-// import Health from './health';
-import FallBack from './fallback';
+import FallBack from '../components/fallback';
+import { setGame, setVote } from '../actions/index';
 
-import HomepageWithSocket from './homepage/homepage';
-
-import MobileLandingWithSocket from '../containers/landingpage_mobile/landingpage_mobile';
-import MobileWaitingWithSocket from '../containers/waiting_mobile/waiting_mobile';
-import MobileAnswerWithSocket from '../containers/answer_mobile/answer_mobile_doublequestion';
-import MobileVoteWithSocket from '../containers/vote_mobile/vote_mobile';
-import MobileScoreWithSocket from '../containers/score_mobile/score_mobile';
-
+import HomepageWithSocket from '../components/homepage/homepage';
+import MobileLandingWithSocket from './landingpage_mobile/landingpage_mobile';
+import MobileWaitingWithSocket from './waiting_mobile/waiting_mobile';
+import MobileAnswerWithSocket from './answer_mobile/answer_mobile_doublequestion';
+import MobileVoteWithSocket from './vote_mobile/vote_mobile';
+import MobileScoreWithSocket from './score_mobile/score_mobile';
 // import { mobileScore, mobileAnswer, mobileVote } from '../containers/score_mobile/score_mobile';
 // import mobileAnswer from '../containers/score_mobile/score_mobile';
 // import mobileVote from '../containers/score_mobile/score_mobile';
 // import mobileScore from '../containers/score_mobile/score_mobile';
 
-import DesktopLandingWithSocket from '../containers/landingpage_desktop/landingpage_desktop';
-import DesktopWaitingWithSocket from '../containers/waiting_desktop/waiting_desktop';
-import DesktopScoreWithSocket from '../containers/score_desktop/score_desktop';
-import DesktopRoundScoreWithSocket from '../containers/roundscore_desktop/roundscore_desktop';
-import DesktopAnswerWithSocket from '../containers/answer_desktop/answerquestion_desktop';
-import DesktopVotingWithSocket from '../containers/vote_desktop/vote_desktop';
-import DesktopVoteResultWithSocket from '../containers/vote_results/vote_results';
+import DesktopLandingWithSocket from './landingpage_desktop/landingpage_desktop';
+import DesktopWaitingWithSocket from './waiting_desktop/waiting_desktop';
+import DesktopScoreWithSocket from './score_desktop/score_desktop';
+import DesktopRoundScoreWithSocket from './roundscore_desktop/roundscore_desktop';
+import DesktopAnswerWithSocket from './answer_desktop/answerquestion_desktop';
+import DesktopVotingWithSocket from './vote_desktop/vote_desktop';
+import DesktopVoteResultWithSocket from './vote_results/vote_results';
 
 /*
 Route                       -> Screen                       Receives:         Emits:
@@ -51,18 +50,15 @@ class App extends Component {
     super(props);
     this.state = {};
 
-    // this.props.socket.on('vote', (id) => {
-    //   console.log('received vote event');
-    //   console.log(id);
-    // });
+    this.props.socket.on('vote', (index) => {
+      console.log(`app component index: ${index}`);
+      this.props.setVote(index);
+    });
 
-    // this.props.socket.on('answer', () => {
-    //   console.log('received answer event');
-    // });
-
-    // this.props.socket.on('see_scores', () => {
-    //   console.log('received see_scores event');
-    // });
+    this.props.socket.on('game', (game) => {
+      console.log(`app component game: ${game}`);
+      this.props.setGame(game);
+    });
   }
 
   render() {
@@ -106,4 +102,4 @@ const AppWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default AppWithSocket;
+export default connect(null, { setGame, setVote })(AppWithSocket);
