@@ -48,6 +48,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.props.socket.on('vote', (id) => {
+      console.log('received vote event');
+      console.log(id);
+    });
+
+    this.props.socket.on('answer', () => {
+      console.log('received answer event');
+    });
+
+    this.props.socket.on('see_scores', () => {
+      console.log('received see_scores event');
+    });
   }
 
   render() {
