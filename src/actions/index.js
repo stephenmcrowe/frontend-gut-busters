@@ -3,11 +3,7 @@ export const ActionTypes = {
   ANSWER_STAGE: 'ANSWER_STAGE',
   VOTE_STAGE: 'VOTE_STAGE',
   SCORE_STAGE: 'SCORE_STAGE',
-<<<<<<< HEAD
   OTHER: 'OTHER',
-=======
-  CURR_VOTE: 'CURR_VOTE',
->>>>>>> master
 };
 
 export function setGame(game) {
@@ -64,25 +60,9 @@ export function fetchGame(socket) {
 // }
 
 // What is this? Doesn't exist rn - Stephen
-<<<<<<< HEAD
 // export function restartGame() {
 //   return {
 //     type: ActionTypes.RESTART_GAME,
 //     payload: null,
 //   };
 // }
-=======
-export function restartGame() {
-  return {
-    type: ActionTypes.RESTART_GAME,
-    payload: null,
-  };
-}
-
-export function currentVote(questionId) {
-  return {
-    type: ActionTypes.CURR_VOTE,
-    payload: questionId,
-  };
-}
->>>>>>> master
