@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SocketContext from '../socket-context';
+<<<<<<< HEAD:src/containers/app.js
 import FallBack from '../components/fallback';
 import { setGame, setVote } from '../actions/index';
 
@@ -13,6 +14,18 @@ import MobileWaitingWithSocket from './waiting_mobile/waiting_mobile';
 import MobileAnswerWithSocket from './answer_mobile/answer_mobile_doublequestion';
 import MobileVoteWithSocket from './vote_mobile/vote_mobile';
 import MobileScoreWithSocket from './score_mobile/score_mobile';
+=======
+// import Health from './health';
+import FallBack from './fallback';
+
+import HomepageWithSocket from './homepage/homepage';
+
+import MobileLandingWithSocket from '../containers/landingpage_mobile/landingpage_mobile';
+import MobileWaitingWithSocket from '../containers/waiting_mobile/waiting_mobile';
+import MobileAnswerWithSocket from '../containers/answer_mobile/answer_mobile_doublequestion';
+import MobileVoteWithSocket from '../containers/vote_mobile/vote_mobile';
+import MobileScoreWithSocket from '../containers/score_mobile/score_mobile';
+>>>>>>> master:src/components/app.js
 
 // import { mobileScore, mobileAnswer, mobileVote } from '../containers/score_mobile/score_mobile';
 // import mobileAnswer from '../containers/score_mobile/score_mobile';
@@ -50,6 +63,7 @@ class App extends Component {
     super(props);
     this.state = {};
 
+<<<<<<< HEAD:src/containers/app.js
     this.props.socket.on('vote', (index) => {
       console.log(`app component index: ${index}`);
       this.props.setVote(index);
@@ -59,6 +73,20 @@ class App extends Component {
       console.log(`app component game: ${game}`);
       this.props.setGame(game);
     });
+=======
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   console.log(id);
+    // });
+
+    // this.props.socket.on('answer', () => {
+    //   console.log('received answer event');
+    // });
+
+    // this.props.socket.on('see_scores', () => {
+    //   console.log('received see_scores event');
+    // });
+>>>>>>> master:src/components/app.js
   }
 
   render() {
@@ -66,6 +94,10 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
+<<<<<<< HEAD:src/containers/app.js
+=======
+            <Route exact path="/" component={HomepageWithSocket} />
+>>>>>>> master:src/components/app.js
             <Route exact path="/mobile" component={MobileLandingWithSocket} />
             <Route exact path="/mobile/waiting" component={MobileWaitingWithSocket} />
             <Route path="/mobile/answer" component={MobileAnswerWithSocket} />
@@ -81,7 +113,7 @@ class App extends Component {
             <Route path="/desktop/answer" component={DesktopAnswerWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/answer/:id" component={DesktopAnswerWithSocket} />
-            <Route path="/desktop/voting" component={DesktopVotingWithSocket} />
+            <Route path="/desktop/vote" component={DesktopVotingWithSocket} />
             <Route path="/desktop/voteresult" component={DesktopVoteResultWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/voteresult/:id" component={DesktopVoteResultWithSocket} />

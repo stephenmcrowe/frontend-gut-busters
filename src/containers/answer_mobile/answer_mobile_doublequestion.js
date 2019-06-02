@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /*
 * Sources:
@@ -7,8 +8,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { fetchGame } from '../../actions/index';
-import { submitAnswer, moveOn } from '../../actions/submitActions';
+// import { fetchGame, currentVote } from '../../actions/index';
+import { submitAnswer, startVoting, moveOn } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 import { subscribeToTimer } from '../../timers';
@@ -16,6 +17,16 @@ import { subscribeToTimer } from '../../timers';
 
 // Required Props:
 // player question
+
+// fake Question for testing:
+const questionsTest = {
+  _id: '5cee2f1d2f5763d88683ca4c',
+  code: '1234',
+  active: true,
+  questions: ['5cf02890b8888886f14f086d', '5cf028a5b8888886f14f086e', '5cf028abb8888886f14f086f'],
+  players: [],
+  createdAt: '2019-05-30T07:05:01.948Z',
+};
 
 class MobileAnswer extends Component {
   constructor(props) {
@@ -35,6 +46,14 @@ class MobileAnswer extends Component {
     };
 
     // Received Events
+    this.props.socket.on('timer', () => {
+      console.log('received timer!');
+    });
+
+    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
+      timestamp: timeRemaining,
+    }));
+
     this.props.socket.on('time_remaining', (time) => {
       // console.log(`timer reads: ${time}`);
     });
@@ -52,18 +71,18 @@ class MobileAnswer extends Component {
       // console.log(`answerText2: ${this.state.answerText2}`);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
       submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
+
+      startVoting(this.props.socket, this.props.game.questions);
+
       moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
 
-
-    this.props.socket.on('timer', () => {
-      console.log('received timer!');
-    });
-
-    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
-      timestamp: timeRemaining,
-    }));
-
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   console.log(id);
+    //   currentVote(id);
+    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    // });
 
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
@@ -74,7 +93,7 @@ class MobileAnswer extends Component {
 
 
   componentDidMount = () => {
-    fetchGame(this.props.socket);
+    // fetchGame(this.props.socket);
 
     // Don't do this, there's a reason game is stored in Redux - madison
 
@@ -229,4 +248,4 @@ const MobileAnswerWithSocket = props => (
 );
 
 
-export default withRouter(connect(mapStateToProps, { fetchGame })(MobileAnswerWithSocket));
+export default withRouter(connect(mapStateToProps)(MobileAnswerWithSocket));

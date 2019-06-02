@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions/index';
-import { submitVote, receiveVote } from '../../actions/submitActions';
+// import { fetchGame, currentVote } from '../../actions/index';
+import { submitVote, receiveVote, moveOn } from '../../actions/submitActions';
 import './vote_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 import { subscribeToTimer } from '../../timers';
@@ -37,17 +37,17 @@ class MobileVote extends Component {
 
     this.props.socket.on('see_scores', () => {
       console.log('see_scores!');
-      // do stuff
+      moveOn(this.props.socket, this.props.history, 'mobile/score');
     });
   }
 
   componentDidMount = () => {
-    fetchGame(this.props.socket);
-    console.log(this.props.game);
-    this.props.socket.on('vote', (vote) => {
-      console.log('vote component did mount');
-      console.log(vote);
-    });
+    // fetchGame(this.props.socket);
+    // console.log(this.props.game);
+    // this.props.socket.on('vote', (vote) => {
+    //   console.log('vote component did mount');
+    //   console.log(vote);
+    // });
   }
 
   // functions
