@@ -1,0 +1,130 @@
+.homepage {
+  // height: 100%;
+  width: 100%;
+  background: linear-gradient(180deg, #B6E5FF 0%, rgba(255, 255, 255, 0) 100%), #42BBFF;
+
+
+  h1 {
+    font-family: Creepster;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #FF0000;
+    text-shadow: 0px 4px 4px #000000;
+  }
+
+  h2 {
+    font-family: Creepster;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #000;
+  }
+
+  a{
+    border-style: solid;
+    border-color: black;
+    margin: 15px;
+    padding: 0px;
+    text-decoration: none;
+
+    h2 {
+      padding: 0px;
+      margin: 15px;
+    }
+  }
+  //Source: https://www.w3schools.com/css/css_link.asp
+  a:link {
+    background-color: #fff;
+  }
+
+  a:hover {
+    background-color: rgb(216, 216, 216);
+  }
+
+  a:active {
+    background-color: red;
+  } 
+
+  h3 {
+    font-family: Roboto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .landing {
+    min-height: 100vh;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+
+    .left {
+      flex: 1;
+      min-width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+
+      img {
+        min-width: 100px;
+        width: 50%;
+        height: auto;
+      }
+    }
+
+    .right {
+      flex: 1;
+      min-width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .information {
+    display: flex;
+    flex-direction: column;
+    padding: 10%;
+    justify-content: center;
+    align-items: center;
+
+    .instructions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+
+      ol, ul {
+        margin-left: 0px;
+      }
+    }
+
+    .about {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+    }
+    .team {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+    }
+  }
+
+}
