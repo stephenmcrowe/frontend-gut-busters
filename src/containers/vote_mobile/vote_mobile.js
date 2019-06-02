@@ -30,6 +30,11 @@ class MobileVote extends Component {
       timestamp: timeRemaining,
     }));
 
+    this.props.socket.on('vote', (vote) => {
+      console.log('vote constructor');
+      console.log(vote);
+    });
+
     this.props.socket.on('see_scores', () => {
       console.log('see_scores!');
       // do stuff
@@ -39,6 +44,10 @@ class MobileVote extends Component {
   componentDidMount = () => {
     fetchGame(this.props.socket);
     console.log(this.props.game);
+    this.props.socket.on('vote', (vote) => {
+      console.log('vote component did mount');
+      console.log(vote);
+    });
   }
 
   // functions
@@ -115,6 +124,7 @@ class MobileVote extends Component {
 function mapStateToProps(reduxState) {
   return {
     game: reduxState.socket.game,
+    index: reduxState.index,
   };
 }
 

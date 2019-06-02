@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import * as io from 'socket.io-client';
 import reducers from './reducers';
-import AppWithSocket from './components/app';
+import AppWithSocket from './containers/app';
 import SocketContext from './socket-context';
 
 // connect to socket
