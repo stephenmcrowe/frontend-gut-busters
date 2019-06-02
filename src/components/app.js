@@ -4,8 +4,10 @@ import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
 import SocketContext from '../socket-context';
-import Health from './health';
+// import Health from './health';
 import FallBack from './fallback';
+
+import HomepageWithSocket from './homepage/homepage';
 
 import MobileLandingWithSocket from '../containers/landingpage_mobile/landingpage_mobile';
 import MobileWaitingWithSocket from '../containers/waiting_mobile/waiting_mobile';
@@ -48,6 +50,19 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   console.log(id);
+    // });
+
+    // this.props.socket.on('answer', () => {
+    //   console.log('received answer event');
+    // });
+
+    // this.props.socket.on('see_scores', () => {
+    //   console.log('received see_scores event');
+    // });
   }
 
   render() {
@@ -55,7 +70,7 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path="/" component={Health} />
+            <Route exact path="/" component={HomepageWithSocket} />
             <Route exact path="/mobile" component={MobileLandingWithSocket} />
             <Route exact path="/mobile/waiting" component={MobileWaitingWithSocket} />
             <Route path="/mobile/answer" component={MobileAnswerWithSocket} />
@@ -71,7 +86,7 @@ class App extends Component {
             <Route path="/desktop/answer" component={DesktopAnswerWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/answer/:id" component={DesktopAnswerWithSocket} />
-            <Route path="/desktop/voting" component={DesktopVotingWithSocket} />
+            <Route path="/desktop/vote" component={DesktopVotingWithSocket} />
             <Route path="/desktop/voteresult" component={DesktopVoteResultWithSocket} />
             {/* Above path is temporary, until we have ids */}
             <Route path="/desktop/voteresult/:id" component={DesktopVoteResultWithSocket} />

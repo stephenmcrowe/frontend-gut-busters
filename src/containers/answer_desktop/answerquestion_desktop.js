@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import './answer_desktop.scss';
 import SocketContext from '../../socket-context';
 import { fetchGame } from '../../actions/index';
+import { startVoting } from '../../actions/submitActions';
 
 /* function mapStateToProps(reduxState) {
   // console.log(reduxState);
@@ -18,6 +19,19 @@ class QuestionAnswer extends Component {
     super(props);
 
     this.state = {};
+
+    this.props.socket.on('gotcha', () => {
+      console.log('dun got got!!!!');
+    });
+
+    this.props.socket.on('see_scores', () => {
+      console.log('see_scores received');
+      // moveOn(this.props.socket, this.props.history, 'desktop/score');
+    });
+
+    // Bindings
+    this.onStartVoting = this.onStartVoting.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +40,16 @@ class QuestionAnswer extends Component {
 
   onButtonClick = () => {
     console.log(this.props.game);
+  }
+
+  onStartVoting() {
+    console.log('clicked start voting!');
+    // console.log(this.props.socket);
+    console.log(this.props.game.questions);
+    startVoting(this.props.socket, this.props.game.questions); // this.props.game.questions
+    // if (this.props.game) {
+    //   startGame(this.props.socket, this.props.game.id);
+    // }
   }
 
   renderQuestions = () => {
@@ -40,18 +64,29 @@ class QuestionAnswer extends Component {
     return '';
   }
 
+  renderButton() {
+    // did assuming whole background image/title/logo is just one image other than the button
+    return (
+    // <div id="start_round_button">
+      <button onClick={this.onStartVoting} type="submit" id="start_round_button"><NavLink to="/desktop/vote"><h3>Start Voting!</h3></NavLink></button>
+    // </div>
+
+    );
+  }
+
   // props.round will be instantiated once connected to backend
   // {this.props.round}
   render() {
     return (
       <div id="question_page">
-        <h1>Ready</h1>
-        <h2>Please Answer Question on Screen</h2>
+        <h1>Ready?</h1>
+        <h2>Quick! Answer the questions on your phone. When time runs out, go ahead and click to start voting on the funniest responses.</h2>
         <div id="dots">
           <div id="dot_1">.</div>
           <div id="dot_2">.</div>
           <div id="dot_3">.</div>
         </div>
+        {this.renderButton()}
       </div>
 
     );

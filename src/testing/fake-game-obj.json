@@ -1,18 +1,27 @@
-[{
-  questions: Array(0), 
-  players: Array(0), 
-  banks: Array(0), 
-  _id: "5cee2f1d2f5763d88683ca4c", 
-  code: "7893", 
-  …}
-  active: false
-  banks: []
-  code: "7893"
-  createdAt: "2019-05-29T07:05:01.948Z"
-  id: "5cee2f1d2f5763d88683ca4c"
-  players: []
-  questions: []
-  __v: 0
-  _id: "5cee2f1d2f5763d88683ca4c"
-  __proto__: Object
-}]
+// [{
+//   questions: Array(0), 
+//   players: Array(0), 
+//   banks: Array(0), 
+//   _id: "5cee2f1d2f5763d88683ca4c", 
+//   code: "7893", 
+//   …}
+//   active: false
+//   banks: []
+//   code: "7893"
+//   createdAt: "2019-05-29T07:05:01.948Z"
+//   id: "5cee2f1d2f5763d88683ca4c"
+//   players: []
+//   questions: []
+//   __v: 0
+//   _id: "5cee2f1d2f5763d88683ca4c"
+//   __proto__: Object
+// }]
+
+{
+  "_id": "5cee2f1d2f5763d88683ca4c",
+  "code": "1234",
+  "active": true,
+  "questions":["5cf02890b8888886f14f086d", "5cf028a5b8888886f14f086e", "5cf028abb8888886f14f086f"],
+  "players":[],
+  "createdAt":"2019-05-30T07:05:01.948Z",
+}

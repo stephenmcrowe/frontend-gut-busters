@@ -3,6 +3,7 @@ export const ActionTypes = {
   ANSWER_STAGE: 'ANSWER_STAGE',
   VOTE_STAGE: 'VOTE_STAGE',
   SCORE_STAGE: 'SCORE_STAGE',
+  CURR_VOTE: 'CURR_VOTE',
 };
 
 export function fetchGame(socket) {
@@ -45,5 +46,12 @@ export function restartGame() {
   return {
     type: ActionTypes.RESTART_GAME,
     payload: null,
+  };
+}
+
+export function currentVote(questionId) {
+  return {
+    type: ActionTypes.CURR_VOTE,
+    payload: questionId,
   };
 }

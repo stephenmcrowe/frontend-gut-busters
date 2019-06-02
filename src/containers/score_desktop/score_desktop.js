@@ -62,9 +62,9 @@ class DesktopScore extends Component {
   // }
   renderScores = () => {
     if (this.props.game) {
-      const scores = this.props.game.questions(1).answers(1).score.map((score) => {
+      const scores = this.props.game.questions[1].answers[1].score.map((score) => {
         return (
-          <div key={this.props.game.questions(1)}>{this.props.game.questions(1).answers(1).score}</div>
+          <div key={this.props.game.questions[1]}>{this.props.game.questions[1].answers[1].score}</div>
         );
       });
       return scores;
@@ -75,7 +75,7 @@ class DesktopScore extends Component {
   render() {
     return (
       <div className="desktop-score-page">
-        {this.renderScores()};
+        {/* {this.renderScores()}; */}
         {/* <div className="game-winner">
         //    <h1>{this.props.player.find(1)} won because ghouls
         //                 just want to have fun!

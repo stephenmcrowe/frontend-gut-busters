@@ -8,8 +8,8 @@ import axios from 'axios';
 import './waiting_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions/index';
-import { pushStage } from '../../actions/submitActions';
+import { fetchGame, currentVote } from '../../actions/index';
+import { pushStage, moveOn } from '../../actions/submitActions';
 
 
 const randomInt = require('random-int');
@@ -21,7 +21,24 @@ class MobileWaiting extends Component {
       jokes: [],
       selectedJoke: '',
     };
+
+    // Listeners
+    // this.props.socket.on('see_scores', () => {
+    //   moveOn(this.props.socket, this.props.history, 'mobile/score');
+    // });
+    this.props.socket.on('vote', (id) => {
+      console.log('received vote event');
+      console.log(id);
+      currentVote(id);
+      moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    });
+
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    // });
   }
+
 
   componentDidMount() {
     axios.get('https://icanhazdadjoke.com/search?term=ghost', {
@@ -95,4 +112,4 @@ function mapStateToProps(reduxState) {
 }
 
 
-export default withRouter(connect(mapStateToProps, { fetchGame })(MobileWaitingWithSocket));
+export default withRouter(connect(mapStateToProps, { fetchGame, currentVote })(MobileWaitingWithSocket));
