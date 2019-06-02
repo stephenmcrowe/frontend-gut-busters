@@ -31,7 +31,7 @@ export function moveOn(socket, history, page) {
   // console.log(socket);
   // console.log(history);
   // console.log(page);
-  console.log('moveOn activated');
+  // console.log('moveOn activated');
   history.push(`/${page}`);
 
   // socket.emit('move_on', () => {
