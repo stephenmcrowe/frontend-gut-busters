@@ -8,6 +8,7 @@ import { fetchGame } from '../../actions/index';
 import { submitVote, receiveVote } from '../../actions/submitActions';
 import './vote_mobile.scss';
 import ghost from '../../img/ghost-score.png';
+import { subscribeToTimer } from '../../timers';
 
 // Required Props:
 // player question
@@ -25,13 +26,19 @@ class MobileVote extends Component {
       display: true,
     };
 
-    // Bindings
-    this.voteTiming = this.voteTiming.bind(this);
+    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
+      timestamp: timeRemaining,
+    }));
+
+    this.props.socket.on('see_scores', () => {
+      console.log('see_scores!');
+      // do stuff
+    });
   }
 
   componentDidMount = () => {
     fetchGame(this.props.socket);
-    this.voteTiming();
+    console.log(this.props.game);
   }
 
   // functions
@@ -47,25 +54,7 @@ class MobileVote extends Component {
       this.setState({ display: false });
     }
     // eslint-disable-next-line max-len
-    submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.idx], this.props.game.questions[this.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
-  }
-
-  voteTiming() {
-  // Emit time updates to client
-    let timeLeft = 14;
-    const voteTimerCountdown = setInterval(() => {
-      this.setState({
-        timestamp: timeLeft,
-      });
-      // eslint-disable-next-line no-plusplus
-      timeLeft--;
-      if (timeLeft === 0) {
-        this.setState({
-          timestamp: 0,
-        });
-        clearInterval(voteTimerCountdown);
-      }
-    }, 1000);
+    submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.state.idx], this.props.game.questions[this.state.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
   }
 
   render() {
