@@ -10,8 +10,8 @@ import AppWithSocket from './containers/app';
 import SocketContext from './socket-context';
 
 // connect to socket
-// const socketserver = 'https://gut-busters.herokuapp.com/';
-const socketserver = 'http://localhost:9090/';
+const socketserver = 'https://gut-busters.herokuapp.com/';
+// const socketserver = 'http://localhost:9090/';
 const socket = io(socketserver);
 
 // connecting to the socket

@@ -26,7 +26,7 @@ class Homepage extends Component {
               <h3>Each player, visit the following link on your phone...</h3>
               <img src={frame} alt="QR Code" />
               {/* <NavLink to="/mobile"><h2>gut-busters.surge.sh/mobile</h2></NavLink> */}
-              <a href="http:/gut-busters.surge.sh/mobile"><h2>gut-busters.surge.sh/mobile</h2></a>
+              <a href="http://gut-busters.surge.sh/mobile"><h2>gut-busters.surge.sh/mobile</h2></a>
               <h3>When you are ready to begin the game, click here...</h3>
               <a href="http://gut-busters.surge.sh/desktop"><h2>gut-busters.surge.sh/desktop</h2></a>
               {/* <NavLink to="/desktop"><h2>gut-busters.surge.sh/desktop</h2></NavLink> */}
