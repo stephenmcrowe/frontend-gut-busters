@@ -66,7 +66,6 @@ class MobileWaiting extends Component {
       }).catch((error) => {
         // console.log('rip waiting joke');
       });
-    this.props.fetchGame(this.props.socket);
     // get random integer from 0 to length of array
     // gettings becomes an action
     pushStage(this.props.socket, this.props.history);
