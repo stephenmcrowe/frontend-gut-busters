@@ -15,6 +15,7 @@ class MobileLanding extends Component {
     this.state = {
       roomCode: '',
       playerName: '',
+      error: '',
     };
 
     // bindings
@@ -25,10 +26,25 @@ class MobileLanding extends Component {
 
   componentDidMount() {
     receiveJoinGame(this.props.socket);
+
+    this.props.socket.on('join_game', () => {
+      this.props.history.push('/mobile/waiting');
+    });
+    this.props.socket.on('user_error', (message) => {
+      this.setState({ error: message });
+    });
+  }
+
+  componentWillUnmount() {
+    this.props.socket.off('join_game');
+    this.props.socket.off('user_error');
   }
 
   joinGameClick(event) {
-    joinGame(this.props.socket, this.state.roomCode, this.state.playerName);
+    const code = this.state.roomCode;
+    const name = this.state.playerName;
+    this.props.socket.emit('join_game', { code, name });
+    this.setState({ error: '' });
   }
 
   roomCodeChange(event) {
@@ -54,8 +70,9 @@ class MobileLanding extends Component {
           <input className="playername-input" type="text" placeholder="playername..." onChange={this.playerNameChange} value={this.state.playerName} />
         </div>
         <div className="join-game">
-          <button type="submit" onClick={this.joinGameClick} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Join!</p></NavLink></button>
+          <button type="submit" onClick={this.joinGameClick} className="join-game-button"><p>Join!</p></button>
         </div>
+        <p>{this.state.error}</p>
       </div>
     );
   }
