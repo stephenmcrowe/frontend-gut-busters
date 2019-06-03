@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router, Route, Switch,
+  BrowserRouter as Router, Route, Switch, NavLink,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
@@ -51,7 +51,9 @@ class App extends Component {
     };
 
     this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
 
+  componentDidMount = () => {
     this.props.socket.on('vote', (index) => {
       console.log(`app component index: ${index}`);
       this.props.setVote(index);
@@ -59,21 +61,24 @@ class App extends Component {
 
     this.props.socket.on('game', (game) => {
       console.log('app component game:');
-      console.log(game);
       this.props.setGame(game);
     });
-  }
 
-  componentDidMount = () => {
     this.props.socket.on('disconnect', () => {
       this.setState({ showModal: true });
     });
   }
 
+  componentWillUnmount = () => {
+    this.props.socket.off('vote');
+    this.props.socket.off('game');
+    this.props.socket.off('disconnect');
+  }
+
   handleCloseModal() {
     this.setState({ showModal: false });
-    this.props.history.push('/');
   }
+
 
   render() {
     return (
@@ -109,8 +114,10 @@ class App extends Component {
             contentLabel="socket disconnect"
           >
             <h1>Server Disconnect</h1>
-            <p>You web client has disconnect from the server socket. There is nothing we can do but start a new game. Sorry for the inconvenience.</p>
-            <button onClick={this.handleCloseModal}>Exit To Main Screen</button>
+            <p>Your web client has disconnect from the server (the socket connection has closed). There is nothing we can do. Please return to the home page.</p>
+            <NavLink to="/" className="home-page">
+              <button onClick={this.handleCloseModal}>EXIT</button>
+            </NavLink>
           </ReactModal>
         </div>
       </Router>
