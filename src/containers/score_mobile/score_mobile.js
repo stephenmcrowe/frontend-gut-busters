@@ -26,9 +26,17 @@ const MobileScore = (props) => {
     }, {});
 
     props.game.questions.forEach((question) => {
+      let voteCount = 0;
+      const playerVotes = {};
       question.answers.forEach((answer) => {
-        scores[answer.player] += answer.score;
+        voteCount += answer.score;
+        playerVotes[answer.player] = answer.score;
       });
+      if (voteCount) { // Else no votes cast
+        Object.keys(playerVotes).forEach((playerId) => {
+          scores[playerId] += Math.round(playerVotes[playerId] / voteCount * 100);
+        });
+      }
     });
 
     // https://stackoverflow.com/questions/25500316/sort-a-dictionary-by-value-in-javascript
@@ -41,10 +49,16 @@ const MobileScore = (props) => {
     });
 
     const finalScores = {};
+    let rank = 1;
+    let previous = sortedScores[0][1];
     sortedScores.forEach((item, idx) => {
+      if (previous !== item[1]) {
+        rank += 1;
+      }
+      [, previous] = item;
       finalScores[item[0]] = {
         score: item[1],
-        rank: idx + 1,
+        rank,
       };
     });
 
