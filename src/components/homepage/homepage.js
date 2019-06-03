@@ -5,6 +5,9 @@ import SocketContext from '../../socket-context';
 import './homepage.scss';
 import logo from '../../img/ghostbusters_logo.png';
 import frame from '../../img/frame.png';
+import charlotte from '../../img/team/charlotte.jpeg';
+import danielle from '../../img/team/danielle.jpeg';
+import maddie from '../../img/team/maddie.jpg';
 
 class Homepage extends Component {
   constructor(props) {
@@ -58,6 +61,20 @@ class Homepage extends Component {
               <h2>
                 Team
               </h2>
+              <div className="team-photos">
+                <div className="team-member">
+                  <img src={charlotte} alt="Charlotte Chui" />
+                  <h2>Charlotte Chui</h2>
+                </div>
+                <div className="team-member">
+                  <img src={maddie} alt="Maddie Hess" />
+                  <h2>Maddie Hess</h2>
+                </div>
+                <div className="team-member">
+                  <img src={danielle} alt="Danielle Fang" />
+                  <h2>Danielle Fang</h2>
+                </div>
+              </div>
             </div>
           </div>
         </div>

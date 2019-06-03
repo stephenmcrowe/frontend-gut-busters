@@ -124,6 +124,28 @@
       justify-content: center;
       align-items: center;
       text-align: left;
+
+      .team-photos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        .team-member {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 15px;
+          img {
+            min-height: 0px;
+            max-height: 150px;
+            height: 150px;
+            width: auto;
+            border-radius: 50%;
+          }
+        }
+      }
     }
   }
 
