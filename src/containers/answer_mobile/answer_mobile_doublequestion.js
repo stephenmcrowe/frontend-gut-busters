@@ -8,30 +8,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-// import { fetchGame, currentVote } from '../../actions/index';
 import { submitAnswer, startVoting, moveOn } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
-import { subscribeToTimer } from '../../timers';
-
-
-// Required Props:
-// player question
-
-// fake Question for testing:
-const questionsTest = {
-  _id: '5cee2f1d2f5763d88683ca4c',
-  code: '1234',
-  active: true,
-  questions: ['5cf02890b8888886f14f086d', '5cf028a5b8888886f14f086e', '5cf028abb8888886f14f086f'],
-  players: [],
-  createdAt: '2019-05-30T07:05:01.948Z',
-};
 
 class MobileAnswer extends Component {
   constructor(props) {
     super(props);
-
 
     this.state = {
       answerText1: '',
@@ -45,81 +28,13 @@ class MobileAnswer extends Component {
       q2: '',
     };
 
-    // Received Events
-    this.props.socket.on('timer', () => {
-      console.log('received timer!');
-    });
-
-    subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
-      timestamp: timeRemaining,
-    }));
-
-    this.props.socket.on('time_remaining', (time) => {
-      // console.log(`timer reads: ${time}`);
-    });
-
-    this.props.socket.on('time_out', () => {
-      console.log('Time out!');
-      // console.log(this.props.question[0].answers[0].id, this.props.question[1].answers[0].id);
-      // console.log(this.props.game);
-      // console.log(this.props.game);
-      // console.log(`questionId1: ${this.state.questionId1}`);
-      // console.log(`answerId1: ${this.state.answerId1}`);
-      // console.log(`answerText1: ${this.state.answerText1}`);
-      // console.log(`questionId2: ${this.state.questionId2}`);
-      // console.log(`answerId2: ${this.state.answerId2}`);
-      // console.log(`answerText2: ${this.state.answerText2}`);
-      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
-      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
-
-      startVoting(this.props.socket, this.props.game.questions);
-
-      moveOn(this.props.socket, this.props.history, 'mobile/waiting');
-    });
-
-    // this.props.socket.on('vote', (id) => {
-    //   console.log('received vote event');
-    //   console.log(id);
-    //   currentVote(id);
-    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    // });
-
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
     this.answerTextChange2 = this.answerTextChange2.bind(this);
-    // this.setIds = this.setIds.bind(this);
     this.submitTypedAnswers = this.submitTypedAnswers.bind(this);
   }
 
-
   componentDidMount = () => {
-    // fetchGame(this.props.socket);
-
-    // Don't do this, there's a reason game is stored in Redux - madison
-
-    // Super jankey but we need to rerender with event
-    // this.props.socket.on('game', (game) => {
-    //   const myQuestions = [];
-    //   const myAnswers = [];
-    //   game.questions.forEach((question) => {
-    //     question.answers.forEach((answer) => {
-    //       if (answer.player === localStorage.getItem('myId')) {
-    //         myQuestions.push(question);
-    //         myAnswers.push(answer);
-    //       }
-    //     });
-    //   });
-    //   console.log(`myQuestions${myQuestions}`);
-    //
-    //   // Then set state locally using myQuestions
-    //   this.setState({ questionId1: myQuestions[0].id });
-    //   this.setState({ questionId2: myQuestions[1].id });
-    //   this.setState({ answerId1: myAnswers[0].id });
-    //   this.setState({ answerId2: myAnswers[1].id });
-    //   this.setState({ q1: myQuestions[0] });
-    //   this.setState({ q2: myQuestions[1] });
-    // });
-
     console.log(this.props.game);
 
     const myQuestions = [];
@@ -132,7 +47,6 @@ class MobileAnswer extends Component {
         }
       });
     });
-    // console.log(`myQuestions${myQuestions}`);
 
     // Then set state locally using myQuestions
     this.setState({ questionId1: myQuestions[0].id });
@@ -141,7 +55,22 @@ class MobileAnswer extends Component {
     this.setState({ answerId2: myAnswers[1].id });
     this.setState({ q1: myQuestions[0] });
     this.setState({ q2: myQuestions[1] });
+
+    this.props.socket.on('time_remaining', (timeLeft) => {
+      this.setState({ timestamp: timeLeft });
+    });
+
+    this.props.socket.on('time_out', () => {
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
+      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
+      moveOn(this.props.socket, this.props.history, 'mobile/waiting');
+    });
   };
+
+  componentWillUnmount = () => {
+    this.props.socket.off('time_remaining');
+    this.props.socket.off('time_out');
+  }
 
   // functions
   answerTextChange1(event) {
@@ -154,26 +83,12 @@ class MobileAnswer extends Component {
     this.setState({ answerText2: event.target.value });
   }
 
+  // this is the button event
   submitTypedAnswers(event) {
     event.preventDefault();
     this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
     this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
-
-    // this.props.socket.emit('start_voting'); // wrong place to do this
     moveOn(this.props.socket, this.props.history, 'mobile/waiting');
-    // pushStage(this.props.socket, this.props.history);
-  }
-
-  // Emitted Events
-  subscribeMe(cb) {
-    // this.props.socket.emit('subscribe_to_timer');
-    subscribeToTimer(this.props.socket, cb);
-  }
-
-  // Miscellaneous testing
-  // eslint-disable-next-line class-methods-use-this
-  display(err, timestamp) {
-    console.log(`current time reads ${timestamp}`);
   }
 
   renderQuestion1() {
@@ -189,7 +104,6 @@ class MobileAnswer extends Component {
     }
     return '';
   }
-
 
   render() {
     return (

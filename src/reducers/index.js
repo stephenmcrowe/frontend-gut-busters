@@ -6,7 +6,7 @@ import VoteReducer from './vote-reducer';
 const rootReducer = combineReducers({
   // display: DisplayReducer,
   socket: SocketReducer,
-  index: VoteReducer,
+  vote: VoteReducer,
 });
 
 export default rootReducer;

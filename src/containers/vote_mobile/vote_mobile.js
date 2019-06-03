@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
 import SocketContext from '../../socket-context';
 // import { fetchGame, currentVote } from '../../actions/index';
-import { submitVote, receiveVote, moveOn } from '../../actions/submitActions';
+import { moveOn } from '../../actions/submitActions';
 import './vote_mobile.scss';
-import ghost from '../../img/ghost-score.png';
+// import ghost from '../../img/ghost-score.png';
 import { subscribeToTimer } from '../../timers';
 
 // Required Props:
@@ -17,12 +17,9 @@ class MobileVote extends Component {
   constructor(props) {
     super(props);
 
-    const myIdx = receiveVote(this.props.socket);
-
     this.state = {
-      tempAnswer: '',
-      timestamp: '15',
-      idx: myIdx,
+      timestamp: '0',
+      tempAnswer: null,
       display: true,
     };
 
@@ -30,93 +27,103 @@ class MobileVote extends Component {
       timestamp: timeRemaining,
     }));
 
-    this.props.socket.on('vote', (vote) => {
-      console.log('vote constructor');
-      console.log(vote);
-    });
+    console.log(this.props.game);
 
-    this.props.socket.on('see_scores', () => {
-      console.log('see_scores!');
-      moveOn(this.props.socket, this.props.history, 'mobile/score');
+    this.props.socket.on('time_out', (vote) => {
+      console.log('time out');
+      // record vote
+      moveOn(this.props.socket, this.props.history, 'mobile/waiting');
     });
   }
 
   componentDidMount = () => {
-    // fetchGame(this.props.socket);
-    // console.log(this.props.game);
-    // this.props.socket.on('vote', (vote) => {
-    //   console.log('vote component did mount');
-    //   console.log(vote);
-    // });
+    // calculate if this is the players answer
+    if (this.props.game && Number.isInteger(this.props.index)) {
+      const question = this.props.game.questions[this.props.index];
+      console.log(question);
+
+      question.answers.forEach((answer) => {
+        if (answer.player === localStorage.getItem('myId')) {
+          this.setState({ display: false });
+        }
+      });
+    }
   }
 
   // functions
-  selectAnswer(event) {
+  selectAnswer = (event) => {
     this.setState({ tempAnswer: event.target.value });
   }
 
-  submitVote(event) {
-    event.preventDefault();
+  // submitVote(event) {
+  //   event.preventDefault();
+  //
+  //   // make sure this exact path is set up later because right now it's not the player id who answered the question
+  //   if (this.props.game.questions[this.idx].answers.playerid === localStorage.getItem('myId')) {
+  //     this.setState({ display: false });
+  //   }
+  //   // eslint-disable-next-line max-len
+  //   submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.state.idx],
+  //   this.props.game.questions[this.state.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
+  // }
 
-    // make sure this exact path is set up later because right now it's not the player id who answered the question
-    if (this.props.game.questions[this.idx].answers.playerid === localStorage.getItem('myId')) {
-      this.setState({ display: false });
-    }
-    // eslint-disable-next-line max-len
-    submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.state.idx], this.props.game.questions[this.state.idx].answer.id, this.props.game.questions[this.idx].answers.playerid);
+  renderAnswers = () => {
+    const answers = this.props.game.questions[this.props.index].answers.map((answer) => {
+      return (
+        <button key={answer.id} value={answer.id} onClick={this.selectAnswer} className="select-vote first">
+          <p>
+            {answer.text}
+          </p>
+        </button>
+      );
+    });
+    return answers;
   }
 
-  render() {
-    if (this.state.display) {
-      return (
-        <div className="vote-page">
-          <div className="header">
-            <div className="timer">
-              {this.state.timestamp}
-            </div>
-          </div>
+  renderQuestion = () => {
+    if (this.props.game && Number.isInteger(this.props.index)) {
+      const question = this.props.game.questions[this.props.index];
+      let display = false;
+      question.answers.forEach((answer) => {
+        if (answer.player === localStorage.getItem('myId')) {
+          display = true;
+        }
+      });
+      if (display) {
+        return (
           <div className="vote-content">
             <div className="question-wrapper">
-              <h1>What do you call an apple with no eyes?</h1>
-              {/* <h1>{this.props.game.questions[this.idx].bank.question}</h1> */}
+              <h1>{question.bank.question}</h1>
             </div>
 
             <div className="options-wrapper">
-              <button value="1" onClick={this.selectAnswer} className="select-vote first"><p>opt 1{/* this.props.game.questions[this.idx].answers[0] */}</p></button>
-              {/* in the future, value should be :answerid */}
-              {/* <input className="type-answer" type="text" placeholder="Your answer here..." onChange={this.answerTextChange} value={this.state.answerText} /> */}
-              <button value="2" onClick={this.selectAnswer} className="select-vote second"><p>opt 2{/* this.props.game.questions[this.idx].answers[1] */}</p></button>
+              {this.renderAnswers()}
             </div>
             <div className="submit-button">
               <button onClick={this.submitAnswer} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Done!</p></NavLink></button>
             </div>
           </div>
-
-        </div>
-      );
+        );
+      } else {
+      // Your question
+        return (<div>THIS IS YOUR QUESTION </div>);
+      }
     } else {
-      return (
-        <div id="mobile-waiting-page">
-          <div id="waiting-joke">
-            {/* <h1>{this.selectedJoke}</h1> */}
-            {/* figure out how to loop through the jokes here that are
-              specifically ghost related */}
-            <h1>If you&apos;ve got it... Haunt it!</h1>
-          </div>
-          <div id="waiting-loading">
-            <img className="loading-icon" src={ghost} alt="Loading Icon" />
-            {/* <div className="base-loading" /> */}
-            {/* loading image that moves do it with CSS */}
-          </div>
-          <div id="waiting-info">
-            <h2>
-              {/* TODO: argument based on which component is next */}
-              Waiting information: here is what you need to know!
-            </h2>
+      return (<div>Loading...</div>);
+    }
+  }
+
+  render() {
+    return (
+      <div className="vote-page">
+        <div className="header">
+          <div className="timer">
+            {this.state.timestamp}
           </div>
         </div>
-      );
-    }
+        {this.renderQuestion()}
+      </div>
+    );
   }
 }
 
@@ -124,7 +131,7 @@ class MobileVote extends Component {
 function mapStateToProps(reduxState) {
   return {
     game: reduxState.socket.game,
-    index: reduxState.index,
+    index: reduxState.vote.index,
   };
 }
 

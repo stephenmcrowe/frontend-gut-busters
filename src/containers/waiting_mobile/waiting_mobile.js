@@ -8,16 +8,17 @@ import axios from 'axios';
 import './waiting_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 import SocketContext from '../../socket-context';
-import { pushStage, moveOn } from '../../actions/submitActions';
+import { pushStage } from '../../actions/submitActions';
 
 
 const randomInt = require('random-int');
 
 class MobileWaiting extends Component {
+  _isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = {
-      jokes: [],
       selectedJoke: '',
     };
 
@@ -25,12 +26,11 @@ class MobileWaiting extends Component {
     // this.props.socket.on('see_scores', () => {
     //   moveOn(this.props.socket, this.props.history, 'mobile/score');
     // });
-    this.props.socket.on('vote', (id) => {
-      console.log('received vote event');
-      console.log(id);
-      moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    });
-
+    // this.props.socket.on('vote', (id) => {
+    //   console.log('received vote event');
+    //   console.log(id);
+    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
+    // });
     // this.props.socket.on('vote', (id) => {
     //   console.log('received vote event');
     //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
@@ -39,51 +39,42 @@ class MobileWaiting extends Component {
 
 
   componentDidMount() {
+    this._isMounted = true;
+
     axios.get('https://icanhazdadjoke.com/search?term=ghost', {
       headers: { Accept: 'application/json' },
     })
       .then((response) => {
-        // generate random int
-        // save that one to state given length
+        // save random joke to state
         const jokes = response.data.results.map(joke => ({
           jokeID: joke.id,
           jokeText: joke.joke,
         }));
-        this.setState({ jokes });
-        // const min = 1;
-        // const max = this.state.jokes.length;
-        // const rand = min + Math.random() * (max - min);
-        const random = randomInt(0, this.state.jokes.length - 1);
-        // this.state.random = this.state.random + rand;
-        // this.setState({ random: this.state.random + rand });
-        // this.selectedJoke: this.state.jokes.find(random).jokeText;
+        const random = randomInt(0, jokes.length - 1);
 
-        // this.setState({ selectedJoke: this.state.jokes.find(random).jokeText });
-        const newObject = Object.assign({}, this.state.jokes.find(random).jokeText);
-        this.setState({ selectedJoke: newObject });
-
-        // this.setState({ selectedJoke: })
+        if (this._isMounted) {
+          this.setState({ selectedJoke: jokes[random].jokeText });
+        }
       }).catch((error) => {
-        // console.log('rip waiting joke');
+        console.log('did not load waiting joke');
+        console.log(error);
       });
-    // get random integer from 0 to length of array
-    // gettings becomes an action
+
     pushStage(this.props.socket, this.props.history);
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   render() {
     return (
       <div id="mobile-waiting-page">
         <div id="waiting-joke">
-          {/* <h1>{this.selectedJoke}</h1> */}
-          {/* figure out how to loop through the jokes here that are
-            specifically ghost related */}
-          <h1>If you&apos;ve got it... Haunt it!</h1>
+          <h1>{this.state.selectedJoke}</h1>
         </div>
         <div id="waiting-loading">
           <img className="loading-icon" src={ghost} alt="Loading Icon" />
-          {/* <div className="base-loading" /> */}
-          {/* loading image that moves do it with CSS */}
         </div>
         <div id="waiting-info">
           <h2>

@@ -18,7 +18,7 @@ export function setGame(game) {
 export function setVote(index) {
   return (dispatch) => {
     dispatch({
-      type: ActionTypes.FETCH_GAME,
+      type: ActionTypes.VOTE_STAGE,
       payload: index,
     });
   };
