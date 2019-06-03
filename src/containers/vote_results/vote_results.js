@@ -5,50 +5,41 @@ import { NavLink, withRouter } from 'react-router-dom';
 import './vote_results.scss';
 import SocketContext from '../../socket-context';
 // import { nextQuestion } from '../../actions';
-
-/*
-listens for players coming in
-store player info as local state for now
-Navlink to start round aka questions
-*/
-
-// need to figure out the new information flow of getting the questions in that round and the votes of each question to use
-
-/* will get posts eventually
-function mapStateToProps(reduxState) {
-  // console.log(reduxState);
-  return {
-    room_id: reduxState.game.id,
-    players: reduxState.game.players,
-    votes: reduxState.game.votes,
-    questions: reduxState.game.round.questions,
-  };
-}
-*/
+import { moveOnEvent } from '../../actions/submitActions';
 
 class VoteResults extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
-
-    this.onNext = this.onNext.bind(this);
-    this.renderHeader = this.renderHeader.bind(this);
-    this.renderNextButton = this.renderNextButton.bind(this);
+    this.state = {
+      timestamp: '0',
+    };
   }
 
+  componentDidMount() {
+    this.props.socket.on('time_remaining', (timeLeft) => {
+      this.setState({ timestamp: timeLeft });
+    });
 
-  /* componentDidMount() {
-    this.props.getQuestions();
-    this.props.getVotes();
-  }
-  */
-
-  onNext() {
-    // event.preventDefault();
-    this.props.nextResults(this.state);
+    moveOnEvent(this.props.socket, this.props.history, 'vote', '/desktop/vote', null, null);
+    moveOnEvent(this.props.socket, this.props.history, 'score', '/desktop/score', null, null);
   }
 
+  componentWillUnmount() {
+    this.props.socket.off('time_remaining');
+    this.props.socket.off('vote');
+    this.props.socket.off('score');
+  }
+
+  renderTimer = () => {
+    return (
+      <div className="header">
+        <div className="timer">
+          {this.state.timestamp}
+        </div>
+      </div>
+    );
+  }
 
   renderHeader() {
     // did assuming whole background image/title/logo is just one image other than the button
@@ -98,6 +89,7 @@ class VoteResults extends Component {
     // this.props.players.map((answers) => {
     return (
       <div className="vote_results">
+        {this.renderTimer()}
         {this.renderHeader()}
         <div className="player_answers">
           <div className="answer">
@@ -118,6 +110,13 @@ class VoteResults extends Component {
   }
 }
 
+function mapStateToProps(reduxState) {
+  return {
+    game: reduxState.socket.game,
+    index: reduxState.vote.index,
+  };
+}
+
 const VoteResultsWithSocket = props => (
   <SocketContext.Consumer>
     {socket => <VoteResults {...props} socket={socket} />}
@@ -125,4 +124,4 @@ const VoteResultsWithSocket = props => (
 );
 
 // export default withRouter(connect(null, { nextQuestion })(voteResults));
-export default withRouter(connect(null, null)(VoteResultsWithSocket));
+export default withRouter(connect(mapStateToProps, null)(VoteResultsWithSocket));

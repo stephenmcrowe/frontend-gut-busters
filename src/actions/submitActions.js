@@ -79,8 +79,12 @@ export function pushStage(socket, history) {
   });
 }
 
-export function moveOnEvent(socket, history, event, page) {
+// https://stackoverflow.com/questions/3458553/javascript-passing-parameters-to-a-callback-function
+export function moveOnEvent(socket, history, event, page, callback, callbackArgs) {
   socket.on(event, () => {
+    if (callback) {
+      callback.apply(this, callbackArgs); // Pass context so console.log works
+    }
     history.push(page);
   });
 }
