@@ -20,8 +20,8 @@ class DesktopVoting extends Component {
       this.setState({ timestamp: timeLeft });
     });
 
-    // moveOnEvent(this.props.socket, this.props.history, 'time_out', '/desktop/voteresult', null, null);
-    moveOnEvent(this.props.socket, this.props.history, 'score', '/desktop/score', null, null);
+    moveOnEvent(this.props.socket, this.props.history, 'time_out', '/desktop/voteresult', null, null);
+    // moveOnEvent(this.props.socket, this.props.history, 'score', '/desktop/score', null, null);
   }
 
   componentWillUnmount() {
