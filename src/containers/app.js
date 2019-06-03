@@ -56,7 +56,8 @@ class App extends Component {
     });
 
     this.props.socket.on('game', (game) => {
-      console.log(`app component game: ${game}`);
+      console.log('app component game:');
+      console.log(game);
       this.props.setGame(game);
     });
   }

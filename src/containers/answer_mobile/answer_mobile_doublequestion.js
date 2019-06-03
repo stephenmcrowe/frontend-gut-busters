@@ -19,7 +19,7 @@ class MobileAnswer extends Component {
     this.state = {
       answerText1: '',
       answerText2: '',
-      timestamp: '30',
+      timestamp: '0',
       questionId1: '', // this.props.question[0].id, // this.props.question[quesIndex1].id,
       questionId2: '', // this.props.question[1].id, // this.props.question[quesIndex2].id,
       answerId1: '', // this.props.question[0].answers[0].id, // this.props.question[quesIndex1].answers[answerIndex1].id,

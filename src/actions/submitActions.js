@@ -73,4 +73,14 @@ export function pushStage(socket, history) {
   socket.on('vote', (game) => {
     history.push('/mobile/vote');
   });
+
+  socket.on('score', (game) => {
+    history.push('/mobile/score');
+  });
+}
+
+export function moveOnEvent(socket, history, event, page) {
+  socket.on(event, () => {
+    history.push(page);
+  });
 }

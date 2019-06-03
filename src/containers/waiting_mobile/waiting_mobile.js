@@ -76,12 +76,6 @@ class MobileWaiting extends Component {
         <div id="waiting-loading">
           <img className="loading-icon" src={ghost} alt="Loading Icon" />
         </div>
-        <div id="waiting-info">
-          <h2>
-            {/* TODO: argument based on which component is next */}
-            Waiting information: here is what you need to know!
-          </h2>
-        </div>
       </div>
     );
   }
