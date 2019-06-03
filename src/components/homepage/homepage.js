@@ -9,6 +9,7 @@ import charlotte from '../../img/team/charlotte.jpeg';
 import danielle from '../../img/team/danielle.jpeg';
 import maddie from '../../img/team/maddie.jpg';
 import madison from '../../img/team/madison.png';
+import stephen from '../../img/team/stephen.png';
 
 class Homepage extends Component {
   constructor(props) {
@@ -68,6 +69,10 @@ class Homepage extends Component {
                 <div className="team-member">
                   <img src={madison} alt="Madison Hazard" />
                   <h2>Madison Hazard</h2>
+                </div>
+                <div className="team-member">
+                  <img src={stephen} alt="Stephen Crowe" />
+                  <h2>Stephen Crowe</h2>
                 </div>
                 <div className="team-member">
                   <img src={maddie} alt="Maddie Hess" />

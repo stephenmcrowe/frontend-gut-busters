@@ -56,6 +56,19 @@ class VoteResults extends Component {
     );
   }
 
+  renderAnswers = () => {
+    const answers = this.props.game.questions[this.props.index].answers.map((answer) => {
+      return (
+        <div key={answer.id} className="select-vote first">
+          <p>
+            {answer.text}
+          </p>
+        </div>
+      );
+    });
+    return answers;
+  }
+
 
   renderNextButton() {
     // did assuming whole background image/title/logo is just one image other than the button

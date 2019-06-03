@@ -77,7 +77,7 @@ class MobileVote extends Component {
         );
       } else {
       // Your question
-        return (<div>THIS IS YOUR QUESTION</div>);
+        return (<div id="your-q"><h1>THIS IS YOUR QUESTION</h1></div>);
       }
     } else {
       return (<div>Loading...</div>);
