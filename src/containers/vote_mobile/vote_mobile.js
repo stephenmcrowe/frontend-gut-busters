@@ -23,11 +23,11 @@ class MobileVote extends Component {
       display: true,
     };
 
-    console.log(this.props.game);
-
     subscribeToTimer(this.props.socket, (err, timeRemaining) => this.setState({
       timestamp: timeRemaining,
     }));
+
+    console.log(this.props.game);
 
     this.props.socket.on('time_out', (vote) => {
       console.log('time out');
@@ -38,7 +38,7 @@ class MobileVote extends Component {
 
   componentDidMount = () => {
     // calculate if this is the players answer
-    if (this.props.game && this.props.index) {
+    if (this.props.game && Number.isInteger(this.props.index)) {
       const question = this.props.game.questions[this.props.index];
       console.log(question);
 
@@ -81,12 +81,19 @@ class MobileVote extends Component {
   }
 
   renderQuestion = () => {
-    if (this.props.game && this.props.index) {
-      if (this.state.display) {
+    if (this.props.game && Number.isInteger(this.props.index)) {
+      const question = this.props.game.questions[this.props.index];
+      let display = false;
+      question.answers.forEach((answer) => {
+        if (answer.player === localStorage.getItem('myId')) {
+          display = true;
+        }
+      });
+      if (display) {
         return (
           <div className="vote-content">
             <div className="question-wrapper">
-              <h1>{this.props.game.questions[this.props.index].bank.question}</h1>
+              <h1>{question.bank.question}</h1>
             </div>
 
             <div className="options-wrapper">
@@ -99,7 +106,7 @@ class MobileVote extends Component {
         );
       } else {
       // Your question
-        return (<div />);
+        return (<div>THIS IS YOUR QUESTION </div>);
       }
     } else {
       return (<div>Loading...</div>);
@@ -124,7 +131,7 @@ class MobileVote extends Component {
 function mapStateToProps(reduxState) {
   return {
     game: reduxState.socket.game,
-    index: reduxState.index,
+    index: reduxState.vote.index,
   };
 }
 
