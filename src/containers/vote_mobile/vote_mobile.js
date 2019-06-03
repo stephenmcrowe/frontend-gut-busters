@@ -84,14 +84,20 @@ class MobileVote extends Component {
     }
   }
 
+  renderTimer = () => {
+    return (
+      <div className="header">
+        <div className="timer">
+          {this.state.timestamp}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="vote-page">
-        <div className="header">
-          <div className="timer">
-            {this.state.timestamp}
-          </div>
-        </div>
+        {this.renderTimer()}
         {this.renderQuestion()}
       </div>
     );
