@@ -1,17 +1,12 @@
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/button-has-type */
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SocketContext from '../../socket-context';
-// import { fetchGame, currentVote } from '../../actions/index';
 import { submitVote } from '../../actions/submitActions';
 import './vote_mobile.scss';
-// import ghost from '../../img/ghost-score.png';
-// import { subscribeToTimer } from '../../timers';
-
-// Required Props:
-// player question
 
 class MobileVote extends Component {
   constructor(props) {

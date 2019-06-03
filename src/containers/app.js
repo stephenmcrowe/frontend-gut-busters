@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable react/button-has-type */
+
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router, Route, Switch,
+  BrowserRouter as Router, Route, Switch, NavLink,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
+import ReactModal from 'react-modal';
 import SocketContext from '../socket-context';
 import FallBack from '../components/fallback';
 import { setGame, setVote } from '../actions/index';
@@ -14,11 +17,6 @@ import MobileWaitingWithSocket from './waiting_mobile/waiting_mobile';
 import MobileAnswerWithSocket from './answer_mobile/answer_mobile_doublequestion';
 import MobileVoteWithSocket from './vote_mobile/vote_mobile';
 import MobileScoreWithSocket from './score_mobile/score_mobile';
-// import { mobileScore, mobileAnswer, mobileVote } from '../containers/score_mobile/score_mobile';
-// import mobileAnswer from '../containers/score_mobile/score_mobile';
-// import mobileVote from '../containers/score_mobile/score_mobile';
-// import mobileScore from '../containers/score_mobile/score_mobile';
-
 import DesktopLandingWithSocket from './landingpage_desktop/landingpage_desktop';
 import DesktopWaitingWithSocket from './waiting_desktop/waiting_desktop';
 import DesktopScoreWithSocket from './score_desktop/score_desktop';
@@ -48,8 +46,14 @@ Route                       -> Screen                       Receives:         Em
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showModal: false,
+    };
 
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  componentDidMount = () => {
     this.props.socket.on('vote', (index) => {
       console.log(`app component index: ${index}`);
       this.props.setVote(index);
@@ -57,10 +61,24 @@ class App extends Component {
 
     this.props.socket.on('game', (game) => {
       console.log('app component game:');
-      console.log(game);
       this.props.setGame(game);
     });
+
+    this.props.socket.on('disconnect', () => {
+      this.setState({ showModal: true });
+    });
   }
+
+  componentWillUnmount = () => {
+    this.props.socket.off('vote');
+    this.props.socket.off('game');
+    this.props.socket.off('disconnect');
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
 
   render() {
     return (
@@ -91,6 +109,16 @@ class App extends Component {
             <Route exact path="/desktop/score" component={DesktopScoreWithSocket} />
             <Route component={FallBack} />
           </Switch>
+          <ReactModal
+            isOpen={this.state.showModal}
+            contentLabel="socket disconnect"
+          >
+            <h1>Server Disconnect</h1>
+            <p>Your web client has disconnect from the server (the socket connection has closed). There is nothing we can do. Please return to the home page.</p>
+            <NavLink to="/" className="home-page">
+              <button onClick={this.handleCloseModal}>EXIT</button>
+            </NavLink>
+          </ReactModal>
         </div>
       </Router>
     );
