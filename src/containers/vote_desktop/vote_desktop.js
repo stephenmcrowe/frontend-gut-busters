@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './vote_desktop.scss';
 import SocketContext from '../../socket-context';
-// import { fetchGame } from '../../actions/index';
 import { moveOnEvent } from '../../actions/submitActions';
 
 class DesktopVoting extends Component {
@@ -21,7 +20,6 @@ class DesktopVoting extends Component {
     });
 
     moveOnEvent(this.props.socket, this.props.history, 'time_out', '/desktop/voteresult', null, null);
-    // moveOnEvent(this.props.socket, this.props.history, 'score', '/desktop/score', null, null);
   }
 
   componentWillUnmount() {
@@ -43,11 +41,11 @@ class DesktopVoting extends Component {
   renderAnswers = () => {
     const answers = this.props.game.questions[this.props.index].answers.map((answer) => {
       return (
-        <div key={answer.id} className="select-vote first answer-container">
+        <div key={answer.id} className="answer-container">
           <div className="answer-box">
-            <p>
+            <h3>
               {answer.text}
-            </p>
+            </h3>
           </div>
         </div>
       );
@@ -55,42 +53,27 @@ class DesktopVoting extends Component {
     return answers;
   }
 
-  renderQuestion = () => {
-    if (this.props.game && Number.isInteger(this.props.index)) {
-      const question = this.props.game.questions[this.props.index];
-      return (
-        <div className="vote-content">
-          <div className="question-wrapper">
-            <h1>{question.bank.question}</h1>
-          </div>
-
-          <div className="options-wrapper">
-            {this.renderAnswers()}
-          </div>
+  renderHeader() {
+    const question = this.props.game.questions[this.props.index];
+    return (
+      <div id="voteResults">
+        <div id="question">
+          <h1>
+            {question.bank.question}
+          </h1>
         </div>
-      );
-    } else {
-      return (<div>Loading...</div>);
-    }
+        <div className="rainbow" />
+      </div>
+    );
   }
 
-  // props.round will be instantiated once connected to backend
   render() {
     return (
       <div className="voting_page">
         {this.renderTimer()}
-        {this.renderQuestion()}
-        {/* <h1>Vote!
-        </h1>
-        <h2>Voting in Progress...</h2>
-        <div id="dots">
-          <div id="dot_1">.</div>
-          <div id="dot_2">.</div>
-          <div id="dot_3">.</div>
-          <button onClick={this.test} type="button">Test</button>
-        </div> */}
+        {this.renderHeader()}
+        {this.renderAnswers()}
       </div>
-
     );
   }
 }

@@ -7,6 +7,34 @@
     justify-content: center;
     align-items: center;
 
+    #voteResults{
+
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 64px;
+        line-height: 75px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        #question{
+            h1{
+                color: #FFFFFF;
+            }
+        }
+
+        .rainbow{
+            width:500px; 
+            height:10px; 
+            background-image:url('../../img/rainbow.png');
+            background-size: cover;
+            margin:0; 
+            padding:0; 
+        }
+    }
+
     h1{
         font-family: Roboto;
         font-style: normal;
@@ -72,7 +100,7 @@
 
     .answer-box {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column wrap;
         justify-content: center;
         align-items: center;
         height: 60%;
@@ -82,5 +110,17 @@
         border-width: 5px;
         background: #fff500;
         overflow: scroll;
+        padding: 0px 7px;
+
+        h3{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            color: #2A3947;
+        }
     }
 }
