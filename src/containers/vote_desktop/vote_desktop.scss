@@ -60,3 +60,27 @@
     
     }
 }
+
+
+.answer-container {
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    width: 100%;
+
+    .answer-box {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        height: 60%;
+        width: 30%;
+        border-style: solid;
+        border-color: white;
+        border-width: 5px;
+        background: #fff500;
+        overflow: scroll;
+    }
+}
