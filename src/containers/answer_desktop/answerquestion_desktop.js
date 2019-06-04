@@ -24,7 +24,6 @@ class QuestionAnswer extends Component {
   componentWillUnmount = () => {
     this.props.socket.off('time_out');
     this.props.socket.off('time_remaining');
-    this.props.socket.off('vote');
   }
 
   renderTimer = () => {

@@ -23,6 +23,7 @@
         #question{
             h1{
                 color: #FFFFFF;
+
             }
         }
 
@@ -34,6 +35,19 @@
             margin:0; 
             padding:0; 
         }
+    }
+
+    h1{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 64px;
+        line-height: 75px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    
+        color: #2A3947;
     }
 
     .player_answers{
@@ -115,6 +129,45 @@
             margin:0; 
             padding:0;  
             border-radius: 35px;
+        }
+    }
+}
+
+.header {
+    flex: 1;
+}
+
+.answer-container {
+    display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    width: 100%;
+
+    .answer-box {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        height: 60%;
+        width: 30%;
+        border-style: solid;
+        border-color: white;
+        border-width: 5px;
+        background: #fff500;
+        overflow: scroll;
+        padding: 0px 7px;
+
+        h3{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            color: #2A3947;
         }
     }
 }

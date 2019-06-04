@@ -37,12 +37,10 @@ class App extends Component {
 
   componentDidMount = () => {
     this.props.socket.on('vote', (index) => {
-      console.log(`app component index: ${index}`);
       this.props.setVote(index);
     });
 
     this.props.socket.on('game', (game) => {
-      console.log('app component game:');
       this.props.setGame(game);
     });
 
