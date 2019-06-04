@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './vote_results.scss';
 import SocketContext from '../../socket-context';
 // import { nextQuestion } from '../../actions';
@@ -63,6 +63,9 @@ class VoteResults extends Component {
           <p>
             {answer.text}
           </p>
+          <p>
+            {answer.score}
+          </p>
         </div>
       );
     });
@@ -70,17 +73,17 @@ class VoteResults extends Component {
   }
 
 
-  renderNextButton() {
-    // did assuming whole background image/title/logo is just one image other than the button
-    return (
-    // would be to "/desktop/voteResult/:id once we get the questions ids per round and the votes
-    // button will be image in css         <div className="next_button_pic" />
-      <div id="next_button">
-        <button onClick={this.onNext} type="submit" id="button"><NavLink to="/desktop/answer" /></button>
-      </div>
+  // renderNextButton() {
+  //   // did assuming whole background image/title/logo is just one image other than the button
+  //   return (
+  //   // would be to "/desktop/voteResult/:id once we get the questions ids per round and the votes
+  //   // button will be image in css         <div className="next_button_pic" />
+  //     <div id="next_button">
+  //       <button onClick={this.onNext} type="submit" id="button"><NavLink to="/desktop/answer" /></button>
+  //     </div>
 
-    );
-  }
+  //   );
+  // }
 
   /*
   // did assuming whole background image/title/logo is just one image other than the button
@@ -104,7 +107,8 @@ class VoteResults extends Component {
       <div className="vote_results">
         {this.renderTimer()}
         {this.renderHeader()}
-        <div className="player_answers">
+        {this.renderAnswers()}
+        {/* <div className="player_answers">
           <div className="answer">
             <div className="answer_player_img" />
             <h1>Answer Text Here</h1>
@@ -113,8 +117,8 @@ class VoteResults extends Component {
               <div className="voter_player_img2" />
             </div>
           </div>
-        </div>
-        {this.renderNextButton()}
+        </div> */}
+        {/* {this.renderNextButton()} */}
       </div>
 
     );
