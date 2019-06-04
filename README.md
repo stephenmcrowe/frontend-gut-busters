@@ -33,7 +33,7 @@ First thing you see is this handy landing page shows three things
 * provides an easy accsess QR code for players to join the game
 * provides instructions for how to play the game for new players
 * a little biography about the creation of the game by our lovley team
-![Landing](src/img/landing.png)
+![Landing](src/img/landing.png =350x)
 
 ### Stage 2
 From the links of the landing page you will be directed to the starting screen for the desktop and mobile pages shown below
@@ -46,7 +46,7 @@ Watch the users pop up like magic and click `Start Game` when all players have j
 ![Start Room](src/img/startroom.gif)
 #### Mobile Waiting
 Enter in the room code and a username of your choice! Be creative.....but not too crazy! After you join the game you will see this waiting screen until all other players gave joined and the game has started. Enjoy the ghastly jokes while you're waiting :wink:
-![Start Game Waiting](src/img/joke_waiting_mobile.png)
+![Start Game Waiting](src/img/joke_waiting_mobile.png =200x)
 
 
 ### Stage 4
@@ -62,27 +62,27 @@ You and one other player will be answering each question, and the questions are 
 Battle of the wit begins, vote for the best answer on the screen!
 #### Desktop Vote
 See the options that people are voting on and what your opponent came up with for each question.
-![Vote Options](src/img/desktop_answer_options.png)
+![Vote Options](src/img/desktop_answer_options.png =350x)
 After each question is voted for, see who pulled ahead of popular opinion with the results screen.
-![Vote Results](src/img/desktop_votes.png)
+![Vote Results](src/img/desktop_votes.png =350x)
 #### Mobile Vote
 Voting begins! May the best answer win! Please know that you are also on a time limit, so make haste.
-![Vote](src/img/vote_mobile.png)
+![Vote](src/img/vote_mobile.png =200x)
 If you are a speedy voter, enjoy another joke while the other voters catch up.
-![Waiting for Voting](src/img/joke_waiting_mobile_2.png)
+![Waiting for Voting](src/img/joke_waiting_mobile_2.png =200x)
 
 If this is your answer, then you can't vote for yourself, that's cheating!
 Sit tight while the other players decide your fate.
-![Own Question](src/img/vote_own_mobile.png)
+![Own Question](src/img/vote_own_mobile.png =200x)
 
 ### Stage 6
 See who came out on top with the final ranking.
 #### Desktop Final
 Moment of glory or stage of shame, see who had the wittiest, gut-busting answers.
-![Final Ranking](src/img/final_score_desktop.png)
+![Final Ranking](src/img/final_score_desktop.png =350x)
 #### Mobile Final
 How'd you do? Rank number 1, or bottom of the barrel? Either way hope you had fun!
-![Your Score](src/img/final_score_mobile.png)
+![Your Score](src/img/final_score_mobile.png =200x)
 
 
 ## Setup
