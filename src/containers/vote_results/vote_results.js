@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './vote_results.scss';
 import SocketContext from '../../socket-context';
-// import { nextQuestion } from '../../actions';
 import { moveOnEvent } from '../../actions/submitActions';
 
 class VoteResults extends Component {
@@ -27,8 +26,6 @@ class VoteResults extends Component {
 
   componentWillUnmount() {
     this.props.socket.off('time_remaining');
-    this.props.socket.off('vote');
-    this.props.socket.off('score');
   }
 
   renderTimer = () => {
