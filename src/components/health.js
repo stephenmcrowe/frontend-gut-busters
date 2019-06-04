@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 
 const ROOT_URL = 'https://gut-busters.herokuapp.com/api';
-// const ROOT_URL = 'http://localhost:9090/api';
 
 class Health extends React.Component {
   constructor(props) {

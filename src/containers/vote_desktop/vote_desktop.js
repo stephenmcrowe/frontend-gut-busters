@@ -25,7 +25,6 @@ class DesktopVoting extends Component {
   componentWillUnmount() {
     this.props.socket.off('time_remaining');
     this.props.socket.off('time_out');
-    this.props.socket.off('score');
   }
 
   renderTimer = () => {

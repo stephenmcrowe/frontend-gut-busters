@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import SocketContext from '../../socket-context';
-import { submitVote } from '../../actions/submitActions';
+import { submitVote, moveOnEvent } from '../../actions/submitActions';
 import './vote_mobile.scss';
 
 class MobileVote extends Component {
@@ -22,11 +22,7 @@ class MobileVote extends Component {
       this.setState({ timestamp: timeLeft });
     });
 
-    this.props.socket.on('time_out', (vote) => {
-      // record vote
-      // moveOn(this.props.socket, this.props.history, 'mobile/waiting');
-      this.props.history.push('/mobile/waiting');
-    });
+    moveOnEvent(this.props.socket, this.props.history, 'time_out', '/mobile/waiting', null, null);
   }
 
   componentWillUnmount = () => {
@@ -34,7 +30,6 @@ class MobileVote extends Component {
     this.props.socket.off('time_remaining');
   }
 
-  // functions
   selectVote = (event) => {
     submitVote(this.props.socket, this.props.game.id, this.props.game.questions[this.props.index],
       event.currentTarget.value, localStorage.getItem('myId'));
@@ -117,6 +112,5 @@ const MobileVoteWithSocket = props => (
     {socket => <MobileVote {...props} socket={socket} />}
   </SocketContext.Consumer>
 );
-
 
 export default withRouter(connect(mapStateToProps)(MobileVoteWithSocket));

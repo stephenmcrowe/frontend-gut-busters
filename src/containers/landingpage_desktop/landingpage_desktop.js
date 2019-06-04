@@ -4,7 +4,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import SocketContext from '../../socket-context';
 import './landingpage_desktop.scss';
 import logo from '../../img/gut-logo-landing.png';
-import { fetchGame } from '../../actions/index';
 import { createGame } from '../../actions/submitActions';
 
 class DesktopLanding extends Component {
@@ -52,4 +51,4 @@ const DesktopLandingWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default withRouter(connect(null, { fetchGame })(DesktopLandingWithSocket));
+export default withRouter(connect(null)(DesktopLandingWithSocket));

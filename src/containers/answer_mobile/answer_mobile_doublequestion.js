@@ -8,7 +8,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom';
-import { submitAnswer, startVoting, moveOn } from '../../actions/submitActions';
+import { submitAnswer, moveOnEvent } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 
@@ -17,26 +17,24 @@ class MobileAnswer extends Component {
     super(props);
 
     this.state = {
+      timestamp: '0',
       answerText1: '',
       answerText2: '',
-      timestamp: '0',
-      questionId1: '', // this.props.question[0].id, // this.props.question[quesIndex1].id,
-      questionId2: '', // this.props.question[1].id, // this.props.question[quesIndex2].id,
-      answerId1: '', // this.props.question[0].answers[0].id, // this.props.question[quesIndex1].answers[answerIndex1].id,
-      answerId2: '', // this.props.question[1].answers[0].id, // this.props.question[quesIndex2].[answerIndex1].id,
-      q1: '',
-      q2: '',
+      questionId1: '',
+      questionId2: '',
+      answerId1: '',
+      answerId2: '',
+      q1: null,
+      q2: null,
     };
 
     // bindings
     this.answerTextChange1 = this.answerTextChange1.bind(this);
     this.answerTextChange2 = this.answerTextChange2.bind(this);
-    this.submitTypedAnswers = this.submitTypedAnswers.bind(this);
   }
 
   componentDidMount = () => {
-    console.log(this.props.game);
-
+    // Figure out which questions to display
     const myQuestions = [];
     const myAnswers = [];
     this.props.game.questions.forEach((question) => {
@@ -60,16 +58,27 @@ class MobileAnswer extends Component {
       this.setState({ timestamp: timeLeft });
     });
 
-    this.props.socket.on('time_out', () => {
-      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
-      submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
-      moveOn(this.props.socket, this.props.history, 'mobile/waiting');
-    });
+    const submitArgs = [
+      this.props.socket,
+      this.props.game.id,
+      this.state.questionId1,
+      this.state.answerId1,
+      this.state.answerText1,
+      this.state.questionId2,
+      this.state.answerId2,
+      this.state.answerText2,
+    ];
+    moveOnEvent(this.props.socket, this.props.history, 'time_out', '/mobile/waiting', this.submitAnswers, submitArgs);
   };
 
   componentWillUnmount = () => {
     this.props.socket.off('time_remaining');
     this.props.socket.off('time_out');
+  }
+
+  submitAnswers = (socket, gameId, questionId1, answerId1, answerText1, questionId2, answerId2, answerText2) => {
+    submitAnswer(socket, gameId, questionId1, answerId1, answerText1);
+    submitAnswer(socket, gameId, questionId2, answerId2, answerText2);
   }
 
   // functions
@@ -81,14 +90,6 @@ class MobileAnswer extends Component {
   answerTextChange2(event) {
     event.preventDefault();
     this.setState({ answerText2: event.target.value });
-  }
-
-  // this is the button event
-  submitTypedAnswers(event) {
-    event.preventDefault();
-    this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1, this.state.answerText1);
-    this.props.submitAnswer(this.props.socket, this.props.game.id, this.state.questionId2, this.state.answerId2, this.state.answerText2);
-    moveOn(this.props.socket, this.props.history, 'mobile/waiting');
   }
 
   renderQuestion1() {
@@ -136,10 +137,6 @@ class MobileAnswer extends Component {
               <input className="type-answer" type="text" placeholder="Your answer here..." onChange={this.answerTextChange2} value={this.state.answerText2} />
             </div>
           </div>
-
-          <div className="submit-button">
-            <button onClick={this.submitTypedAnswers} className="join-game-button"><NavLink to="/mobile/waiting" className="join-game"><p>Done!</p></NavLink></button>
-          </div>
         </div>
       </div>
     );
@@ -149,9 +146,7 @@ class MobileAnswer extends Component {
 // connects particular parts of redux state to this components props
 function mapStateToProps(reduxState) {
   return {
-    question: reduxState.socket.game.questions,
     game: reduxState.socket.game,
-
   };
 }
 
@@ -160,6 +155,5 @@ const MobileAnswerWithSocket = props => (
     {socket => <MobileAnswer {...props} socket={socket} />}
   </SocketContext.Consumer>
 );
-
 
 export default withRouter(connect(mapStateToProps)(MobileAnswerWithSocket));

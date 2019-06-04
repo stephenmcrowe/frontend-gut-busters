@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './answer_desktop.scss';
 import SocketContext from '../../socket-context';
-import { fetchGame } from '../../actions/index';
 import { moveOnEvent } from '../../actions/submitActions';
 
 class QuestionAnswer extends Component {
@@ -67,4 +66,4 @@ function mapStateToProps(reduxState) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, { fetchGame })(QuestionAnswerWithSocket));
+export default withRouter(connect(mapStateToProps, null)(QuestionAnswerWithSocket));

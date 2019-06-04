@@ -32,11 +32,9 @@ class Homepage extends Component {
             <div className="right">
               <h3>Each player, visit the following link on your phone...</h3>
               <img src={frame} alt="QR Code" />
-              {/* <NavLink to="/mobile"><h2>gut-busters.surge.sh/mobile</h2></NavLink> */}
               <a href="http://gut-busters.surge.sh/mobile"><h2>gut-busters.surge.sh/mobile</h2></a>
               <h3>When you are ready to begin the game, click here...</h3>
               <a href="http://gut-busters.surge.sh/desktop"><h2>gut-busters.surge.sh/desktop</h2></a>
-              {/* <NavLink to="/desktop"><h2>gut-busters.surge.sh/desktop</h2></NavLink> */}
             </div>
           </div>
           <div className="information">
@@ -47,6 +45,7 @@ class Homepage extends Component {
               <ol>
                 <li>Grab your friends and a charged smart phone or computer for every player.</li>
                 <li>Each player, navigate to gut-busters.surge.sh/mobile on your device (scan the QR code above if you don’t want to type!)</li>
+                <li>Join the game with the room code on the main screen. </li>
                 <li>You will have 30 seconds to submit your own answer to 2 prompts. Quick, use that wit!</li>
                 <li>When time is up, you will have 15 seconds to vote on the funniest answer for each question.</li>
                 <li>See which of your friends had the funniest responses!</li>
