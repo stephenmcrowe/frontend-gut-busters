@@ -1,4 +1,3 @@
-# ATTN: PLEASE DO NOT REVIEW UNTIL JUNE 3RD AT 11:59PM (final project deadline)
 # Gut-Busters
 
 ![Team Photo](src/img/team-logo.jpg)
