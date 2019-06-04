@@ -25,8 +25,9 @@
 
 ## Gameplay
 
-### 1
- ####Landing
+### Stage 1
+
+ #### Landing
   First thing you see is this handy landing page shows three things
     * [ ] provides an easy accsess QR code for players to join the game
     * [ ] provides instructions for how to play the game for new players
@@ -34,7 +35,8 @@
 ![Landing](src/img/landing.png)
 ![Landing Instructionw](src/img/landing2.png)
 
-### 2
+### Stage2
+
  From the links of the landing page you will be directed to the starting screen for the desktop and mobile pages shown below
  #### Desktop Landing
  Click start game whenever!
@@ -44,7 +46,8 @@
  Nothing much to do here yet until the next desktop top stage...
  ![Mobile Landing](src/img/mobile_start.png)
  
-### 3
+### Stage 3
+
  Have players join the room with the uniquely generated code displayed on the desktop!
  #### Desktop Waiting
  Unique code on the upper left corner for players to enter...
@@ -60,7 +63,8 @@
  ![Start Game Waiting](src/img/joke_waiting_mobile.png)
 
 
-### 4
+### Stage 4
+
  Start playing! Answer the randomly generated questions!
  #### Desktop Answering
  The big screen will have simple instruction in case the intent of answering isn't clear
@@ -71,7 +75,8 @@
   You and one other player will be answering each question, and the questions are randomly distributed, so don't try cheating off your neighbor!
  ![Answer Questions](src/img/answer_questions_mobile.png)
 
-### 5
+### Stage 5
+
 Battle of the wit begins, vote for the best answer on the screen!
  #### Desktop Vote
  See the options that people are voting on and what your opponent came up with for each question.
@@ -90,7 +95,8 @@ After each question is voted for, see who pulled ahead of popular opinion with t
   Sit tight while the other players decide your fate.
  ![Own Question](src/img/vote_own_mobile.png)
 
-### 6
+### Stage 6
+
 See who came out on top with the final ranking.
  #### Desktop Final
  Moment of glory or stage of shame, see who had the wittiest, gut-busting answers.
