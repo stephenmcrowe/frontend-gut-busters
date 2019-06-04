@@ -59,10 +59,12 @@ class VoteResults extends Component {
   renderAnswers = () => {
     const answers = this.props.game.questions[this.props.index].answers.map((answer) => {
       return (
-        <div key={answer.id} className="select-vote first">
-          <p>
-            {answer.text}
-          </p>
+        <div key={answer.id} className="answer-container">
+          <div className="answer-box">
+            <p>
+              {answer.text}
+            </p>
+          </div>
           <p>
             {answer.score}
           </p>

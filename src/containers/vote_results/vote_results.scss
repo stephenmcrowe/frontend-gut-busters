@@ -118,3 +118,21 @@
         }
     }
 }
+
+.answer-container {
+    display: flex;
+
+    .answer-box {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+        height: 70vh;
+        width: 30vw;
+        border-style: solid;
+        border-color: white;
+        border-width: 5px;
+        background: #fff500;
+        overflow: scroll;
+    }
+}
