@@ -64,10 +64,10 @@ class VoteResults extends Component {
             <p>
               {answer.text}
             </p>
+            <p>
+              {answer.score}
+            </p>
           </div>
-          <p>
-            {answer.score}
-          </p>
         </div>
       );
     });

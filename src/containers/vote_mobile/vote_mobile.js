@@ -77,7 +77,7 @@ class MobileVote extends Component {
         );
       } else {
       // Your question
-        return (<div id="vote-content"><h1>Nice try! You can&apos;t vote on your own question, silly.</h1></div>);
+        return (<div id="vote-content"><h1>Hold tight! You can&apos;t vote on your own question, silly.</h1></div>);
       }
     } else {
       return (<div>Loading...</div>);
