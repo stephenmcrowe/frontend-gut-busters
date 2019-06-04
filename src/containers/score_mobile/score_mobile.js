@@ -71,9 +71,7 @@ const MobileScore = (props) => {
     return (
       <div className="score-text">
         <div className="final-score">
-          <h1>YOU WON!</h1>
-          {/* Change as appropriate... for now, everyone is a winner */}
-          <h2>Final Score</h2>
+          <h1>Final Score</h1>
           <h3>{scores[localStorage.getItem('myId')].score}</h3>
         </div>
         <div className="rank">
