@@ -8,7 +8,7 @@ import axios from 'axios';
 import './waiting_mobile.scss';
 import ghost from '../../img/ghost-score.png';
 import SocketContext from '../../socket-context';
-import { pushStage } from '../../actions/submitActions';
+import { moveOnEvent } from '../../actions/submitActions';
 
 
 const randomInt = require('random-int');
@@ -21,20 +21,6 @@ class MobileWaiting extends Component {
     this.state = {
       selectedJoke: '',
     };
-
-    // Listeners
-    // this.props.socket.on('see_scores', () => {
-    //   moveOn(this.props.socket, this.props.history, 'mobile/score');
-    // });
-    // this.props.socket.on('vote', (id) => {
-    //   console.log('received vote event');
-    //   console.log(id);
-    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    // });
-    // this.props.socket.on('vote', (id) => {
-    //   console.log('received vote event');
-    //   moveOn(this.props.socket, this.props.history, (`mobile/vote/${id}`));
-    // });
   }
 
 
@@ -59,8 +45,9 @@ class MobileWaiting extends Component {
         console.log('did not load waiting joke');
         console.log(error);
       });
-
-    pushStage(this.props.socket, this.props.history);
+    moveOnEvent(this.props.socket, this.props.history, 'answer', '/mobile/answer', null, null);
+    moveOnEvent(this.props.socket, this.props.history, 'vote', '/mobile/vote', null, null);
+    moveOnEvent(this.props.socket, this.props.history, 'score', '/mobile/score', null, null);
   }
 
   componentWillUnmount() {

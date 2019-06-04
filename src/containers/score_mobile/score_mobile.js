@@ -6,17 +6,6 @@ import './score_mobile.scss';
 import ghost from '../../img/ghost-score.png'; // img source https://www.freeiconspng.com/img/36315
 import SocketContext from '../../socket-context';
 
-// Data Needed (receive):
-// props.player array with each player having player.score
-
-// Build ranking logic function here
-
-// this can be dumb or smart component
-// class MobileScore extends Component {
-//   constructor(props) {
-//     super(props);
-//   }
-
 const MobileScore = (props) => {
   function calcScores() {
     const scores = props.game.players.reduce((map, curr) => {
@@ -61,8 +50,6 @@ const MobileScore = (props) => {
         rank,
       };
     });
-
-    console.log(finalScores);
     return finalScores;
   }
 
@@ -71,10 +58,10 @@ const MobileScore = (props) => {
     return (
       <div className="score-text">
         <div className="final-score">
-          <h1>YOU WON!</h1>
+          <h1>{scores[localStorage.getItem('myId')].rank === 1 ? 'YOU WON!' : 'YOU LOST! Better luck next time...'}</h1>
           {/* Change as appropriate... for now, everyone is a winner */}
           <h2>Final Score</h2>
-          <h3>{scores[localStorage.getItem('myId')].score * 100}</h3>
+          <h3>{scores[localStorage.getItem('myId')].score}</h3>
         </div>
         <div className="rank">
           <h2>Rank</h2>
@@ -89,7 +76,6 @@ const MobileScore = (props) => {
       <img className="score-icon" src={ghost} alt="Ghost Icon" />
       {renderScore()}
     </div>
-
   );
 };
 
@@ -105,7 +91,6 @@ const MobileScoreWithSocket = props => (
     {socket => <MobileScore {...props} socket={socket} />}
   </SocketContext.Consumer>
 );
-
 
 // react-redux glue -- outputs Container that know state in props
 // also with an optional HOC withRouter
