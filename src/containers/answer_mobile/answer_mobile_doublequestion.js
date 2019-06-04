@@ -7,8 +7,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
-import { submitAnswer, moveOnEvent } from '../../actions/submitActions';
+import { withRouter } from 'react-router-dom';
+import { submitAnswer } from '../../actions/submitActions';
 import './answer_mobile.scss';
 import SocketContext from '../../socket-context';
 
@@ -58,17 +58,11 @@ class MobileAnswer extends Component {
       this.setState({ timestamp: timeLeft });
     });
 
-    const submitArgs = [
-      this.props.socket,
-      this.props.game.id,
-      this.state.questionId1,
-      this.state.answerId1,
-      this.state.answerText1,
-      this.state.questionId2,
-      this.state.answerId2,
-      this.state.answerText2,
-    ];
-    moveOnEvent(this.props.socket, this.props.history, 'time_out', '/mobile/waiting', this.submitAnswers, submitArgs);
+    this.props.socket.on('time_out', () => {
+      this.submitAnswers(this.props.socket, this.props.game.id, this.state.questionId1, this.state.answerId1,
+        this.state.answerText1, this.state.questionId2, this.state.answerId2, this.state.answerText2);
+      this.props.history.push('/mobile/waiting');
+    });
   };
 
   componentWillUnmount = () => {
