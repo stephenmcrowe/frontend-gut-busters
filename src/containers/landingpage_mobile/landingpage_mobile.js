@@ -2,8 +2,8 @@
 /* eslint-disable react/no-unused-vars */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, NavLink } from 'react-router-dom';
-import { joinGame, receiveJoinGame } from '../../actions/submitActions';
+import { withRouter } from 'react-router-dom';
+import { joinGame, receiveJoinGame, moveOnEvent } from '../../actions/submitActions';
 import './landingpage_mobile.scss';
 import logo from '../../img/gut-logo.svg';
 import SocketContext from '../../socket-context';
@@ -26,10 +26,7 @@ class MobileLanding extends Component {
 
   componentDidMount() {
     receiveJoinGame(this.props.socket);
-
-    this.props.socket.on('join_game', () => {
-      this.props.history.push('/mobile/waiting');
-    });
+    moveOnEvent(this.props.socket, this.props.history, 'join_game', '/mobile/waiting', null, null);
     this.props.socket.on('user_error', (message) => {
       this.setState({ error: message });
     });
@@ -43,7 +40,7 @@ class MobileLanding extends Component {
   joinGameClick(event) {
     const code = this.state.roomCode;
     const name = this.state.playerName;
-    this.props.socket.emit('join_game', { code, name });
+    joinGame(this.props.socket, code, name);
     this.setState({ error: '' });
   }
 
@@ -62,7 +59,6 @@ class MobileLanding extends Component {
           <h1>Gut Busters</h1>
         </div>
         <div className="landing-logo">
-          {/* <div className="base-logo" /> */}
           <img src={logo} alt="Gut Busters" />
         </div>
         <div className="landing-inputs">
@@ -83,6 +79,5 @@ const MobileLandingWithSocket = props => (
     {socket => <MobileLanding {...props} socket={socket} />}
   </SocketContext.Consumer>
 );
-
 
 export default withRouter(connect(null)(MobileLandingWithSocket));

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './vote_desktop.scss';
 import SocketContext from '../../socket-context';
-// import { fetchGame } from '../../actions/index';
 import { moveOnEvent } from '../../actions/submitActions';
 
 class DesktopVoting extends Component {
@@ -21,13 +20,11 @@ class DesktopVoting extends Component {
     });
 
     moveOnEvent(this.props.socket, this.props.history, 'time_out', '/desktop/voteresult', null, null);
-    // moveOnEvent(this.props.socket, this.props.history, 'score', '/desktop/score', null, null);
   }
 
   componentWillUnmount() {
     this.props.socket.off('time_remaining');
     this.props.socket.off('time_out');
-    this.props.socket.off('score');
   }
 
   renderTimer = () => {
@@ -72,23 +69,12 @@ class DesktopVoting extends Component {
     }
   }
 
-  // props.round will be instantiated once connected to backend
   render() {
     return (
       <div className="voting_page">
         {this.renderTimer()}
         {this.renderQuestion()}
-        {/* <h1>Vote!
-        </h1>
-        <h2>Voting in Progress...</h2>
-        <div id="dots">
-          <div id="dot_1">.</div>
-          <div id="dot_2">.</div>
-          <div id="dot_3">.</div>
-          <button onClick={this.test} type="button">Test</button>
-        </div> */}
       </div>
-
     );
   }
 }

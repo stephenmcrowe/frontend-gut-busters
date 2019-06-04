@@ -1,81 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
-import { fetchGame } from '../../actions/index';
 import { createGame } from '../../actions/submitActions';
 import './score_desktop.scss';
 import SocketContext from '../../socket-context';
-
-/*
-const game = {
-  questions:
-  [{
-    _id: '5cf4ac5911eaf57ecc52a5a4',
-    answers:
-       [{
-         votes: ['5cf4ac5911eaf57ecc52a5a3'],
-         _id: '5cf4ac5911eaf57ecc52a5a5',
-         player: '5cf4ac37405a507ea00abadc',
-         score: 2,
-       },
-       {
-         votes: [],
-         _id: '5cf4ac5911eaf57ecc52a5a6',
-         player: '5cf4ac5911eaf57ecc52a5a3',
-         score: 1,
-       }],
-    bank:
-       {
-         _id: '5ce314df8fe1694fbe5f8241',
-         question: 'this is a question?',
-         __v: 0,
-       },
-    __v: 0,
-  },
-  {
-    _id: '5cf4ac5911eaf57ecc52a5a7',
-    answers:
-       [{
-         votes: [],
-         _id: '5cf4ac5911eaf57ecc52a5a8',
-         player: '5cf4ac5911eaf57ecc52a5a3',
-         score: 7,
-       },
-       {
-         votes: [],
-         _id: '5cf4ac5911eaf57ecc52a5a9',
-         player: '5cf4ac37405a507ea00abadc',
-         score: 3,
-       }],
-    bank:
-       {
-         _id: '5cee52ade9f4ab41fa95739f',
-         question: 'Something you should never stuff a bra with',
-       },
-    __v: 0,
-  }],
-  players:
-  [{ _id: '5cf4ac37405a507ea00abadc', name: 'Stephen', __v: 0 },
-    { _id: '5cf4ac5911eaf57ecc52a5a3', name: 'Madison', __v: 0 },
-    { _id: '5cf4ac5911eaf57ecc52a5e4', name: 'Madeline', __v: 0 }],
-  banks:
-  [{
-    _id: '5ce314df8fe1694fbe5f8241',
-    question: 'this is a question?',
-    __v: 0,
-  },
-  {
-    _id: '5cee52ade9f4ab41fa95739f',
-    question: 'Something you should never stuff a bra with',
-  }],
-  _id: '5cf4ac29405a507ea00abadb',
-  code: '5432',
-  stage: 'answer',
-  active: true,
-  __v: 0,
-};
-*/
-
 
 class DesktopScore extends Component {
   constructor(props) {
@@ -83,10 +11,6 @@ class DesktopScore extends Component {
 
     this.state = {};
     this.onRestartGame = this.onRestartGame.bind(this);
-  }
-
-  componentDidMount() {
-    this.props.fetchGame(this.props.socket);
   }
 
   onRestartGame() {
@@ -146,12 +70,12 @@ class DesktopScore extends Component {
 
   renderScores = () => {
     const scoresDict = this.calcScores();
-    const scoresHtml = Object.keys(scoresDict).map((key) => {
+    const scoresHtml = Object.keys(scoresDict).map((playerId) => {
       return (
-        <div key={key} className="final-rankings">
-          <h3>{scoresDict[key].rank}</h3>
-          <h3>{scoresDict[key].name}</h3>
-          <h3>{scoresDict[key].score}</h3>
+        <div key={playerId} className="final-rankings">
+          <h3>{scoresDict[playerId].rank}</h3>
+          <h3>{scoresDict[playerId].name}</h3>
+          <h3>{scoresDict[playerId].score}</h3>
         </div>
       );
     });
@@ -191,7 +115,7 @@ class DesktopScore extends Component {
           {this.renderScores()}
         </div>
         <div className="playagain-button">
-          <button onClick={this.onRestartGame} type="submit" id="restart-game-button"><NavLink to="/desktop">Play Again</NavLink></button>
+          <button type="submit" id="restart-game-button"><NavLink to="/desktop">Play Again</NavLink></button>
         </div>
       </div>
     );
@@ -210,4 +134,4 @@ const DesktopScoreWithSocket = props => (
   </SocketContext.Consumer>
 );
 
-export default withRouter(connect(mapStateToProps, { fetchGame })(DesktopScoreWithSocket));
+export default withRouter(connect(mapStateToProps, null)(DesktopScoreWithSocket));
