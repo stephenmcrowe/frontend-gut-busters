@@ -1,5 +1,6 @@
 #waiting-room-page {
-    background-image: linear-gradient(180deg, #86D3FF 0%, #DEF2FD 100%);
+    //background-image: linear-gradient(180deg, #86D3FF 0%, #DEF2FD 100%);
+    background: linear-gradient(180deg, #42BBFF 0%, rgba(255, 255, 255, 0) 100%), #B6E5FF;
     height: 100vh;
     width: 100vw;
     display: flex;
@@ -10,37 +11,60 @@
     #room_code
     {
         h1{
-        margin-left: 5%;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 50px;
-        line-height: 75px;
-        padding-bottom: 10px;
-        display: flex;
-        align-items: center;
-        color: #FFFFFF;
-        text-decoration: underline;
-        text-underline-position: under;
-        text-decoration-color:  #FFA800;
-    }
+            margin-left: 5%;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 50px;
+            line-height: 75px;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: #FFFFFF;
+            text-decoration: underline;
+            text-underline-position: under;
+            text-decoration-color:  #FFA800;
+        }
     }
 
-    #Waiting_cap{
-    h3{
-        margin-left: 5%;
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 30px;
-        line-height: 75px;
-        display: flex;
-        align-items: center;
-        text-align: center;
+    #Waiting_cap {
+        /* display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: flex-start; */
 
-        color: #FFF500;
+        h3{
+            margin-left: 5%;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 30px;
+            line-height: 75px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+
+            color: #FFF500;
+        }
     }
-}
+
+    .players {
+        margin: 5%;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: flex-start;
+
+        .playerDisplay {
+            margin: 5px;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 30px;
+
+            color: #FFFFFF;
+        }
+    }
 }
 
 #start_round_button{
@@ -72,13 +96,10 @@
 
     a{
     color: #2A3947;
-    text-shadow: 1px 1px #FFFFFF;
     text-decoration: none;
     width: 100%;
     
     }
-    /* Darkest Dark */
-    /* White */
 
 }
 }
