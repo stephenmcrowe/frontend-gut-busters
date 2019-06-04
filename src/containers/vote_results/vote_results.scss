@@ -119,11 +119,18 @@
     }
 }
 
+.header {
+    flex: 1;
+}
+
 .answer-container {
     display: flex;
+    flex: 2;
+    justify-content: center;
+    align-items: center;
     flex-flow: row wrap;
     width: 100%;
-    
+
     .answer-box {
         display: flex;
         flex-flow: row wrap;

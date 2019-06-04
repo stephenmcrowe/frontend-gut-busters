@@ -48,7 +48,6 @@ class VoteResults extends Component {
         <div id="question">
           <h1>
             { this.props.question}
-          What do you call a one eyed pear?
           </h1>
         </div>
         <div className="rainbow" />
