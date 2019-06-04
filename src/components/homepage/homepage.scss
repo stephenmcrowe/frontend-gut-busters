@@ -3,8 +3,11 @@
   width: 100%;
   background: linear-gradient(180deg, #B6E5FF 0%, rgba(255, 255, 255, 0) 100%), #42BBFF;
 
+  * {
+    box-sizing: border-box;
+  }
 
-  h1 {
+  h1, .head1-style {
     font-family: Creepster;
     font-size: 64px;
     font-style: normal;
@@ -14,13 +17,14 @@
     text-shadow: 0px 4px 4px #000000;
   }
 
-  h2 {
+  h2, .head2-style {
     font-family: Creepster;
     font-size: 24px;
     font-style: normal;
     font-weight: normal;
     text-decoration: none;
     color: #000;
+    margin-bottom: 5px;
   }
 
   a{
@@ -71,11 +75,17 @@
       justify-content: center;
       text-align: center;
       align-items: center;
+      padding: 15px;
 
       img {
         min-width: 100px;
         width: 50%;
         height: auto;
+      }
+
+      .slogan {
+        display: flex;
+        flex-flow: row wrap;
       }
     }
 
@@ -86,6 +96,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      padding: 15px;
     }
   }
 
@@ -124,6 +135,30 @@
       justify-content: center;
       align-items: center;
       text-align: left;
+
+      .team-photos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        .team-member {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 15px;
+          img {
+            min-height: 0px;
+            max-height: 150px;
+            height: 150px;
+            width: auto;
+            border-radius: 50%;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.75);
+          }
+        }
+      }
     }
   }
 

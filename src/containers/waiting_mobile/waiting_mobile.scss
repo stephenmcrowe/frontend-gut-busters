@@ -1,7 +1,7 @@
 #mobile-waiting-page {
     display: flex;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #C2E9FF;    width: 375px;
     font-family: "Roboto", sans-serif;
     flex-direction: column;

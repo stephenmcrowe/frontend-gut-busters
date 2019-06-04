@@ -40,40 +40,38 @@ class DesktopVoting extends Component {
   renderAnswers = () => {
     const answers = this.props.game.questions[this.props.index].answers.map((answer) => {
       return (
-        <div key={answer.id} className="select-vote first">
-          <p>
-            {answer.text}
-          </p>
+        <div key={answer.id} className="answer-container">
+          <div className="answer-box">
+            <h3>
+              {answer.text}
+            </h3>
+          </div>
         </div>
       );
     });
     return answers;
   }
 
-  renderQuestion = () => {
-    if (this.props.game && Number.isInteger(this.props.index)) {
-      const question = this.props.game.questions[this.props.index];
-      return (
-        <div className="vote-content">
-          <div className="question-wrapper">
-            <h1>{question.bank.question}</h1>
-          </div>
-
-          <div className="options-wrapper">
-            {this.renderAnswers()}
-          </div>
+  renderHeader() {
+    const question = this.props.game.questions[this.props.index];
+    return (
+      <div id="voteResults">
+        <div id="question">
+          <h1>
+            {question.bank.question}
+          </h1>
         </div>
-      );
-    } else {
-      return (<div>Loading...</div>);
-    }
+        <div className="rainbow" />
+      </div>
+    );
   }
 
   render() {
     return (
       <div className="voting_page">
         {this.renderTimer()}
-        {this.renderQuestion()}
+        {this.renderHeader()}
+        {this.renderAnswers()}
       </div>
     );
   }

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { joinGame, receiveJoinGame, moveOnEvent } from '../../actions/submitActions';
 import './landingpage_mobile.scss';
-import logo from '../../img/gut-logo.svg';
+import logo from '../../img/ghostbusters_logo.png';
 import SocketContext from '../../socket-context';
 
 class MobileLanding extends Component {

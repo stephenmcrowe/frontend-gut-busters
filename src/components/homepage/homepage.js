@@ -5,6 +5,11 @@ import SocketContext from '../../socket-context';
 import './homepage.scss';
 import logo from '../../img/ghostbusters_logo.png';
 import frame from '../../img/frame.png';
+import charlotte from '../../img/team/charlotte.jpeg';
+import danielle from '../../img/team/danielle.jpeg';
+import maddie from '../../img/team/maddie.jpg';
+import madison from '../../img/team/madison.png';
+import stephen from '../../img/team/stephen.png';
 
 class Homepage extends Component {
   constructor(props) {
@@ -20,7 +25,9 @@ class Homepage extends Component {
             <div className="left">
               <h1>Gut Busters</h1>
               <img src={logo} alt="Gut Busters" />
-              <h1>Fun game... Seriously.</h1>
+              <div id="slogan">
+                <h2>A game so funny, you will die of laughter.</h2>
+              </div>
             </div>
             <div className="right">
               <h3>Each player, visit the following link on your phone...</h3>
@@ -57,6 +64,28 @@ class Homepage extends Component {
               <h2>
                 Team
               </h2>
+              <div className="team-photos">
+                <div className="team-member">
+                  <img src={madison} alt="Madison Hazard" />
+                  <h2>Madison Hazard</h2>
+                </div>
+                <div className="team-member">
+                  <img src={stephen} alt="Stephen Crowe" />
+                  <h2>Stephen Crowe</h2>
+                </div>
+                <div className="team-member">
+                  <img src={maddie} alt="Maddie Hess" />
+                  <h2>Maddie Hess</h2>
+                </div>
+                <div className="team-member">
+                  <img src={charlotte} alt="Charlotte Chui" />
+                  <h2>Charlotte Chui</h2>
+                </div>
+                <div className="team-member">
+                  <img src={danielle} alt="Danielle Fang" />
+                  <h2>Danielle Fang</h2>
+                </div>
+              </div>
             </div>
           </div>
         </div>

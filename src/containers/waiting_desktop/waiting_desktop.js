@@ -26,7 +26,7 @@ class DesktopWaiting extends Component {
     if (this.props.game) {
       const players = this.props.game.players.map((player) => {
         return (
-          <div key={player.id}>{player.name}</div>
+          <div className="playerDisplay" key={player.id}>{player.name}</div>
         );
       });
       return players;
@@ -46,7 +46,9 @@ class DesktopWaiting extends Component {
         </div>
         <div id="Waiting_cap">
           <h3>Waiting for players.... </h3>
-          {this.renderPlayers()}
+          <div className="players">
+            {this.renderPlayers()}
+          </div>
         </div>
       </div>
     );
